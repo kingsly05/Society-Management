@@ -1,0 +1,138 @@
+<html>
+<head>
+<title>custom_chat_message.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #e8bf6a;}
+.s1 { color: #bababa;}
+.s2 { color: #6a8759;}
+.s3 { color: #a9b7c6;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+custom_chat_message.xml</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;LinearLayout</span>
+    <span class="s1">xmlns:android</span><span class="s2">=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="s1">xmlns:app</span><span class="s2">=&quot;http://schemas.android.com/apk/res-auto&quot;</span>
+    <span class="s1">xmlns:tools</span><span class="s2">=&quot;http://schemas.android.com/tools&quot;</span>
+    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+    <span class="s1">android:padding</span><span class="s2">=&quot;0dp&quot;</span>
+    <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span>
+    <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span><span class="s0">&gt;</span>
+
+    <span class="s0">&lt;LinearLayout</span>
+        <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear1&quot;</span>
+        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+        <span class="s1">android:padding</span><span class="s2">=&quot;0dp&quot;</span>
+        <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;de.hdodenhof.circleimageview.CircleImageView</span>
+            <span class="s1">android:id</span><span class="s2">=&quot;@+id/noprofile&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;40dp&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;45dp&quot;</span>
+            <span class="s1">android:src</span><span class="s2">=&quot;@drawable/default_profile&quot;</span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;LinearLayout</span>
+            <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear2&quot;</span>
+            <span class="s1">android:paddingTop</span><span class="s2">=&quot;4dp&quot;</span>
+            <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;20dp&quot;</span>
+            <span class="s1">android:paddingLeft</span><span class="s2">=&quot;4dp&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span><span class="s0">&gt;</span>
+
+            <span class="s0">&lt;TextView</span>
+                <span class="s1">android:id</span><span class="s2">=&quot;@+id/username&quot;</span>
+                <span class="s1">android:focusable</span><span class="s2">=&quot;false&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                <span class="s1">android:paddingLeft</span><span class="s2">=&quot;5dp&quot;</span>
+                <span class="s1">android:paddingTop</span><span class="s2">=&quot;1dp&quot;</span>
+                <span class="s1">android:paddingRight</span><span class="s2">=&quot;8dp&quot;</span>
+                <span class="s1">android:paddingBottom</span><span class="s2">=&quot;1dp&quot;</span>
+                <span class="s1">android:text</span><span class="s2">=&quot;TextView&quot;</span>
+                <span class="s1">android:textSize</span><span class="s2">=&quot;12dp&quot;</span>
+                <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+                <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;LinearLayout</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+                <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;ImageView</span>
+                <span class="s1">android:id</span><span class="s2">=&quot;@+id/imageview1&quot;</span>
+                <span class="s1">android:focusable</span><span class="s2">=&quot;false&quot;</span>
+                <span class="s1">android:padding</span><span class="s2">=&quot;05dp&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;150dp&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;150dp&quot;</span>
+                <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+                <span class="s1">android:src</span><span class="s2">=&quot;@drawable/default_image&quot;</span>
+                <span class="s1">android:scaleType</span><span class="s2">=&quot;fitCenter&quot;</span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;VideoView</span>
+                    <span class="s1">android:id</span><span class="s2">=&quot;@+id/videoview&quot;</span>
+                    <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;150dp&quot;</span>
+                    <span class="s1">android:focusable</span><span class="s2">=&quot;false&quot;</span>
+                    <span class="s1">android:visibility</span><span class="s2">=&quot;gone&quot;</span>
+                    <span class="s1">android:padding</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">android:layout_marginRight</span><span class="s2">=&quot;5dp&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;150dp&quot;</span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;/LinearLayout&gt;</span>
+            <span class="s0">&lt;LinearLayout</span>
+                <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear3&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                <span class="s1">android:padding</span><span class="s2">=&quot;2dp&quot;</span>
+                <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;TextView</span>
+                    <span class="s1">android:id</span><span class="s2">=&quot;@+id/message&quot;</span>
+                    <span class="s1">android:focusable</span><span class="s2">=&quot;false&quot;</span>
+                    <span class="s1">android:maxWidth</span><span class="s2">=&quot;280dp&quot;</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:paddingLeft</span><span class="s2">=&quot;8dp&quot;</span>
+                    <span class="s1">android:paddingTop</span><span class="s2">=&quot;0dp&quot;</span>
+                    <span class="s1">android:paddingRight</span><span class="s2">=&quot;1dp&quot;</span>
+                    <span class="s1">android:paddingBottom</span><span class="s2">=&quot;1dp&quot;</span>
+                    <span class="s1">android:text</span><span class="s2">=&quot;TextView&quot;</span>
+                    <span class="s1">android:textSize</span><span class="s2">=&quot;13dp&quot;</span>
+                    <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span>
+                    <span class="s1">android:layout_gravity</span><span class="s2">=&quot;left|center_vertical&quot;</span><span class="s0">/&gt;</span>
+
+            <span class="s0">&lt;/LinearLayout&gt;</span>
+            <span class="s0">&lt;LinearLayout</span>
+                <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear4&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                <span class="s1">android:padding</span><span class="s2">=&quot;0dp&quot;</span>
+                <span class="s1">android:layout_gravity</span><span class="s2">=&quot;right&quot;</span>
+                <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span><span class="s0">&gt;</span>
+
+                <span class="s0">&lt;TextView</span>
+                    <span class="s1">android:id</span><span class="s2">=&quot;@+id/time&quot;</span>
+                    <span class="s1">android:focusable</span><span class="s2">=&quot;false&quot;</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:layout_marginLeft</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">android:paddingRight</span><span class="s2">=&quot;9dp&quot;</span>
+                    <span class="s1">android:paddingBottom</span><span class="s2">=&quot;6dp&quot;</span>
+                    <span class="s1">android:gravity</span><span class="s2">=&quot;right|bottom&quot;</span>
+                    <span class="s1">android:text</span><span class="s2">=&quot;TextView&quot;</span>
+                    <span class="s1">android:textSize</span><span class="s2">=&quot;12dp&quot;</span>
+                    <span class="s1">android:textColor</span><span class="s2">=&quot;#424242&quot;</span>
+                    <span class="s1">android:layout_gravity</span><span class="s2">=&quot;right|bottom&quot;</span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;/LinearLayout&gt;</span>
+        <span class="s0">&lt;/LinearLayout&gt;</span>
+        <span class="s0">&lt;de.hdodenhof.circleimageview.CircleImageView</span>
+            <span class="s1">android:id</span><span class="s2">=&quot;@+id/profile&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;40dp&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;45dp&quot;</span>
+            <span class="s1">android:src</span><span class="s2">=&quot;@drawable/default_profile&quot;</span><span class="s0">/&gt;</span>
+    <span class="s0">&lt;/LinearLayout&gt;</span>
+<span class="s0">&lt;/LinearLayout&gt;</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,723 @@
+<html>
+<head>
+<title>DashboardActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #808080;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+DashboardActivity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.sonawane_ad.societymanagement</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.annotation.NonNull</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.annotation.RequiresApi</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AppCompatActivity</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.cardview.widget.CardView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.core.app.ActivityCompat</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.core.content.ContextCompat</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">android.Manifest</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.app.Activity</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.app.ActivityOptions</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.app.AlertDialog</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.app.Dialog</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.app.Notification</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.app.NotificationChannel</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.app.NotificationManager</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.app.PendingIntent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.Context</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.DialogInterface</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.SharedPreferences</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.pm.PackageManager</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.Color</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.drawable.ColorDrawable</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.location.Location</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.net.Uri</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.Build</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.Handler</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.Looper</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.ResultReceiver</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.util.Log</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.util.Pair</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.MenuItem</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.BaseAdapter</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.Button</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.ImageButton</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.ImageView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.LinearLayout</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.Toast</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">com.bumptech.glide.Glide</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.location.LocationCallback</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.location.LocationRequest</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.location.LocationResult</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.location.LocationServices</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.OnCompleteListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.Task</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.material.bottomnavigation.BottomNavigationView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.auth.AuthResult</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.auth.FirebaseAuth</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.ChildEventListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.DataSnapshot</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.DatabaseError</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.DatabaseReference</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.FirebaseDatabase</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.GenericTypeIndicator</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.ValueEventListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.sdsmdg.tastytoast.TastyToast</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.HashMap</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">DashboardActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity {</span>
+
+    <span class="s0">private </span><span class="s1">CardView cd1</span><span class="s0">,</span><span class="s1">cd2</span><span class="s0">,</span><span class="s1">cd3</span><span class="s0">,</span><span class="s1">cd4</span><span class="s0">,</span><span class="s1">cd5</span><span class="s0">,</span><span class="s1">cd6</span><span class="s0">,</span><span class="s1">cd7</span><span class="s0">,</span><span class="s1">cd8</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">TextView username</span><span class="s0">,</span><span class="s1">useraddress</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ImageButton logoutbtn</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ImageView imageview1</span><span class="s0">;</span>
+    <span class="s1">Dialog myDialog</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">LinearLayout nointernet</span><span class="s0">,</span><span class="s1">linear</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Button retry</span><span class="s0">;</span>
+
+    <span class="s1">String TAG=</span><span class="s2">&quot;DashboardActivity&quot;</span><span class="s0">;</span>
+    <span class="s0">double </span><span class="s1">soslat</span><span class="s0">, </span><span class="s1">soslon</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">String get_name = </span><span class="s2">&quot;&quot;</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">String db_name = </span><span class="s2">&quot;&quot;</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">String useremail = </span><span class="s2">&quot;&quot;</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; map = </span><span class="s0">new </span><span class="s1">HashMap&lt;&gt;()</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">String memberid = </span><span class="s2">&quot;&quot;</span><span class="s0">;</span>
+
+<span class="s3">//    BottomNavigationView bottomNavigationView;</span>
+
+    <span class="s1">Intent intent = </span><span class="s0">new </span><span class="s1">Intent()</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">FirebaseDatabase _firebase = FirebaseDatabase.getInstance()</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">DatabaseReference Currdata = _firebase.getReference(</span><span class="s2">&quot;Currdata&quot;</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ChildEventListener _Currdata_child_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">FirebaseAuth Currauth</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnCompleteListener&lt;AuthResult&gt; _Currauth_create_user_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnCompleteListener&lt;AuthResult&gt; _Currauth_sign_in_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnCompleteListener&lt;Void&gt; _Currauth_reset_password_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">DatabaseReference chat = _firebase.getReference(</span><span class="s2">&quot;chat&quot;</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ChildEventListener _chat_child_listener</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">SharedPreferences file</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">AlertDialog.Builder dialog</span><span class="s0">;</span>
+    <span class="s0">private static final int </span><span class="s1">REQUEST_CODE_LOCATION_PERMISSION = </span><span class="s4">1</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ResultReceiver resultReceiver</span><span class="s0">;</span>
+    <span class="s0">private static final int </span><span class="s1">REQUEST_CALL = </span><span class="s4">1</span><span class="s0">;</span>
+    <span class="s1">String address</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">RequestNetwork internet</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">RequestNetwork.RequestListener _internet_request_listener</span><span class="s0">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span>
+
+        <span class="s1">setContentView(R.layout.activity_dashboard)</span><span class="s0">;</span>
+        <span class="s1">com.google.firebase.FirebaseApp.initializeApp(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">initialize()</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(ContextCompat.checkSelfPermission(</span>
+                <span class="s1">getApplicationContext()</span><span class="s0">, </span><span class="s1">Manifest.permission.ACCESS_FINE_LOCATION</span>
+        <span class="s1">) != PackageManager.PERMISSION_GRANTED) {</span>
+            <span class="s1">ActivityCompat.requestPermissions(DashboardActivity.</span><span class="s0">this,</span>
+                    <span class="s0">new </span><span class="s1">String[]{Manifest.permission.ACCESS_FINE_LOCATION}</span><span class="s0">,</span>
+                    <span class="s1">REQUEST_CODE_LOCATION_PERMISSION)</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">getCurrentLocation()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s1">initializeLogic()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onRequestPermissionsResult(</span><span class="s0">int </span><span class="s1">requestCode</span><span class="s0">, </span><span class="s1">@NonNull String[] permissions</span><span class="s0">, </span><span class="s1">@NonNull </span><span class="s0">int</span><span class="s1">[] grantResults) {</span>
+        <span class="s0">super</span><span class="s1">.onRequestPermissionsResult(requestCode</span><span class="s0">, </span><span class="s1">permissions</span><span class="s0">, </span><span class="s1">grantResults)</span><span class="s0">;</span>
+        <span class="s0">if</span><span class="s1">(requestCode == REQUEST_CODE_LOCATION_PERMISSION &amp;&amp; grantResults.length&gt;</span><span class="s4">0</span><span class="s1">){</span>
+            <span class="s0">if</span><span class="s1">(grantResults[</span><span class="s4">0</span><span class="s1">] == PackageManager.PERMISSION_GRANTED){</span>
+                <span class="s1">getCurrentLocation()</span><span class="s0">;</span>
+            <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+                <span class="s1">Toast.makeText(</span><span class="s0">this, </span><span class="s2">&quot;Permsission Denied&quot;</span><span class="s0">, </span><span class="s1">Toast.LENGTH_SHORT).show()</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">getCurrentLocation() {</span>
+
+        <span class="s0">final </span><span class="s1">LocationRequest locationRequest = </span><span class="s0">new </span><span class="s1">LocationRequest()</span><span class="s0">;</span>
+        <span class="s1">locationRequest.setInterval(</span><span class="s4">1000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">locationRequest.setFastestInterval(</span><span class="s4">3000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)</span><span class="s0">;</span>
+
+        <span class="s0">if </span><span class="s1">(ActivityCompat.checkSelfPermission(DashboardActivity.</span><span class="s0">this, </span><span class="s1">Manifest.permission.ACCESS_FINE_LOCATION)</span>
+                <span class="s1">!= PackageManager.PERMISSION_GRANTED &amp;&amp; ActivityCompat.checkSelfPermission(getApplicationContext()</span><span class="s0">, </span><span class="s1">Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {</span>
+            <span class="s3">// TODO: Consider calling</span>
+            <span class="s3">//    ActivityCompat#requestPermissions</span>
+            <span class="s3">// here to request the missing permissions, and then overriding</span>
+            <span class="s3">//   public void onRequestPermissionsResult(int requestCode, String[] permissions,</span>
+            <span class="s3">//                                          int[] grantResults)</span>
+            <span class="s3">// to handle the case where the user grants the permission. See the documentation</span>
+            <span class="s3">// for ActivityCompat#requestPermissions for more details.</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+        <span class="s1">LocationServices.getFusedLocationProviderClient(getApplicationContext())</span>
+                <span class="s1">.requestLocationUpdates(locationRequest</span><span class="s0">, new </span><span class="s1">LocationCallback() {</span>
+
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onLocationResult(LocationResult locationResult) {</span>
+                        <span class="s0">super</span><span class="s1">.onLocationResult(locationResult)</span><span class="s0">;</span>
+                        <span class="s1">LocationServices.getFusedLocationProviderClient(getApplicationContext()).removeLocationUpdates(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s0">if </span><span class="s1">(locationResult != </span><span class="s0">null </span><span class="s1">&amp;&amp; locationResult.getLocations().size() &gt; </span><span class="s4">0</span><span class="s1">) {</span>
+                            <span class="s0">int </span><span class="s1">latestLocationIndex = locationResult.getLocations().size() - </span><span class="s4">1</span><span class="s0">;</span>
+                            <span class="s1">soslat = locationResult.getLocations().get(latestLocationIndex).getLatitude()</span><span class="s0">;</span>
+                            <span class="s1">soslon = locationResult.getLocations().get(latestLocationIndex).getLongitude()</span><span class="s0">;</span>
+
+                            <span class="s1">Log.e(</span><span class="s2">&quot;Lat&quot;</span><span class="s0">,</span><span class="s1">String.valueOf(soslat))</span><span class="s0">;</span>
+                            <span class="s1">Log.e(</span><span class="s2">&quot;lon&quot;</span><span class="s0">,</span><span class="s1">String.valueOf(soslon))</span><span class="s0">;</span>
+
+                            <span class="s1">Location location = </span><span class="s0">new </span><span class="s1">Location(</span><span class="s2">&quot;ProvideNA&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                            <span class="s1">location.setLatitude(soslat)</span><span class="s0">;</span>
+                            <span class="s1">location.setLongitude(soslon)</span><span class="s0">;</span>
+                            <span class="s3">//   SharedPreferencesConFig.saveLat(String.valueOf(latitude),getApplicationContext());</span>
+                            <span class="s3">// SharedPreferencesConFig.saveLon(String.valueOf(longitude),getApplicationContext());</span>
+
+                            <span class="s1">fetchAddressFromLatLong(location)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span><span class="s0">, </span><span class="s1">Looper.getMainLooper())</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private class </span><span class="s1">AddressResultReceiver </span><span class="s0">extends </span><span class="s1">ResultReceiver {</span>
+        <span class="s1">AddressResultReceiver(Handler handler){</span>
+            <span class="s0">super</span><span class="s1">(handler)</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">protected void </span><span class="s1">onReceiveResult(</span><span class="s0">int </span><span class="s1">resultCode</span><span class="s0">,</span><span class="s1">Bundle resultData){</span>
+        <span class="s0">super</span><span class="s1">.onReceiveResult(resultCode</span><span class="s0">,</span><span class="s1">resultData)</span><span class="s0">;</span>
+        <span class="s0">if</span><span class="s1">(resultCode == Constants.SUCCESS_RESULT){</span>
+            <span class="s1">address = resultData.getString(Constants.RESULT_DATA_KEY)</span><span class="s0">;</span>
+            <span class="s1">useraddress.setText(address)</span><span class="s0">;</span>
+            <span class="s1">file.edit().putString(</span><span class="s2">&quot;Current_address&quot;</span><span class="s0">,</span><span class="s1">address).apply()</span><span class="s0">;</span>
+            <span class="s1">Log.e(</span><span class="s2">&quot;RESULT&quot;</span><span class="s0">,</span><span class="s1">address)</span><span class="s0">;</span>
+
+        <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+            <span class="s1">Toast.makeText(getApplicationContext()</span><span class="s0">,</span><span class="s1">resultData.getString(Constants.RESULT_DATA_KEY)</span><span class="s0">,</span><span class="s1">Toast.LENGTH_LONG).show()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">fetchAddressFromLatLong(Location location) {</span>
+        <span class="s1">Intent intent=</span><span class="s0">new </span><span class="s1">Intent(DashboardActivity.</span><span class="s0">this, </span><span class="s1">FetchAddressIntentService.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">intent.putExtra(Constants.RECEIVER</span><span class="s0">,</span><span class="s1">resultReceiver)</span><span class="s0">;</span>
+        <span class="s1">intent.putExtra(Constants.LOCATION_DATA_EXTRA</span><span class="s0">,</span><span class="s1">location)</span><span class="s0">;</span>
+        <span class="s1">getApplicationContext().startService(intent)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+
+    <span class="s0">private void </span><span class="s1">initializeLogic() {</span>
+        <span class="s1">useremail = file.getString(</span><span class="s2">&quot;emailid&quot;</span><span class="s0">, </span><span class="s2">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">initialize() {</span>
+        <span class="s1">cd1 = findViewById(R.id.UI_cardview1)</span><span class="s0">;</span>
+        <span class="s1">cd2 = findViewById(R.id.UI_cardview2)</span><span class="s0">;</span>
+        <span class="s1">cd3 = findViewById(R.id.UI_cardview3)</span><span class="s0">;</span>
+        <span class="s1">cd4 = findViewById(R.id.UI_cardview4)</span><span class="s0">;</span>
+        <span class="s1">cd5 = findViewById(R.id.UI_cardview5)</span><span class="s0">;</span>
+        <span class="s1">cd6 = findViewById(R.id.UI_cardview6)</span><span class="s0">;</span>
+        <span class="s1">cd7 = findViewById(R.id.UI_cardview7)</span><span class="s0">;</span>
+        <span class="s1">cd8 = findViewById(R.id.UI_cardview8)</span><span class="s0">;</span>
+        <span class="s1">imageview1 =  findViewById(R.id.imageview1)</span><span class="s0">;</span>
+        <span class="s1">internet = </span><span class="s0">new </span><span class="s1">RequestNetwork(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">nointernet = findViewById(R.id.nointernet)</span><span class="s0">;</span>
+        <span class="s1">linear = findViewById(R.id.linear)</span><span class="s0">;</span>
+        <span class="s1">retry = findViewById(R.id.retry)</span><span class="s0">;</span>
+
+<span class="s3">//     &lt;com.google.android.material.bottomnavigation.BottomNavigationView</span>
+<span class="s3">//        android:layout_width=&quot;match_parent&quot;</span>
+<span class="s3">//        android:layout_height=&quot;wrap_content&quot;</span>
+<span class="s3">//        app:itemBackground=&quot;@color/navbar&quot;</span>
+<span class="s3">//        android:layout_alignParentBottom=&quot;true&quot;</span>
+<span class="s3">//        app:itemTextColor=&quot;@drawable/nav_bar_selector&quot;</span>
+<span class="s3">//        app:itemIconTint=&quot;@drawable/nav_bar_selector&quot;</span>
+<span class="s3">//        app:menu=&quot;@menu/nav_bar_menu&quot;</span>
+<span class="s3">//        android:id=&quot;@+id/UI_bottomnavbar&quot;/&gt;</span>
+<span class="s3">//        bottomNavigationView = findViewById(R.id.UI_bottomnavbar);</span>
+        <span class="s1">username = findViewById(R.id.UI_Username_txt)</span><span class="s0">;</span>
+        <span class="s1">useraddress = findViewById(R.id.UI_address_txt)</span><span class="s0">;</span>
+        <span class="s1">logoutbtn = findViewById(R.id.UI_login_btn)</span><span class="s0">;</span>
+
+        <span class="s1">dialog = </span><span class="s0">new </span><span class="s1">AlertDialog.Builder(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">resultReceiver = </span><span class="s0">new </span><span class="s1">AddressResultReceiver(</span><span class="s0">new </span><span class="s1">Handler())</span><span class="s0">;</span>
+        <span class="s1">file = getSharedPreferences(</span><span class="s2">&quot;file&quot;</span><span class="s0">, </span><span class="s1">Activity.MODE_PRIVATE)</span><span class="s0">;</span>
+
+<span class="s3">//        bottomNavigationView.setSelectedItemId(R.id.profile);</span>
+<span class="s3">//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {</span>
+<span class="s3">//            @Override</span>
+<span class="s3">//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {</span>
+<span class="s3">//                switch (item.getItemId())</span>
+<span class="s3">//                {</span>
+<span class="s3">//                    case R.id.profile:</span>
+<span class="s3">//                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));</span>
+<span class="s3">//                        overridePendingTransition(0,0);</span>
+<span class="s3">//                        return true;</span>
+<span class="s3">//                    case R.id.bill:</span>
+<span class="s3">//                        startActivity(new Intent(getApplicationContext(),BillActivity.class));</span>
+<span class="s3">//                        overridePendingTransition(0,0);</span>
+<span class="s3">//                        return true;</span>
+<span class="s3">//                    case R.id.notice:</span>
+<span class="s3">//                        if((file.getString(&quot;emailid&quot;,&quot;&quot;).toLowerCase().equals(&quot;admin123@gmail.com&quot;))) {</span>
+<span class="s3">//                            startActivity(new Intent(getApplicationContext(),AdminNoticeActivity.class));</span>
+<span class="s3">//                            overridePendingTransition(0,0);</span>
+<span class="s3">//                        }else{</span>
+<span class="s3">//                            startActivity(new Intent(getApplicationContext(),NoticeActivity.class));</span>
+<span class="s3">//                            overridePendingTransition(0,0);</span>
+<span class="s3">//                        }</span>
+<span class="s3">//                        return true;</span>
+<span class="s3">//                    case R.id.complaint:</span>
+<span class="s3">//                        if((file.getString(&quot;emailid&quot;,&quot;&quot;).toLowerCase().equals(&quot;admin123@gmail.com&quot;))) {</span>
+<span class="s3">//                            startActivity(new Intent(getApplicationContext(),AdminComplaintActivity.class));</span>
+<span class="s3">//                            overridePendingTransition(0,0);</span>
+<span class="s3">//                        }else{</span>
+<span class="s3">//                            startActivity(new Intent(getApplicationContext(),ComplaintActivity.class));</span>
+<span class="s3">//                            overridePendingTransition(0,0);</span>
+<span class="s3">//                        }</span>
+<span class="s3">//</span>
+<span class="s3">//                        return true;</span>
+<span class="s3">//                }</span>
+<span class="s3">//                return false;</span>
+<span class="s3">//            }</span>
+<span class="s3">//        });</span>
+
+        <span class="s1">logoutbtn.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View view) {</span>
+                <span class="s1">dialog.setTitle(</span><span class="s2">&quot;Logout&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">dialog.setMessage(</span><span class="s2">&quot;Do you want to logout?&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">dialog.setPositiveButton(</span><span class="s2">&quot;Yes&quot;</span><span class="s0">, new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onClick(DialogInterface _dialog</span><span class="s0">, int </span><span class="s1">_which) {</span>
+                        <span class="s1">FirebaseAuth.getInstance().signOut()</span><span class="s0">;</span>
+                        <span class="s1">file.edit().putString(</span><span class="s2">&quot;emailid&quot;</span><span class="s0">, </span><span class="s2">&quot;&quot;</span><span class="s1">).commit()</span><span class="s0">;</span>
+                        <span class="s1">file.edit().putString(</span><span class="s2">&quot;profileurl&quot;</span><span class="s0">, </span><span class="s2">&quot;&quot;</span><span class="s1">).commit()</span><span class="s0">;</span>
+                        <span class="s1">intent.setClass(getApplicationContext()</span><span class="s0">, </span><span class="s1">LoginActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+                        <span class="s1">startActivity(intent)</span><span class="s0">;</span>
+                        <span class="s1">finish()</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">})</span><span class="s0">;</span>
+                <span class="s1">dialog.setNegativeButton(</span><span class="s2">&quot;No&quot;</span><span class="s0">, new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onClick(DialogInterface _dialog</span><span class="s0">, int </span><span class="s1">_which) {</span>
+
+                    <span class="s1">}</span>
+                <span class="s1">})</span><span class="s0">;</span>
+                <span class="s1">dialog.create().show()</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">cd1.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View view) {</span>
+                <span class="s1">intent.setClass(getApplicationContext()</span><span class="s0">,</span><span class="s1">ProfileActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+
+                <span class="s1">Pair[] pairs = </span><span class="s0">new </span><span class="s1">Pair[</span><span class="s4">2</span><span class="s1">]</span><span class="s0">;</span>
+                <span class="s1">pairs[</span><span class="s4">0</span><span class="s1">] = </span><span class="s0">new </span><span class="s1">Pair&lt;View</span><span class="s0">, </span><span class="s1">String&gt;(imageview1</span><span class="s0">,</span><span class="s2">&quot;imageview1Trans&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">pairs[</span><span class="s4">1</span><span class="s1">] = </span><span class="s0">new </span><span class="s1">Pair&lt;View</span><span class="s0">, </span><span class="s1">String&gt;(username</span><span class="s0">,</span><span class="s2">&quot;UI_Username_textTrans&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(DashboardActivity.</span><span class="s0">this,</span><span class="s1">pairs)</span><span class="s0">;</span>
+                <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+                <span class="s1">startActivity(intent</span><span class="s0">,</span><span class="s1">options.toBundle())</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+        <span class="s1">cd2.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View view) {</span>
+                <span class="s1">intent.setClass(getApplicationContext()</span><span class="s0">,</span><span class="s1">BillActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">startActivity(intent)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+        <span class="s1">cd3.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View view) {</span>
+                <span class="s0">if</span><span class="s1">((file.getString(</span><span class="s2">&quot;emailid&quot;</span><span class="s0">,</span><span class="s2">&quot;&quot;</span><span class="s1">).toLowerCase().equals(</span><span class="s2">&quot;admin123@gmail.com&quot;</span><span class="s1">))) {</span>
+                    <span class="s1">intent.setClass(getApplicationContext()</span><span class="s0">, </span><span class="s1">AdminNoticeActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+                    <span class="s1">startActivity(intent)</span><span class="s0">;</span>
+                <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+                    <span class="s1">intent.setClass(getApplicationContext()</span><span class="s0">, </span><span class="s1">NoticeActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+                    <span class="s1">startActivity(intent)</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+        <span class="s1">cd4.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View view) {</span>
+                <span class="s0">if</span><span class="s1">((file.getString(</span><span class="s2">&quot;emailid&quot;</span><span class="s0">,</span><span class="s2">&quot;&quot;</span><span class="s1">).toLowerCase().equals(</span><span class="s2">&quot;admin123@gmail.com&quot;</span><span class="s1">))) {</span>
+                    <span class="s1">intent.setClass(getApplicationContext()</span><span class="s0">, </span><span class="s1">AdminComplaintActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+                    <span class="s1">startActivity(intent)</span><span class="s0">;</span>
+                <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+                    <span class="s1">intent.setClass(getApplicationContext()</span><span class="s0">, </span><span class="s1">ComplaintActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+                    <span class="s1">startActivity(intent)</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+        <span class="s1">cd5.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View view) {</span>
+                <span class="s0">if</span><span class="s1">((file.getString(</span><span class="s2">&quot;emailid&quot;</span><span class="s0">,</span><span class="s2">&quot;&quot;</span><span class="s1">).toLowerCase().equals(</span><span class="s2">&quot;admin123@gmail.com&quot;</span><span class="s1">))) {</span>
+                    <span class="s1">intent.setClass(getApplicationContext()</span><span class="s0">, </span><span class="s1">AdminPaymentActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+                    <span class="s1">startActivity(intent)</span><span class="s0">;</span>
+                <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+                    <span class="s1">intent.setClass(getApplicationContext()</span><span class="s0">, </span><span class="s1">PaymentActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+                    <span class="s1">startActivity(intent)</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+        <span class="s1">cd6.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View view) {</span>
+                <span class="s1">intent.setClass(getApplicationContext()</span><span class="s0">,</span><span class="s1">ChatActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+                <span class="s1">startActivity(intent)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+        <span class="s1">cd7.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View view) {</span>
+                <span class="s0">if</span><span class="s1">((file.getString(</span><span class="s2">&quot;emailid&quot;</span><span class="s0">,</span><span class="s2">&quot;&quot;</span><span class="s1">).toLowerCase().equals(</span><span class="s2">&quot;admin123@gmail.com&quot;</span><span class="s1">))) {</span>
+                    <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+                    <span class="s1">intent.setClass(getApplicationContext()</span><span class="s0">, </span><span class="s1">AdminVotingActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">startActivity(intent)</span><span class="s0">;</span>
+                <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+                    <span class="s1">intent.setClass(getApplicationContext()</span><span class="s0">, </span><span class="s1">VotingActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+                    <span class="s1">startActivity(intent)</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+        <span class="s0">if</span><span class="s1">((file.getString(</span><span class="s2">&quot;emailid&quot;</span><span class="s0">,</span><span class="s2">&quot;&quot;</span><span class="s1">).toLowerCase().equals(</span><span class="s2">&quot;admin123@gmail.com&quot;</span><span class="s1">))) {</span>
+            <span class="s1">cd8.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+            <span class="s1">cd8.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+                <span class="s1">@Override</span>
+                <span class="s0">public void </span><span class="s1">onClick(View view) {</span>
+                    <span class="s1">intent.setClass(getApplicationContext()</span><span class="s0">,</span><span class="s1">AdminMemDetActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">startActivity(intent)</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">})</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">else</span>
+        <span class="s1">{</span>
+            <span class="s1">cd8.setVisibility(View.GONE)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">retry.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View view) {</span>
+                <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+        <span class="s3">//Currdata</span>
+
+        <span class="s1">_Currdata_child_listener = </span><span class="s0">new </span><span class="s1">ChildEventListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildAdded(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+                <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(!file.getString(</span><span class="s2">&quot;emailid&quot;</span><span class="s0">, </span><span class="s2">&quot;&quot;</span><span class="s1">).equals(</span><span class="s2">&quot;&quot;</span><span class="s1">)) {</span>
+                    <span class="s0">if </span><span class="s1">(_childValue.get(</span><span class="s2">&quot;emailid&quot;</span><span class="s1">).toString().equals(useremail)) {</span>
+                        <span class="s0">if </span><span class="s1">(!_childValue.get(</span><span class="s2">&quot;profileurl&quot;</span><span class="s1">).toString().equals(</span><span class="s2">&quot;&quot;</span><span class="s1">)) {</span>
+                            <span class="s1">username.setText(</span><span class="s2">&quot;Hi, &quot;</span><span class="s1">.concat(_childValue.get(</span><span class="s2">&quot;name&quot;</span><span class="s1">).toString()))</span><span class="s0">;</span>
+                            <span class="s1">Glide.with(getApplicationContext()).load(Uri.parse(_childValue.get(</span><span class="s2">&quot;profileurl&quot;</span><span class="s1">).toString())).into(imageview1)</span><span class="s0">;</span>
+                            <span class="s1">file.edit().putString(</span><span class="s2">&quot;name&quot;</span><span class="s0">, </span><span class="s1">_childValue.get(</span><span class="s2">&quot;name&quot;</span><span class="s1">).toString()).commit()</span><span class="s0">;</span>
+                            <span class="s1">file.edit().putString(</span><span class="s2">&quot;profileurl&quot;</span><span class="s0">, </span><span class="s1">_childValue.get(</span><span class="s2">&quot;profileurl&quot;</span><span class="s1">).toString()).commit()</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                        <span class="s0">else </span><span class="s1">{</span>
+                            <span class="s1">username.setText(</span><span class="s2">&quot;Hi, &quot;</span><span class="s1">.concat(_childValue.get(</span><span class="s2">&quot;name&quot;</span><span class="s1">).toString()))</span><span class="s0">;</span>
+                            <span class="s1">file.edit().putString(</span><span class="s2">&quot;name&quot;</span><span class="s0">, </span><span class="s1">_childValue.get(</span><span class="s2">&quot;name&quot;</span><span class="s1">).toString()).commit()</span><span class="s0">;</span>
+                            <span class="s1">imageview1.setBackgroundResource(R.drawable.default_profile)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                        <span class="s1">memberid = _childValue.get(</span><span class="s2">&quot;memberid&quot;</span><span class="s1">).toString()</span><span class="s0">;</span>
+                        <span class="s1">map = </span><span class="s0">new </span><span class="s1">HashMap&lt;&gt;()</span><span class="s0">;</span>
+                        <span class="s1">map.put(</span><span class="s2">&quot;user_uid&quot;</span><span class="s0">, </span><span class="s1">FirebaseAuth.getInstance().getCurrentUser().getUid())</span><span class="s0">;</span>
+                        <span class="s1">Currdata.child(memberid).updateChildren(map)</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildChanged(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(!file.getString(</span><span class="s2">&quot;emailid&quot;</span><span class="s0">, </span><span class="s2">&quot;&quot;</span><span class="s1">).equals(</span><span class="s2">&quot;&quot;</span><span class="s1">)) {</span>
+                    <span class="s0">if </span><span class="s1">(_childValue.get(</span><span class="s2">&quot;emailid&quot;</span><span class="s1">).toString().equals(useremail)) {</span>
+                        <span class="s0">if </span><span class="s1">(!_childValue.get(</span><span class="s2">&quot;profileurl&quot;</span><span class="s1">).toString().equals(</span><span class="s2">&quot;&quot;</span><span class="s1">)) {</span>
+                            <span class="s1">username.setText(</span><span class="s2">&quot;Hi, &quot;</span><span class="s1">.concat(_childValue.get(</span><span class="s2">&quot;name&quot;</span><span class="s1">).toString()))</span><span class="s0">;</span>
+                            <span class="s1">Glide.with(getApplicationContext()).load(Uri.parse(_childValue.get(</span><span class="s2">&quot;profileurl&quot;</span><span class="s1">).toString())).into(imageview1)</span><span class="s0">;</span>
+                            <span class="s1">file.edit().putString(</span><span class="s2">&quot;name&quot;</span><span class="s0">, </span><span class="s1">_childValue.get(</span><span class="s2">&quot;name&quot;</span><span class="s1">).toString()).commit()</span><span class="s0">;</span>
+                            <span class="s1">file.edit().putString(</span><span class="s2">&quot;profileurl&quot;</span><span class="s0">, </span><span class="s1">_childValue.get(</span><span class="s2">&quot;profileurl&quot;</span><span class="s1">).toString()).commit()</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                        <span class="s0">else </span><span class="s1">{</span>
+                            <span class="s1">username.setText(</span><span class="s2">&quot;Hi, &quot;</span><span class="s1">.concat(_childValue.get(</span><span class="s2">&quot;name&quot;</span><span class="s1">).toString()))</span><span class="s0">;</span>
+                            <span class="s1">file.edit().putString(</span><span class="s2">&quot;name&quot;</span><span class="s0">, </span><span class="s1">_childValue.get(</span><span class="s2">&quot;name&quot;</span><span class="s1">).toString()).commit()</span><span class="s0">;</span>
+                            <span class="s1">imageview1.setImageResource(R.drawable.default_profile)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                        <span class="s1">memberid = _childValue.get(</span><span class="s2">&quot;memberid&quot;</span><span class="s1">).toString()</span><span class="s0">;</span>
+                        <span class="s1">map = </span><span class="s0">new </span><span class="s1">HashMap&lt;&gt;()</span><span class="s0">;</span>
+                        <span class="s1">map.put(</span><span class="s2">&quot;user_uid&quot;</span><span class="s0">, </span><span class="s1">FirebaseAuth.getInstance().getCurrentUser().getUid())</span><span class="s0">;</span>
+                        <span class="s1">Currdata.child(memberid).updateChildren(map)</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildMoved(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildRemoved(DataSnapshot _param1) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onCancelled(DatabaseError _param1) {</span>
+                <span class="s0">final int </span><span class="s1">_errorCode = _param1.getCode()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _errorMessage = _param1.getMessage()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+        <span class="s1">Currdata.addChildEventListener(_Currdata_child_listener)</span><span class="s0">;</span>
+
+        <span class="s1">_internet_request_listener = </span><span class="s0">new </span><span class="s1">RequestNetwork.RequestListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onResponse(String _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s0">final </span><span class="s1">String _tag = _param1</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _response = _param2</span><span class="s0">;</span>
+                <span class="s1">linear.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                <span class="s1">nointernet.setVisibility(View.GONE)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onErrorResponse(String _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s0">final </span><span class="s1">String _tag = _param1</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _message = _param2</span><span class="s0">;</span>
+                <span class="s1">linear.setVisibility(View.GONE)</span><span class="s0">;</span>
+                <span class="s1">nointernet.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s1">_Currauth_create_user_listener = </span><span class="s0">new </span><span class="s1">OnCompleteListener&lt;AuthResult&gt;() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onComplete(Task&lt;AuthResult&gt; _param1) {</span>
+                <span class="s0">final boolean </span><span class="s1">_success = _param1.isSuccessful()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _errorMessage = _param1.getException() != </span><span class="s0">null </span><span class="s1">? _param1.getException().getMessage() : </span><span class="s2">&quot;&quot;</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s1">_Currauth_sign_in_listener = </span><span class="s0">new </span><span class="s1">OnCompleteListener&lt;AuthResult&gt;() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onComplete(Task&lt;AuthResult&gt; _param1) {</span>
+                <span class="s0">final boolean </span><span class="s1">_success = _param1.isSuccessful()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _errorMessage = _param1.getException() != </span><span class="s0">null </span><span class="s1">? _param1.getException().getMessage() : </span><span class="s2">&quot;&quot;</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s1">_Currauth_reset_password_listener = </span><span class="s0">new </span><span class="s1">OnCompleteListener&lt;Void&gt;() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onComplete(Task&lt;Void&gt; _param1) {</span>
+                <span class="s0">final boolean </span><span class="s1">_success = _param1.isSuccessful()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+
+        <span class="s1">_chat_child_listener = </span><span class="s0">new </span><span class="s1">ChildEventListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildAdded(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+                <span class="s3">//notification();</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildChanged(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+                <span class="s1">chat.addListenerForSingleValueEvent(</span><span class="s0">new </span><span class="s1">ValueEventListener() {</span>
+
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onDataChange(DataSnapshot _dataSnapshot) {</span>
+
+                        <span class="s0">try </span><span class="s1">{</span>
+                            <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                            <span class="s0">for </span><span class="s1">(DataSnapshot _data : _dataSnapshot.getChildren()) {</span>
+                                <span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _map = _data.getValue(_ind)</span><span class="s0">;</span>
+                                <span class="s3">//notification();</span>
+                            <span class="s1">}</span>
+                        <span class="s1">}</span>
+                        <span class="s0">catch </span><span class="s1">(Exception _e) {</span>
+                            <span class="s1">_e.printStackTrace()</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+
+                    <span class="s1">}</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onCancelled(DatabaseError _databaseError) {</span>
+                    <span class="s1">}</span>
+                <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildMoved(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildRemoved(DataSnapshot _param1) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onCancelled(DatabaseError _param1) {</span>
+                <span class="s0">final int </span><span class="s1">_errorCode = _param1.getCode()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _errorMessage = _param1.getMessage()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+        <span class="s1">chat.addChildEventListener(_chat_child_listener)</span><span class="s0">;</span>
+
+        <span class="s3">//Image PopUp</span>
+
+        <span class="s1">imageview1.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View view) {</span>
+                <span class="s1">ImageView imageView</span><span class="s0">,</span><span class="s1">imageView1</span><span class="s0">;</span>
+                <span class="s1">Button btnok</span><span class="s0">,</span><span class="s1">btncancel</span><span class="s0">;</span>
+                <span class="s1">AlertDialog.Builder builder = </span><span class="s0">new </span><span class="s1">AlertDialog.Builder(DashboardActivity.</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+
+                <span class="s1">View view1 = getLayoutInflater().inflate(R.layout.custom_image_pop_up</span><span class="s0">,null</span><span class="s1">)</span><span class="s0">;</span>
+
+                <span class="s1">builder.setView(view1)</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">AlertDialog alertDialog = builder.create()</span><span class="s0">;</span>
+                <span class="s1">imageView = view1.findViewById(R.id.imageview1)</span><span class="s0">;</span>
+                <span class="s1">Glide.with(getApplicationContext()).load(Uri.parse(file.getString(</span><span class="s2">&quot;profileurl&quot;</span><span class="s0">, </span><span class="s2">&quot;&quot;</span><span class="s1">))).into(imageView)</span><span class="s0">;</span>
+
+                <span class="s1">alertDialog.show()</span><span class="s0">;</span>
+                <span class="s1">alertDialog.getWindow().setBackgroundDrawable(</span><span class="s0">new </span><span class="s1">ColorDrawable(Color.TRANSPARENT))</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+        <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s3">//Image PopUp</span>
+    <span class="s1">}</span>
+
+
+<span class="s3">//    private void notification() {</span>
+<span class="s3">//        String message = &quot;New message arrived&quot;;</span>
+<span class="s3">//        final Notification.Builder builder = new Notification.Builder(DashboardActivity.this).setSmallIcon(R.drawable.app_icon).setContentTitle(&quot;Society&quot;).setContentText(message).setAutoCancel(true);</span>
+<span class="s3">//        Intent intent = new Intent(DashboardActivity.this, ChatActivity.class);</span>
+<span class="s3">//        PendingIntent pendingIntent = PendingIntent.getActivity(DashboardActivity.this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);</span>
+<span class="s3">//        builder.setContentIntent(pendingIntent);</span>
+<span class="s3">//        final NotificationManager notificationManager =</span>
+<span class="s3">//                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);</span>
+<span class="s3">//        final int id = 0;</span>
+<span class="s3">//        notificationManager.notify(id, builder.build());</span>
+<span class="s3">//</span>
+<span class="s3">//        Handler handler = new Handler();</span>
+<span class="s3">//        long delayInMilliseconds = 20000;</span>
+<span class="s3">//        handler.postDelayed(new Runnable() {</span>
+<span class="s3">//            public void run() {</span>
+<span class="s3">//                notificationManager.cancel(id);</span>
+<span class="s3">//                finish();</span>
+<span class="s3">//            }</span>
+<span class="s3">//        }, delayInMilliseconds);</span>
+<span class="s3">////        builder.</span>
+<span class="s3">//    }</span>
+
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onBackPressed() {</span>
+        <span class="s0">if </span><span class="s1">((FirebaseAuth.getInstance().getCurrentUser() != </span><span class="s0">null</span><span class="s1">)) {</span>
+            <span class="s1">dialog.setTitle(</span><span class="s2">&quot;Exit&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">dialog.setMessage(</span><span class="s2">&quot;Do you want to Exit?&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">dialog.setPositiveButton(</span><span class="s2">&quot;Yes&quot;</span><span class="s0">, new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+                <span class="s1">@Override</span>
+                <span class="s0">public void </span><span class="s1">onClick(DialogInterface _dialog</span><span class="s0">, int </span><span class="s1">_which) {</span>
+                    <span class="s1">finish()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">dialog.setNegativeButton(</span><span class="s2">&quot;No&quot;</span><span class="s0">, new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+                <span class="s1">@Override</span>
+                <span class="s0">public void </span><span class="s1">onClick(DialogInterface _dialog</span><span class="s0">, int </span><span class="s1">_which) {</span>
+
+                <span class="s1">}</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">dialog.create().show()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">else </span><span class="s1">{</span>
+
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onRestart() {</span>
+        <span class="s0">super</span><span class="s1">.onRestart()</span><span class="s0">;</span>
+        <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onResume() {</span>
+        <span class="s0">super</span><span class="s1">.onResume()</span><span class="s0">;</span>
+        <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onDestroy() {</span>
+        <span class="s0">super</span><span class="s1">.onDestroy()</span><span class="s0">;</span>
+        <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onStart() {</span>
+        <span class="s0">super</span><span class="s1">.onStart()</span><span class="s0">;</span>
+        <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onStop() {</span>
+        <span class="s0">super</span><span class="s1">.onStop()</span><span class="s0">;</span>
+        <span class="s1">internet.startRequestNetwork(RequestNetworkController.GET</span><span class="s0">, </span><span class="s2">&quot;https://google.com&quot;</span><span class="s0">, </span><span class="s2">&quot;A&quot;</span><span class="s0">, </span><span class="s1">_internet_request_listener)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

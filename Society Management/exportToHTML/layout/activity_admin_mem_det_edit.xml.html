@@ -1,0 +1,269 @@
+<html>
+<head>
+<title>activity_admin_mem_det_edit.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #e8bf6a;}
+.s1 { color: #bababa;}
+.s2 { color: #6a8759;}
+.s3 { color: #a9b7c6;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+activity_admin_mem_det_edit.xml</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;RelativeLayout</span>
+    <span class="s1">xmlns:android</span><span class="s2">=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="s1">xmlns:app</span><span class="s2">=&quot;http://schemas.android.com/apk/res-auto&quot;</span>
+    <span class="s1">xmlns:tools</span><span class="s2">=&quot;http://schemas.android.com/tools&quot;</span>
+    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+    <span class="s1">android:background</span><span class="s2">=&quot;@drawable/signup_page_background&quot;</span>
+    <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span><span class="s0">&gt;</span>
+
+    <span class="s0">&lt;ImageView</span>
+        <span class="s1">android:id</span><span class="s2">=&quot;@+id/profileimage&quot;</span>
+        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+        <span class="s1">android:layout_height</span><span class="s2">=&quot;200dp&quot;</span>
+        <span class="s1">android:transitionName</span><span class="s2">=&quot;imageview1Trans&quot;</span>
+        <span class="s1">android:scaleType</span><span class="s2">=&quot;centerCrop&quot;</span>
+        <span class="s1">android:src</span><span class="s2">=&quot;@drawable/default_profile&quot;</span><span class="s0">/&gt;</span>
+    <span class="s0">&lt;TextView</span>
+        <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+        <span class="s1">android:layout_gravity</span><span class="s2">=&quot;left&quot;</span>
+        <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+        <span class="s1">android:id</span><span class="s2">=&quot;@+id/signup&quot;</span>
+        <span class="s1">android:transitionName</span><span class="s2">=&quot;signupTrans&quot;</span>
+        <span class="s1">android:letterSpacing</span><span class="s2">=&quot;0.5&quot;</span>
+        <span class="s1">android:text</span><span class="s2">=&quot;SignUp&quot;</span>
+        <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;150dp&quot;</span>
+        <span class="s1">android:textAllCaps</span><span class="s2">=&quot;false&quot;</span>
+        <span class="s1">android:background</span><span class="s2">=&quot;@color/semi_transparent&quot;</span>
+        <span class="s1">android:textColor</span><span class="s2">=&quot;#ffffff&quot;</span>
+        <span class="s1">android:textSize</span><span class="s2">=&quot;30dp&quot;</span>
+        <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot; </span><span class="s0">/&gt;</span>
+    <span class="s0">&lt;ImageView</span>
+        <span class="s1">android:layout_width</span><span class="s2">=&quot;35dp&quot;</span>
+        <span class="s1">android:layout_height</span><span class="s2">=&quot;35dp&quot;</span>
+        <span class="s1">android:layout_alignParentRight</span><span class="s2">=&quot;true&quot;</span>
+        <span class="s1">android:src</span><span class="s2">=&quot;@drawable/edit&quot;</span>
+        <span class="s1">android:layout_marginRight</span><span class="s2">=&quot;15dp&quot;</span>
+        <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;155dp&quot;</span>
+        <span class="s1">android:id</span><span class="s2">=&quot;@+id/addimg&quot;</span><span class="s0">/&gt;</span>
+    <span class="s0">&lt;ImageView</span>
+        <span class="s1">android:layout_width</span><span class="s2">=&quot;35dp&quot;</span>
+        <span class="s1">android:layout_height</span><span class="s2">=&quot;35dp&quot;</span>
+        <span class="s1">android:layout_alignParentRight</span><span class="s2">=&quot;true&quot;</span>
+        <span class="s1">android:layout_marginRight</span><span class="s2">=&quot;15dp&quot;</span>
+        <span class="s1">android:src</span><span class="s2">=&quot;@drawable/close_black&quot;</span>
+        <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;155dp&quot;</span>
+        <span class="s1">android:id</span><span class="s2">=&quot;@+id/delprofile&quot;</span><span class="s0">/&gt;</span>
+
+    <span class="s0">&lt;LinearLayout</span>
+        <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear&quot;</span>
+        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+        <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+        <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+        <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;215dp&quot;</span>
+        <span class="s1">android:layout_weight</span><span class="s2">=&quot;0.8&quot;</span>
+        <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;ScrollView</span>
+            <span class="s1">xmlns:android</span><span class="s2">=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+            <span class="s1">xmlns:app</span><span class="s2">=&quot;http://schemas.android.com/apk/res-auto&quot;</span>
+            <span class="s1">xmlns:tools</span><span class="s2">=&quot;http://schemas.android.com/tools&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span>
+            <span class="s1">android:scrollbars</span><span class="s2">=&quot;none&quot;</span>
+            <span class="s1">tools:context</span><span class="s2">=&quot;.DashboardActivity&quot;</span><span class="s0">&gt;</span>
+
+            <span class="s0">&lt;LinearLayout</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;com.google.android.material.textfield.TextInputLayout</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                    <span class="s1">android:layout_marginStart</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">android:layout_marginEnd</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">app:boxStrokeColor</span><span class="s2">=&quot;@color/black&quot;</span>
+                    <span class="s1">android:textColorHint</span><span class="s2">=&quot;@color/black&quot;</span>
+                    <span class="s1">android:textColorHighlight</span><span class="s2">=&quot;@color/black&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;EditText </span><span class="s1">android:id</span><span class="s2">=&quot;@+id/memberid&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:textColor</span><span class="s2">=&quot;@color/black&quot;</span>
+                        <span class="s1">android:backgroundTint</span><span class="s2">=&quot;@color/black&quot;</span>
+                        <span class="s1">android:textSize</span><span class="s2">=&quot;14dp&quot;</span>
+                        <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                        <span class="s1">android:inputType</span><span class="s2">=&quot;phone&quot;</span>
+                        <span class="s1">android:hint</span><span class="s2">=&quot;Member ID&quot; </span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;/com.google.android.material.textfield.TextInputLayout&gt;</span>
+
+                <span class="s0">&lt;com.google.android.material.textfield.TextInputLayout</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                    <span class="s1">app:boxStrokeColor</span><span class="s2">=&quot;#000000&quot;</span>
+                    <span class="s1">android:layout_marginStart</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">android:layout_marginEnd</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">android:textColorHint</span><span class="s2">=&quot;#000000&quot;</span>
+                    <span class="s1">android:textColorHighlight</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;EditText </span><span class="s1">android:id</span><span class="s2">=&quot;@+id/name&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:textColor</span><span class="s2">=&quot;@color/black&quot;</span>
+                        <span class="s1">android:textSize</span><span class="s2">=&quot;14dp&quot;</span>
+                        <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                        <span class="s1">android:inputType</span><span class="s2">=&quot;text&quot;</span>
+                        <span class="s1">android:hint</span><span class="s2">=&quot;Name&quot; </span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;/com.google.android.material.textfield.TextInputLayout&gt;</span>
+                <span class="s0">&lt;com.google.android.material.textfield.TextInputLayout</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                    <span class="s1">android:layout_marginStart</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">android:layout_marginEnd</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">app:boxStrokeColor</span><span class="s2">=&quot;@color/black&quot;</span>
+                    <span class="s1">android:textColorHint</span><span class="s2">=&quot;@color/black&quot;</span>
+                    <span class="s1">android:textColorHighlight</span><span class="s2">=&quot;@color/black&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;EditText </span><span class="s1">android:id</span><span class="s2">=&quot;@+id/emailid&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:textColor</span><span class="s2">=&quot;@color/black&quot;</span>
+                        <span class="s1">android:textSize</span><span class="s2">=&quot;14dp&quot;</span>
+                        <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                        <span class="s1">android:inputType</span><span class="s2">=&quot;textEmailAddress&quot;</span>
+                        <span class="s1">android:hint</span><span class="s2">=&quot;Email ID&quot; </span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;/com.google.android.material.textfield.TextInputLayout&gt;</span>
+                <span class="s0">&lt;com.google.android.material.textfield.TextInputLayout</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                    <span class="s1">android:layout_marginStart</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">android:layout_marginEnd</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">app:boxStrokeColor</span><span class="s2">=&quot;@color/black&quot;</span>
+                    <span class="s1">android:textColorHint</span><span class="s2">=&quot;@color/black&quot;</span>
+                    <span class="s1">android:textColorHighlight</span><span class="s2">=&quot;@color/black&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;EditText </span><span class="s1">android:id</span><span class="s2">=&quot;@+id/phonenumber&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:textColor</span><span class="s2">=&quot;@color/black&quot;</span>
+                        <span class="s1">android:textSize</span><span class="s2">=&quot;14dp&quot;</span>
+                        <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                        <span class="s1">android:inputType</span><span class="s2">=&quot;phone&quot;</span>
+                        <span class="s1">android:hint</span><span class="s2">=&quot;Phone Number&quot; </span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;/com.google.android.material.textfield.TextInputLayout&gt;</span>
+                <span class="s0">&lt;com.google.android.material.textfield.TextInputLayout</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                    <span class="s1">android:layout_marginStart</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">android:layout_marginEnd</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">app:boxStrokeColor</span><span class="s2">=&quot;@color/black&quot;</span>
+                    <span class="s1">android:textColorHint</span><span class="s2">=&quot;@color/black&quot;</span>
+                    <span class="s1">android:textColorHighlight</span><span class="s2">=&quot;@color/black&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;EditText </span><span class="s1">android:id</span><span class="s2">=&quot;@+id/flattype&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:textColor</span><span class="s2">=&quot;@color/black&quot;</span>
+                        <span class="s1">android:textSize</span><span class="s2">=&quot;14dp&quot;</span>
+                        <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                        <span class="s1">android:inputType</span><span class="s2">=&quot;text&quot;</span>
+                        <span class="s1">android:hint</span><span class="s2">=&quot;Flat Type&quot; </span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;/com.google.android.material.textfield.TextInputLayout&gt;</span>
+
+                <span class="s0">&lt;com.google.android.material.textfield.TextInputLayout</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                    <span class="s1">android:layout_marginStart</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">android:layout_marginEnd</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">app:boxStrokeColor</span><span class="s2">=&quot;@color/black&quot;</span>
+                    <span class="s1">android:textColorHint</span><span class="s2">=&quot;@color/black&quot;</span>
+                    <span class="s1">android:textColorHighlight</span><span class="s2">=&quot;@color/black&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;EditText </span><span class="s1">android:id</span><span class="s2">=&quot;@+id/maintenance&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:textColor</span><span class="s2">=&quot;@color/black&quot;</span>
+                        <span class="s1">android:textSize</span><span class="s2">=&quot;14dp&quot;</span>
+                        <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                        <span class="s1">android:inputType</span><span class="s2">=&quot;phone&quot;</span>
+                        <span class="s1">android:hint</span><span class="s2">=&quot;Current Maintenance&quot; </span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;/com.google.android.material.textfield.TextInputLayout&gt;</span>
+
+                <span class="s0">&lt;com.google.android.material.textfield.TextInputLayout</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                    <span class="s1">android:layout_marginStart</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">android:layout_marginEnd</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">app:boxStrokeColor</span><span class="s2">=&quot;@color/black&quot;</span>
+                    <span class="s1">android:textColorHint</span><span class="s2">=&quot;@color/black&quot;</span>
+                    <span class="s1">android:textColorHighlight</span><span class="s2">=&quot;@color/black&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;EditText </span><span class="s1">android:id</span><span class="s2">=&quot;@+id/miscellaneous&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:textColor</span><span class="s2">=&quot;@color/black&quot;</span>
+                        <span class="s1">android:textSize</span><span class="s2">=&quot;14dp&quot;</span>
+                        <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                        <span class="s1">android:inputType</span><span class="s2">=&quot;phone&quot;</span>
+                        <span class="s1">android:hint</span><span class="s2">=&quot;Current Miscellaneous&quot; </span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;/com.google.android.material.textfield.TextInputLayout&gt;</span>
+                <span class="s0">&lt;com.google.android.material.textfield.TextInputLayout</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                    <span class="s1">android:layout_marginStart</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">android:layout_marginEnd</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">app:boxStrokeColor</span><span class="s2">=&quot;@color/black&quot;</span>
+                    <span class="s1">android:textColorHint</span><span class="s2">=&quot;@color/black&quot;</span>
+                    <span class="s1">android:textColorHighlight</span><span class="s2">=&quot;@color/black&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;EditText </span><span class="s1">android:id</span><span class="s2">=&quot;@+id/status&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:textColor</span><span class="s2">=&quot;@color/black&quot;</span>
+                        <span class="s1">android:textSize</span><span class="s2">=&quot;14dp&quot;</span>
+                        <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                        <span class="s1">android:inputType</span><span class="s2">=&quot;text&quot;</span>
+                        <span class="s1">android:hint</span><span class="s2">=&quot;Status&quot; </span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;/com.google.android.material.textfield.TextInputLayout&gt;</span>
+
+                <span class="s0">&lt;LinearLayout</span>
+                    <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear7&quot;</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:padding</span><span class="s2">=&quot;4dp&quot;</span>
+                    <span class="s1">android:gravity</span><span class="s2">=&quot;center_horizontal|center_vertical&quot;</span>
+                    <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;Button</span>
+                        <span class="s1">android:id</span><span class="s2">=&quot;@+id/button1&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                        <span class="s1">android:text</span><span class="s2">=&quot;Update&quot;</span>
+                        <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+                        <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                        <span class="s1">android:background</span><span class="s2">=&quot;@drawable/oval_btn&quot;</span>
+                        <span class="s1">android:textSize</span><span class="s2">=&quot;14dp&quot;</span>
+                        <span class="s1">android:layout_marginBottom</span><span class="s2">=&quot;10dp&quot;</span>
+                        <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;10dp&quot;</span>
+                        <span class="s1">android:textColor</span><span class="s2">=&quot;@color/black&quot;</span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;/LinearLayout&gt;</span>
+                <span class="s0">&lt;LinearLayout</span>
+                    <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear8&quot;</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:padding</span><span class="s2">=&quot;4dp&quot;</span>
+                    <span class="s1">android:gravity</span><span class="s2">=&quot;center_horizontal|center_vertical&quot;</span>
+                    <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;/LinearLayout&gt;</span>
+            <span class="s0">&lt;/LinearLayout&gt;</span>
+        <span class="s0">&lt;/ScrollView&gt;</span>
+    <span class="s0">&lt;/LinearLayout&gt;</span>
+<span class="s0">&lt;/RelativeLayout&gt;</span></pre>
+</body>
+</html>

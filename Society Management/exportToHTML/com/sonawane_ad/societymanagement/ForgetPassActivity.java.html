@@ -1,0 +1,120 @@
+<html>
+<head>
+<title>ForgetPassActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ForgetPassActivity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.sonawane_ad.societymanagement</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AppCompatActivity</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.Button</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.EditText</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.ImageView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.LinearLayout</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.Toast</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.OnCompleteListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.Task</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.auth.AuthResult</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.auth.FirebaseAuth</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.sdsmdg.tastytoast.TastyToast</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">ForgetPassActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity {</span>
+
+    <span class="s1">String TAG = </span><span class="s2">&quot;ForgetPassActivity&quot;</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">EditText useremail</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Button forgetbtn</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">FirebaseAuth Currauth</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnCompleteListener&lt;AuthResult&gt; _Currauth_create_user_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnCompleteListener&lt;AuthResult&gt; _Currauth_sign_in_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnCompleteListener&lt;Void&gt; _Currauth_reset_password_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">LinearLayout nointernet</span><span class="s0">,</span><span class="s1">linear</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Button retry</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">RequestNetwork internet</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">RequestNetwork.RequestListener _internet_request_listener</span><span class="s0">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span>
+        <span class="s1">setContentView(R.layout.activity_forget_pass)</span><span class="s0">;</span>
+        <span class="s1">initialize()</span><span class="s0">;</span>
+        <span class="s1">inttializeLogic()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">inttializeLogic() {</span>
+        <span class="s1">useremail.setText(getIntent().getStringExtra(</span><span class="s2">&quot;email&quot;</span><span class="s1">))</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onBackPressed() {</span>
+        <span class="s0">super</span><span class="s1">.onBackPressed()</span><span class="s0">;</span>
+        <span class="s1">supportFinishAfterTransition()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">initialize() {</span>
+
+        <span class="s1">useremail = findViewById(R.id.UI_email_et)</span><span class="s0">;</span>
+        <span class="s1">forgetbtn = findViewById(R.id.UI_forget_btn)</span><span class="s0">;</span>
+        <span class="s1">Currauth = FirebaseAuth.getInstance()</span><span class="s0">;</span>
+
+
+        <span class="s1">internet = </span><span class="s0">new </span><span class="s1">RequestNetwork(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">nointernet = findViewById(R.id.nointernet)</span><span class="s0">;</span>
+        <span class="s1">linear = findViewById(R.id.linear)</span><span class="s0">;</span>
+        <span class="s1">retry = findViewById(R.id.retry)</span><span class="s0">;</span>
+
+
+
+        <span class="s1">forgetbtn.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View _view) {</span>
+                <span class="s0">if</span><span class="s1">(!(useremail.getText().toString().equals(</span><span class="s2">&quot;&quot;</span><span class="s1">))) {</span>
+                    <span class="s1">Currauth.sendPasswordResetEmail(useremail.getText().toString()).addOnCompleteListener(_Currauth_reset_password_listener)</span><span class="s0">;</span>
+                    <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s2">&quot;Email Sent Successfully&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.SUCCESS)</span><span class="s0">;</span>
+                    <span class="s1">supportFinishAfterTransition()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+                <span class="s0">else</span>
+                    <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s2">&quot;Enter Valid Email ID&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.ERROR)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">_Currauth_create_user_listener = </span><span class="s0">new </span><span class="s1">OnCompleteListener&lt;AuthResult&gt;() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onComplete(Task&lt;AuthResult&gt; _param1) {</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s1">_Currauth_sign_in_listener = </span><span class="s0">new </span><span class="s1">OnCompleteListener&lt;AuthResult&gt;() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onComplete(Task&lt;AuthResult&gt; _param1) {</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s1">_Currauth_reset_password_listener = </span><span class="s0">new </span><span class="s1">OnCompleteListener&lt;Void&gt;() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onComplete(Task&lt;Void&gt; _param1) {</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

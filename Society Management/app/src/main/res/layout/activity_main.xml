@@ -1,0 +1,29 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#FFC107"
+    android:layout_height="match_parent">
+        
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <ImageView
+            android:id="@+id/imageview1"
+            android:layout_width="match_parent"
+            android:padding="30dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/nav_home"
+            android:scaleType="fitCenter"/>
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_gravity="right|bottom"
+        app:srcCompat="@drawable/arrow_right"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

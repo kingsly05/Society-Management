@@ -1,0 +1,624 @@
+<html>
+<head>
+<title>FileUtil.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+FileUtil.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.sonawane_ad.societymanagement</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">android.content.ContentResolver</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.ContentUris</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.Context</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.database.Cursor</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.Bitmap</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.BitmapFactory</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.Canvas</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.ColorFilter</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.ColorMatrix</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.ColorMatrixColorFilter</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.LightingColorFilter</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.Matrix</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.Paint</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.PorterDuff</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.PorterDuffXfermode</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.Rect</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.RectF</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.media.ExifInterface</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.net.Uri</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.Environment</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.provider.DocumentsContract</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.provider.MediaStore</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.text.TextUtils</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.io.File</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.FileInputStream</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.FileOutputStream</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.FileReader</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.FileWriter</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.IOException</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.net.URLDecoder</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.text.SimpleDateFormat</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.Date</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">FileUtil {</span>
+
+
+    <span class="s0">private static void </span><span class="s1">createNewFile(String path) {</span>
+        <span class="s0">int </span><span class="s1">lastSep = path.lastIndexOf(File.separator)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(lastSep &gt; </span><span class="s2">0</span><span class="s1">) {</span>
+            <span class="s1">String dirPath = path.substring(</span><span class="s2">0</span><span class="s0">, </span><span class="s1">lastSep)</span><span class="s0">;</span>
+            <span class="s1">makeDir(dirPath)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">File file = </span><span class="s0">new </span><span class="s1">File(path)</span><span class="s0">;</span>
+
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s0">if </span><span class="s1">(!file.exists())</span>
+                <span class="s1">file.createNewFile()</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(IOException e) {</span>
+            <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static </span><span class="s1">String readFile(String path) {</span>
+        <span class="s1">createNewFile(path)</span><span class="s0">;</span>
+
+        <span class="s1">StringBuilder sb = </span><span class="s0">new </span><span class="s1">StringBuilder()</span><span class="s0">;</span>
+        <span class="s1">FileReader fr = </span><span class="s0">null;</span>
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s1">fr = </span><span class="s0">new </span><span class="s1">FileReader(</span><span class="s0">new </span><span class="s1">File(path))</span><span class="s0">;</span>
+
+            <span class="s0">char</span><span class="s1">[] buff = </span><span class="s0">new char</span><span class="s1">[</span><span class="s2">1024</span><span class="s1">]</span><span class="s0">;</span>
+            <span class="s0">int </span><span class="s1">length = </span><span class="s2">0</span><span class="s0">;</span>
+
+            <span class="s0">while </span><span class="s1">((length = fr.read(buff)) &gt; </span><span class="s2">0</span><span class="s1">) {</span>
+                <span class="s1">sb.append(</span><span class="s0">new </span><span class="s1">String(buff</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s1">length))</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(IOException e) {</span>
+            <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">finally </span><span class="s1">{</span>
+            <span class="s0">if </span><span class="s1">(fr != </span><span class="s0">null</span><span class="s1">) {</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                    <span class="s1">fr.close()</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception e) {</span>
+                    <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s0">return </span><span class="s1">sb.toString()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">writeFile(String path</span><span class="s0">, </span><span class="s1">String str) {</span>
+        <span class="s1">createNewFile(path)</span><span class="s0">;</span>
+        <span class="s1">FileWriter fileWriter = </span><span class="s0">null;</span>
+
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s1">fileWriter = </span><span class="s0">new </span><span class="s1">FileWriter(</span><span class="s0">new </span><span class="s1">File(path)</span><span class="s0">, false</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">fileWriter.write(str)</span><span class="s0">;</span>
+            <span class="s1">fileWriter.flush()</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(IOException e) {</span>
+            <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">finally </span><span class="s1">{</span>
+            <span class="s0">try </span><span class="s1">{</span>
+                <span class="s0">if </span><span class="s1">(fileWriter != </span><span class="s0">null</span><span class="s1">)</span>
+                    <span class="s1">fileWriter.close()</span><span class="s0">;</span>
+            <span class="s1">} </span><span class="s0">catch </span><span class="s1">(IOException e) {</span>
+                <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">copyFile(String sourcePath</span><span class="s0">, </span><span class="s1">String destPath) {</span>
+        <span class="s0">if </span><span class="s1">(!isExistFile(sourcePath)) </span><span class="s0">return;</span>
+        <span class="s1">createNewFile(destPath)</span><span class="s0">;</span>
+
+        <span class="s1">FileInputStream fis = </span><span class="s0">null;</span>
+        <span class="s1">FileOutputStream fos = </span><span class="s0">null;</span>
+
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s1">fis = </span><span class="s0">new </span><span class="s1">FileInputStream(sourcePath)</span><span class="s0">;</span>
+            <span class="s1">fos = </span><span class="s0">new </span><span class="s1">FileOutputStream(destPath</span><span class="s0">, false</span><span class="s1">)</span><span class="s0">;</span>
+
+            <span class="s0">byte</span><span class="s1">[] buff = </span><span class="s0">new byte</span><span class="s1">[</span><span class="s2">1024</span><span class="s1">]</span><span class="s0">;</span>
+            <span class="s0">int </span><span class="s1">length = </span><span class="s2">0</span><span class="s0">;</span>
+
+            <span class="s0">while </span><span class="s1">((length = fis.read(buff)) &gt; </span><span class="s2">0</span><span class="s1">) {</span>
+                <span class="s1">fos.write(buff</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s1">length)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(IOException e) {</span>
+            <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">finally </span><span class="s1">{</span>
+            <span class="s0">if </span><span class="s1">(fis != </span><span class="s0">null</span><span class="s1">) {</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                    <span class="s1">fis.close()</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">catch </span><span class="s1">(IOException e) {</span>
+                    <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+            <span class="s0">if </span><span class="s1">(fos != </span><span class="s0">null</span><span class="s1">) {</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                    <span class="s1">fos.close()</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">catch </span><span class="s1">(IOException e) {</span>
+                    <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">moveFile(String sourcePath</span><span class="s0">, </span><span class="s1">String destPath) {</span>
+        <span class="s1">copyFile(sourcePath</span><span class="s0">, </span><span class="s1">destPath)</span><span class="s0">;</span>
+        <span class="s1">deleteFile(sourcePath)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">deleteFile(String path) {</span>
+        <span class="s1">File file = </span><span class="s0">new </span><span class="s1">File(path)</span><span class="s0">;</span>
+
+        <span class="s0">if </span><span class="s1">(!file.exists()) </span><span class="s0">return;</span>
+
+        <span class="s0">if </span><span class="s1">(file.isFile()) {</span>
+            <span class="s1">file.delete()</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">File[] fileArr = file.listFiles()</span><span class="s0">;</span>
+
+        <span class="s0">if </span><span class="s1">(fileArr != </span><span class="s0">null</span><span class="s1">) {</span>
+            <span class="s0">for </span><span class="s1">(File subFile : fileArr) {</span>
+                <span class="s0">if </span><span class="s1">(subFile.isDirectory()) {</span>
+                    <span class="s1">deleteFile(subFile.getAbsolutePath())</span><span class="s0">;</span>
+                <span class="s1">}</span>
+
+                <span class="s0">if </span><span class="s1">(subFile.isFile()) {</span>
+                    <span class="s1">subFile.delete()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s1">file.delete()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static boolean </span><span class="s1">isExistFile(String path) {</span>
+        <span class="s1">File file = </span><span class="s0">new </span><span class="s1">File(path)</span><span class="s0">;</span>
+        <span class="s0">return </span><span class="s1">file.exists()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">makeDir(String path) {</span>
+        <span class="s0">if </span><span class="s1">(!isExistFile(path)) {</span>
+            <span class="s1">File file = </span><span class="s0">new </span><span class="s1">File(path)</span><span class="s0">;</span>
+            <span class="s1">file.mkdirs()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">listDir(String path</span><span class="s0">, </span><span class="s1">ArrayList&lt;String&gt; list) {</span>
+        <span class="s1">File dir = </span><span class="s0">new </span><span class="s1">File(path)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(!dir.exists() || dir.isFile()) </span><span class="s0">return;</span>
+
+        <span class="s1">File[] listFiles = dir.listFiles()</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(listFiles == </span><span class="s0">null </span><span class="s1">|| listFiles.length &lt;= </span><span class="s2">0</span><span class="s1">) </span><span class="s0">return;</span>
+
+        <span class="s0">if </span><span class="s1">(list == </span><span class="s0">null</span><span class="s1">) </span><span class="s0">return;</span>
+        <span class="s1">list.clear()</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(File file : listFiles) {</span>
+            <span class="s1">list.add(file.getAbsolutePath())</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static boolean </span><span class="s1">isDirectory(String path) {</span>
+        <span class="s0">if </span><span class="s1">(!isExistFile(path)) </span><span class="s0">return false;</span>
+        <span class="s0">return new </span><span class="s1">File(path).isDirectory()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static boolean </span><span class="s1">isFile(String path) {</span>
+        <span class="s0">if </span><span class="s1">(!isExistFile(path)) </span><span class="s0">return false;</span>
+        <span class="s0">return new </span><span class="s1">File(path).isFile()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static long </span><span class="s1">getFileLength(String path) {</span>
+        <span class="s0">if </span><span class="s1">(!isExistFile(path)) </span><span class="s0">return </span><span class="s2">0</span><span class="s0">;</span>
+        <span class="s0">return new </span><span class="s1">File(path).length()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static </span><span class="s1">String getExternalStorageDir() {</span>
+        <span class="s0">return </span><span class="s1">Environment.getExternalStorageDirectory().getAbsolutePath()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static </span><span class="s1">String getPackageDataDir(Context context) {</span>
+        <span class="s0">return </span><span class="s1">context.getExternalFilesDir(</span><span class="s0">null</span><span class="s1">).getAbsolutePath()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static </span><span class="s1">String getPublicDir(String type) {</span>
+        <span class="s0">return </span><span class="s1">Environment.getExternalStoragePublicDirectory(type).getAbsolutePath()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static </span><span class="s1">String convertUriToFilePath(</span><span class="s0">final </span><span class="s1">Context context</span><span class="s0">, final </span><span class="s1">Uri uri) {</span>
+        <span class="s1">String path = </span><span class="s0">null;</span>
+        <span class="s0">if </span><span class="s1">(DocumentsContract.isDocumentUri(context</span><span class="s0">, </span><span class="s1">uri)) {</span>
+            <span class="s0">if </span><span class="s1">(isExternalStorageDocument(uri)) {</span>
+                <span class="s0">final </span><span class="s1">String docId = DocumentsContract.getDocumentId(uri)</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String[] split = docId.split(</span><span class="s3">&quot;:&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String type = split[</span><span class="s2">0</span><span class="s1">]</span><span class="s0">;</span>
+
+                <span class="s0">if </span><span class="s1">(</span><span class="s3">&quot;primary&quot;</span><span class="s1">.equalsIgnoreCase(type)) {</span>
+                    <span class="s1">path = Environment.getExternalStorageDirectory() + </span><span class="s3">&quot;/&quot; </span><span class="s1">+ split[</span><span class="s2">1</span><span class="s1">]</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(isDownloadsDocument(uri)) {</span>
+                <span class="s0">final </span><span class="s1">String id = DocumentsContract.getDocumentId(uri)</span><span class="s0">;</span>
+
+                <span class="s0">if </span><span class="s1">(!TextUtils.isEmpty(id)) {</span>
+                    <span class="s0">if </span><span class="s1">(id.startsWith(</span><span class="s3">&quot;raw:&quot;</span><span class="s1">)) {</span>
+                        <span class="s0">return </span><span class="s1">id.replaceFirst(</span><span class="s3">&quot;raw:&quot;</span><span class="s0">, </span><span class="s3">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+
+                <span class="s0">final </span><span class="s1">Uri contentUri = ContentUris</span>
+                        <span class="s1">.withAppendedId(Uri.parse(</span><span class="s3">&quot;content://downloads/public_downloads&quot;</span><span class="s1">)</span><span class="s0">, </span><span class="s1">Long.valueOf(id))</span><span class="s0">;</span>
+
+                <span class="s1">path = getDataColumn(context</span><span class="s0">, </span><span class="s1">contentUri</span><span class="s0">, null, null</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(isMediaDocument(uri)) {</span>
+                <span class="s0">final </span><span class="s1">String docId = DocumentsContract.getDocumentId(uri)</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String[] split = docId.split(</span><span class="s3">&quot;:&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String type = split[</span><span class="s2">0</span><span class="s1">]</span><span class="s0">;</span>
+
+                <span class="s1">Uri contentUri = </span><span class="s0">null;</span>
+                <span class="s0">if </span><span class="s1">(</span><span class="s3">&quot;image&quot;</span><span class="s1">.equals(type)) {</span>
+                    <span class="s1">contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(</span><span class="s3">&quot;video&quot;</span><span class="s1">.equals(type)) {</span>
+                    <span class="s1">contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(</span><span class="s3">&quot;audio&quot;</span><span class="s1">.equals(type)) {</span>
+                    <span class="s1">contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI</span><span class="s0">;</span>
+                <span class="s1">}</span>
+
+                <span class="s0">final </span><span class="s1">String selection = MediaStore.Audio.Media._ID + </span><span class="s3">&quot;=?&quot;</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String[] selectionArgs = </span><span class="s0">new </span><span class="s1">String[]{</span>
+                        <span class="s1">split[</span><span class="s2">1</span><span class="s1">]</span>
+                <span class="s1">}</span><span class="s0">;</span>
+
+                <span class="s1">path = getDataColumn(context</span><span class="s0">, </span><span class="s1">contentUri</span><span class="s0">, </span><span class="s1">selection</span><span class="s0">, </span><span class="s1">selectionArgs)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">} </span><span class="s0">else if </span><span class="s1">(ContentResolver.SCHEME_CONTENT.equalsIgnoreCase(uri.getScheme())) {</span>
+            <span class="s1">path = getDataColumn(context</span><span class="s0">, </span><span class="s1">uri</span><span class="s0">, null, null</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">else if </span><span class="s1">(ContentResolver.SCHEME_FILE.equalsIgnoreCase(uri.getScheme())) {</span>
+            <span class="s1">path = uri.getPath()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">if </span><span class="s1">(path != </span><span class="s0">null</span><span class="s1">) {</span>
+            <span class="s0">try </span><span class="s1">{</span>
+                <span class="s0">return </span><span class="s1">URLDecoder.decode(path</span><span class="s0">, </span><span class="s3">&quot;UTF-8&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">}</span><span class="s0">catch</span><span class="s1">(Exception e){</span>
+                <span class="s0">return null;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s0">return null;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static </span><span class="s1">String getDataColumn(Context context</span><span class="s0">, </span><span class="s1">Uri uri</span><span class="s0">, </span><span class="s1">String selection</span><span class="s0">, </span><span class="s1">String[] selectionArgs) {</span>
+        <span class="s1">Cursor cursor = </span><span class="s0">null;</span>
+
+        <span class="s0">final </span><span class="s1">String column = MediaStore.Images.Media.DATA</span><span class="s0">;</span>
+        <span class="s0">final </span><span class="s1">String[] projection = {</span>
+                <span class="s1">column</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s1">cursor = context.getContentResolver().query(uri</span><span class="s0">, </span><span class="s1">projection</span><span class="s0">, </span><span class="s1">selection</span><span class="s0">, </span><span class="s1">selectionArgs</span><span class="s0">, null</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">if </span><span class="s1">(cursor != </span><span class="s0">null </span><span class="s1">&amp;&amp; cursor.moveToFirst()) {</span>
+                <span class="s0">final int </span><span class="s1">column_index = cursor.getColumnIndexOrThrow(column)</span><span class="s0">;</span>
+                <span class="s0">return </span><span class="s1">cursor.getString(column_index)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception e) {</span>
+
+        <span class="s1">} </span><span class="s0">finally </span><span class="s1">{</span>
+            <span class="s0">if </span><span class="s1">(cursor != </span><span class="s0">null</span><span class="s1">) {</span>
+                <span class="s1">cursor.close()</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s0">return null;</span>
+    <span class="s1">}</span>
+
+
+    <span class="s0">private static boolean </span><span class="s1">isExternalStorageDocument(Uri uri) {</span>
+        <span class="s0">return </span><span class="s3">&quot;com.android.externalstorage.documents&quot;</span><span class="s1">.equals(uri.getAuthority())</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static boolean </span><span class="s1">isDownloadsDocument(Uri uri) {</span>
+        <span class="s0">return </span><span class="s3">&quot;com.android.providers.downloads.documents&quot;</span><span class="s1">.equals(uri.getAuthority())</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static boolean </span><span class="s1">isMediaDocument(Uri uri) {</span>
+        <span class="s0">return </span><span class="s3">&quot;com.android.providers.media.documents&quot;</span><span class="s1">.equals(uri.getAuthority())</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">saveBitmap(Bitmap bitmap</span><span class="s0">, </span><span class="s1">String destPath) {</span>
+        <span class="s1">FileOutputStream out = </span><span class="s0">null;</span>
+        <span class="s1">FileUtil.createNewFile(destPath)</span><span class="s0">;</span>
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s1">out = </span><span class="s0">new </span><span class="s1">FileOutputStream(</span><span class="s0">new </span><span class="s1">File(destPath))</span><span class="s0">;</span>
+            <span class="s1">bitmap.compress(Bitmap.CompressFormat.PNG</span><span class="s0">, </span><span class="s2">100</span><span class="s0">, </span><span class="s1">out)</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception e) {</span>
+            <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">finally </span><span class="s1">{</span>
+            <span class="s0">try </span><span class="s1">{</span>
+                <span class="s0">if </span><span class="s1">(out != </span><span class="s0">null</span><span class="s1">) {</span>
+                    <span class="s1">out.close()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">} </span><span class="s0">catch </span><span class="s1">(IOException e) {</span>
+                <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static </span><span class="s1">Bitmap getScaledBitmap(String path</span><span class="s0">, int </span><span class="s1">max) {</span>
+        <span class="s1">Bitmap src = BitmapFactory.decodeFile(path)</span><span class="s0">;</span>
+
+        <span class="s0">int </span><span class="s1">width = src.getWidth()</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">height = src.getHeight()</span><span class="s0">;</span>
+        <span class="s0">float </span><span class="s1">rate = </span><span class="s2">0.0f</span><span class="s0">;</span>
+
+        <span class="s0">if </span><span class="s1">(width &gt; height) {</span>
+            <span class="s1">rate = max / (</span><span class="s0">float</span><span class="s1">) width</span><span class="s0">;</span>
+            <span class="s1">height = (</span><span class="s0">int</span><span class="s1">) (height * rate)</span><span class="s0">;</span>
+            <span class="s1">width = max</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">rate = max / (</span><span class="s0">float</span><span class="s1">) height</span><span class="s0">;</span>
+            <span class="s1">width = (</span><span class="s0">int</span><span class="s1">) (width * rate)</span><span class="s0">;</span>
+            <span class="s1">height = max</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">return </span><span class="s1">Bitmap.createScaledBitmap(src</span><span class="s0">, </span><span class="s1">width</span><span class="s0">, </span><span class="s1">height</span><span class="s0">, true</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static int </span><span class="s1">calculateInSampleSize(BitmapFactory.Options options</span><span class="s0">, int </span><span class="s1">reqWidth</span><span class="s0">, int </span><span class="s1">reqHeight) {</span>
+        <span class="s0">final int </span><span class="s1">width = options.outWidth</span><span class="s0">;</span>
+        <span class="s0">final int </span><span class="s1">height = options.outHeight</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">inSampleSize = </span><span class="s2">1</span><span class="s0">;</span>
+
+        <span class="s0">if </span><span class="s1">(height &gt; reqHeight || width &gt; reqWidth) {</span>
+            <span class="s0">final int </span><span class="s1">halfHeight = height / </span><span class="s2">2</span><span class="s0">;</span>
+            <span class="s0">final int </span><span class="s1">halfWidth = width / </span><span class="s2">2</span><span class="s0">;</span>
+
+            <span class="s0">while </span><span class="s1">((halfHeight / inSampleSize) &gt;= reqHeight &amp;&amp; (halfWidth / inSampleSize) &gt;= reqWidth) {</span>
+                <span class="s1">inSampleSize *= </span><span class="s2">2</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s0">return </span><span class="s1">inSampleSize</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static </span><span class="s1">Bitmap decodeSampleBitmapFromPath(String path</span><span class="s0">, int </span><span class="s1">reqWidth</span><span class="s0">, int </span><span class="s1">reqHeight) {</span>
+        <span class="s0">final </span><span class="s1">BitmapFactory.Options options = </span><span class="s0">new </span><span class="s1">BitmapFactory.Options()</span><span class="s0">;</span>
+        <span class="s1">options.inJustDecodeBounds = </span><span class="s0">true;</span>
+        <span class="s1">BitmapFactory.decodeFile(path</span><span class="s0">, </span><span class="s1">options)</span><span class="s0">;</span>
+
+        <span class="s1">options.inSampleSize = calculateInSampleSize(options</span><span class="s0">, </span><span class="s1">reqWidth</span><span class="s0">, </span><span class="s1">reqHeight)</span><span class="s0">;</span>
+
+        <span class="s1">options.inJustDecodeBounds = </span><span class="s0">false;</span>
+        <span class="s0">return </span><span class="s1">BitmapFactory.decodeFile(path</span><span class="s0">, </span><span class="s1">options)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">resizeBitmapFileRetainRatio(String fromPath</span><span class="s0">, </span><span class="s1">String destPath</span><span class="s0">, int </span><span class="s1">max) {</span>
+        <span class="s0">if </span><span class="s1">(!isExistFile(fromPath)) </span><span class="s0">return;</span>
+        <span class="s1">Bitmap bitmap = getScaledBitmap(fromPath</span><span class="s0">, </span><span class="s1">max)</span><span class="s0">;</span>
+        <span class="s1">saveBitmap(bitmap</span><span class="s0">, </span><span class="s1">destPath)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">resizeBitmapFileToSquare(String fromPath</span><span class="s0">, </span><span class="s1">String destPath</span><span class="s0">, int </span><span class="s1">max) {</span>
+        <span class="s0">if </span><span class="s1">(!isExistFile(fromPath)) </span><span class="s0">return;</span>
+        <span class="s1">Bitmap src = BitmapFactory.decodeFile(fromPath)</span><span class="s0">;</span>
+        <span class="s1">Bitmap bitmap = Bitmap.createScaledBitmap(src</span><span class="s0">, </span><span class="s1">max</span><span class="s0">, </span><span class="s1">max</span><span class="s0">, true</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">saveBitmap(bitmap</span><span class="s0">, </span><span class="s1">destPath)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">resizeBitmapFileToCircle(String fromPath</span><span class="s0">, </span><span class="s1">String destPath) {</span>
+        <span class="s0">if </span><span class="s1">(!isExistFile(fromPath)) </span><span class="s0">return;</span>
+        <span class="s1">Bitmap src = BitmapFactory.decodeFile(fromPath)</span><span class="s0">;</span>
+        <span class="s1">Bitmap bitmap = Bitmap.createBitmap(src.getWidth()</span><span class="s0">,</span>
+                <span class="s1">src.getHeight()</span><span class="s0">, </span><span class="s1">Bitmap.Config.ARGB_8888)</span><span class="s0">;</span>
+        <span class="s1">Canvas canvas = </span><span class="s0">new </span><span class="s1">Canvas(bitmap)</span><span class="s0">;</span>
+
+        <span class="s0">final int </span><span class="s1">color = </span><span class="s2">0xff424242</span><span class="s0">;</span>
+        <span class="s0">final </span><span class="s1">Paint paint = </span><span class="s0">new </span><span class="s1">Paint()</span><span class="s0">;</span>
+        <span class="s0">final </span><span class="s1">Rect rect = </span><span class="s0">new </span><span class="s1">Rect(</span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s1">src.getWidth()</span><span class="s0">, </span><span class="s1">src.getHeight())</span><span class="s0">;</span>
+
+        <span class="s1">paint.setAntiAlias(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">canvas.drawARGB(</span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">paint.setColor(color)</span><span class="s0">;</span>
+        <span class="s1">canvas.drawCircle(src.getWidth() / </span><span class="s2">2</span><span class="s0">, </span><span class="s1">src.getHeight() / </span><span class="s2">2</span><span class="s0">,</span>
+                <span class="s1">src.getWidth() / </span><span class="s2">2</span><span class="s0">, </span><span class="s1">paint)</span><span class="s0">;</span>
+        <span class="s1">paint.setXfermode(</span><span class="s0">new </span><span class="s1">PorterDuffXfermode(PorterDuff.Mode.SRC_IN))</span><span class="s0">;</span>
+        <span class="s1">canvas.drawBitmap(src</span><span class="s0">, </span><span class="s1">rect</span><span class="s0">, </span><span class="s1">rect</span><span class="s0">, </span><span class="s1">paint)</span><span class="s0">;</span>
+
+        <span class="s1">saveBitmap(bitmap</span><span class="s0">, </span><span class="s1">destPath)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">resizeBitmapFileWithRoundedBorder(String fromPath</span><span class="s0">, </span><span class="s1">String destPath</span><span class="s0">, int </span><span class="s1">pixels) {</span>
+        <span class="s0">if </span><span class="s1">(!isExistFile(fromPath)) </span><span class="s0">return;</span>
+        <span class="s1">Bitmap src = BitmapFactory.decodeFile(fromPath)</span><span class="s0">;</span>
+        <span class="s1">Bitmap bitmap = Bitmap.createBitmap(src.getWidth()</span><span class="s0">, </span><span class="s1">src</span>
+                <span class="s1">.getHeight()</span><span class="s0">, </span><span class="s1">Bitmap.Config.ARGB_8888)</span><span class="s0">;</span>
+        <span class="s1">Canvas canvas = </span><span class="s0">new </span><span class="s1">Canvas(bitmap)</span><span class="s0">;</span>
+
+        <span class="s0">final int </span><span class="s1">color = </span><span class="s2">0xff424242</span><span class="s0">;</span>
+        <span class="s0">final </span><span class="s1">Paint paint = </span><span class="s0">new </span><span class="s1">Paint()</span><span class="s0">;</span>
+        <span class="s0">final </span><span class="s1">Rect rect = </span><span class="s0">new </span><span class="s1">Rect(</span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s1">src.getWidth()</span><span class="s0">, </span><span class="s1">src.getHeight())</span><span class="s0">;</span>
+        <span class="s0">final </span><span class="s1">RectF rectF = </span><span class="s0">new </span><span class="s1">RectF(rect)</span><span class="s0">;</span>
+        <span class="s0">final float </span><span class="s1">roundPx = pixels</span><span class="s0">;</span>
+
+        <span class="s1">paint.setAntiAlias(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">canvas.drawARGB(</span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">paint.setColor(color)</span><span class="s0">;</span>
+        <span class="s1">canvas.drawRoundRect(rectF</span><span class="s0">, </span><span class="s1">roundPx</span><span class="s0">, </span><span class="s1">roundPx</span><span class="s0">, </span><span class="s1">paint)</span><span class="s0">;</span>
+
+        <span class="s1">paint.setXfermode(</span><span class="s0">new </span><span class="s1">PorterDuffXfermode(PorterDuff.Mode.SRC_IN))</span><span class="s0">;</span>
+        <span class="s1">canvas.drawBitmap(src</span><span class="s0">, </span><span class="s1">rect</span><span class="s0">, </span><span class="s1">rect</span><span class="s0">, </span><span class="s1">paint)</span><span class="s0">;</span>
+
+        <span class="s1">saveBitmap(bitmap</span><span class="s0">, </span><span class="s1">destPath)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">cropBitmapFileFromCenter(String fromPath</span><span class="s0">, </span><span class="s1">String destPath</span><span class="s0">, int </span><span class="s1">w</span><span class="s0">, int </span><span class="s1">h) {</span>
+        <span class="s0">if </span><span class="s1">(!isExistFile(fromPath)) </span><span class="s0">return;</span>
+        <span class="s1">Bitmap src = BitmapFactory.decodeFile(fromPath)</span><span class="s0">;</span>
+
+        <span class="s0">int </span><span class="s1">width = src.getWidth()</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">height = src.getHeight()</span><span class="s0">;</span>
+
+        <span class="s0">if </span><span class="s1">(width &lt; w &amp;&amp; height &lt; h)</span>
+            <span class="s0">return;</span>
+
+        <span class="s0">int </span><span class="s1">x = </span><span class="s2">0</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">y = </span><span class="s2">0</span><span class="s0">;</span>
+
+        <span class="s0">if </span><span class="s1">(width &gt; w)</span>
+            <span class="s1">x = (width - w) / </span><span class="s2">2</span><span class="s0">;</span>
+
+        <span class="s0">if </span><span class="s1">(height &gt; h)</span>
+            <span class="s1">y = (height - h) / </span><span class="s2">2</span><span class="s0">;</span>
+
+        <span class="s0">int </span><span class="s1">cw = w</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">ch = h</span><span class="s0">;</span>
+
+        <span class="s0">if </span><span class="s1">(w &gt; width)</span>
+            <span class="s1">cw = width</span><span class="s0">;</span>
+
+        <span class="s0">if </span><span class="s1">(h &gt; height)</span>
+            <span class="s1">ch = height</span><span class="s0">;</span>
+
+        <span class="s1">Bitmap bitmap = Bitmap.createBitmap(src</span><span class="s0">, </span><span class="s1">x</span><span class="s0">, </span><span class="s1">y</span><span class="s0">, </span><span class="s1">cw</span><span class="s0">, </span><span class="s1">ch)</span><span class="s0">;</span>
+        <span class="s1">saveBitmap(bitmap</span><span class="s0">, </span><span class="s1">destPath)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">rotateBitmapFile(String fromPath</span><span class="s0">, </span><span class="s1">String destPath</span><span class="s0">, float </span><span class="s1">angle) {</span>
+        <span class="s0">if </span><span class="s1">(!isExistFile(fromPath)) </span><span class="s0">return;</span>
+        <span class="s1">Bitmap src = BitmapFactory.decodeFile(fromPath)</span><span class="s0">;</span>
+        <span class="s1">Matrix matrix = </span><span class="s0">new </span><span class="s1">Matrix()</span><span class="s0">;</span>
+        <span class="s1">matrix.postRotate(angle)</span><span class="s0">;</span>
+        <span class="s1">Bitmap bitmap = Bitmap.createBitmap(src</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s1">src.getWidth()</span><span class="s0">, </span><span class="s1">src.getHeight()</span><span class="s0">, </span><span class="s1">matrix</span><span class="s0">, true</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">saveBitmap(bitmap</span><span class="s0">, </span><span class="s1">destPath)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">scaleBitmapFile(String fromPath</span><span class="s0">, </span><span class="s1">String destPath</span><span class="s0">, float </span><span class="s1">x</span><span class="s0">, float </span><span class="s1">y) {</span>
+        <span class="s0">if </span><span class="s1">(!isExistFile(fromPath)) </span><span class="s0">return;</span>
+        <span class="s1">Bitmap src = BitmapFactory.decodeFile(fromPath)</span><span class="s0">;</span>
+        <span class="s1">Matrix matrix = </span><span class="s0">new </span><span class="s1">Matrix()</span><span class="s0">;</span>
+        <span class="s1">matrix.postScale(x</span><span class="s0">, </span><span class="s1">y)</span><span class="s0">;</span>
+
+        <span class="s0">int </span><span class="s1">w = src.getWidth()</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">h = src.getHeight()</span><span class="s0">;</span>
+
+        <span class="s1">Bitmap bitmap = Bitmap.createBitmap(src</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s1">w</span><span class="s0">, </span><span class="s1">h</span><span class="s0">, </span><span class="s1">matrix</span><span class="s0">, true</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">saveBitmap(bitmap</span><span class="s0">, </span><span class="s1">destPath)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">skewBitmapFile(String fromPath</span><span class="s0">, </span><span class="s1">String destPath</span><span class="s0">, float </span><span class="s1">x</span><span class="s0">, float </span><span class="s1">y) {</span>
+        <span class="s0">if </span><span class="s1">(!isExistFile(fromPath)) </span><span class="s0">return;</span>
+        <span class="s1">Bitmap src = BitmapFactory.decodeFile(fromPath)</span><span class="s0">;</span>
+        <span class="s1">Matrix matrix = </span><span class="s0">new </span><span class="s1">Matrix()</span><span class="s0">;</span>
+        <span class="s1">matrix.postSkew(x</span><span class="s0">, </span><span class="s1">y)</span><span class="s0">;</span>
+
+        <span class="s0">int </span><span class="s1">w = src.getWidth()</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">h = src.getHeight()</span><span class="s0">;</span>
+
+        <span class="s1">Bitmap bitmap = Bitmap.createBitmap(src</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s1">w</span><span class="s0">, </span><span class="s1">h</span><span class="s0">, </span><span class="s1">matrix</span><span class="s0">, true</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">saveBitmap(bitmap</span><span class="s0">, </span><span class="s1">destPath)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">setBitmapFileColorFilter(String fromPath</span><span class="s0">, </span><span class="s1">String destPath</span><span class="s0">, int </span><span class="s1">color) {</span>
+        <span class="s0">if </span><span class="s1">(!isExistFile(fromPath)) </span><span class="s0">return;</span>
+        <span class="s1">Bitmap src = BitmapFactory.decodeFile(fromPath)</span><span class="s0">;</span>
+        <span class="s1">Bitmap bitmap = Bitmap.createBitmap(src</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">,</span>
+                <span class="s1">src.getWidth() - </span><span class="s2">1</span><span class="s0">, </span><span class="s1">src.getHeight() - </span><span class="s2">1</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Paint p = </span><span class="s0">new </span><span class="s1">Paint()</span><span class="s0">;</span>
+        <span class="s1">ColorFilter filter = </span><span class="s0">new </span><span class="s1">LightingColorFilter(color</span><span class="s0">, </span><span class="s2">1</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">p.setColorFilter(filter)</span><span class="s0">;</span>
+        <span class="s1">Canvas canvas = </span><span class="s0">new </span><span class="s1">Canvas(bitmap)</span><span class="s0">;</span>
+        <span class="s1">canvas.drawBitmap(bitmap</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s1">p)</span><span class="s0">;</span>
+        <span class="s1">saveBitmap(bitmap</span><span class="s0">, </span><span class="s1">destPath)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">setBitmapFileBrightness(String fromPath</span><span class="s0">, </span><span class="s1">String destPath</span><span class="s0">, float </span><span class="s1">brightness) {</span>
+        <span class="s0">if </span><span class="s1">(!isExistFile(fromPath)) </span><span class="s0">return;</span>
+        <span class="s1">Bitmap src = BitmapFactory.decodeFile(fromPath)</span><span class="s0">;</span>
+        <span class="s1">ColorMatrix cm = </span><span class="s0">new </span><span class="s1">ColorMatrix(</span><span class="s0">new float</span><span class="s1">[]</span>
+                <span class="s1">{</span>
+                        <span class="s2">1</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s1">brightness</span><span class="s0">,</span>
+                        <span class="s2">0</span><span class="s0">, </span><span class="s2">1</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s1">brightness</span><span class="s0">,</span>
+                        <span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">1</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s1">brightness</span><span class="s0">,</span>
+                        <span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">1</span><span class="s0">, </span><span class="s2">0</span>
+                <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">Bitmap bitmap = Bitmap.createBitmap(src.getWidth()</span><span class="s0">, </span><span class="s1">src.getHeight()</span><span class="s0">, </span><span class="s1">src.getConfig())</span><span class="s0">;</span>
+        <span class="s1">Canvas canvas = </span><span class="s0">new </span><span class="s1">Canvas(bitmap)</span><span class="s0">;</span>
+        <span class="s1">Paint paint = </span><span class="s0">new </span><span class="s1">Paint()</span><span class="s0">;</span>
+        <span class="s1">paint.setColorFilter(</span><span class="s0">new </span><span class="s1">ColorMatrixColorFilter(cm))</span><span class="s0">;</span>
+        <span class="s1">canvas.drawBitmap(src</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s1">paint)</span><span class="s0">;</span>
+        <span class="s1">saveBitmap(bitmap</span><span class="s0">, </span><span class="s1">destPath)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">setBitmapFileContrast(String fromPath</span><span class="s0">, </span><span class="s1">String destPath</span><span class="s0">, float </span><span class="s1">contrast) {</span>
+        <span class="s0">if </span><span class="s1">(!isExistFile(fromPath)) </span><span class="s0">return;</span>
+        <span class="s1">Bitmap src = BitmapFactory.decodeFile(fromPath)</span><span class="s0">;</span>
+        <span class="s1">ColorMatrix cm = </span><span class="s0">new </span><span class="s1">ColorMatrix(</span><span class="s0">new float</span><span class="s1">[]</span>
+                <span class="s1">{</span>
+                        <span class="s1">contrast</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">,</span>
+                        <span class="s2">0</span><span class="s0">, </span><span class="s1">contrast</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">,</span>
+                        <span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s1">contrast</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">,</span>
+                        <span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">1</span><span class="s0">, </span><span class="s2">0</span>
+                <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">Bitmap bitmap = Bitmap.createBitmap(src.getWidth()</span><span class="s0">, </span><span class="s1">src.getHeight()</span><span class="s0">, </span><span class="s1">src.getConfig())</span><span class="s0">;</span>
+        <span class="s1">Canvas canvas = </span><span class="s0">new </span><span class="s1">Canvas(bitmap)</span><span class="s0">;</span>
+        <span class="s1">Paint paint = </span><span class="s0">new </span><span class="s1">Paint()</span><span class="s0">;</span>
+        <span class="s1">paint.setColorFilter(</span><span class="s0">new </span><span class="s1">ColorMatrixColorFilter(cm))</span><span class="s0">;</span>
+        <span class="s1">canvas.drawBitmap(src</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s1">paint)</span><span class="s0">;</span>
+
+        <span class="s1">saveBitmap(bitmap</span><span class="s0">, </span><span class="s1">destPath)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static int </span><span class="s1">getJpegRotate(String filePath) {</span>
+        <span class="s0">int </span><span class="s1">rotate = </span><span class="s2">0</span><span class="s0">;</span>
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s1">ExifInterface exif = </span><span class="s0">new </span><span class="s1">ExifInterface(filePath)</span><span class="s0">;</span>
+            <span class="s0">int </span><span class="s1">iOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION</span><span class="s0">, </span><span class="s1">-</span><span class="s2">1</span><span class="s1">)</span><span class="s0">;</span>
+
+            <span class="s0">switch </span><span class="s1">(iOrientation) {</span>
+                <span class="s0">case </span><span class="s1">ExifInterface.ORIENTATION_ROTATE_90:</span>
+                    <span class="s1">rotate = </span><span class="s2">90</span><span class="s0">;</span>
+                    <span class="s0">break;</span>
+                <span class="s0">case </span><span class="s1">ExifInterface.ORIENTATION_ROTATE_180:</span>
+                    <span class="s1">rotate = </span><span class="s2">180</span><span class="s0">;</span>
+                    <span class="s0">break;</span>
+                <span class="s0">case </span><span class="s1">ExifInterface.ORIENTATION_ROTATE_270:</span>
+                    <span class="s1">rotate = </span><span class="s2">270</span><span class="s0">;</span>
+                    <span class="s0">break;</span>
+                <span class="s0">default</span><span class="s1">:</span>
+                    <span class="s1">rotate = </span><span class="s2">0</span><span class="s0">;</span>
+                    <span class="s0">break;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s0">catch </span><span class="s1">(IOException e) {</span>
+            <span class="s0">return </span><span class="s2">0</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">return </span><span class="s1">rotate</span><span class="s0">;</span>
+    <span class="s1">}</span>
+    <span class="s0">public static </span><span class="s1">File createNewPictureFile(Context context) {</span>
+        <span class="s1">SimpleDateFormat date = </span><span class="s0">new </span><span class="s1">SimpleDateFormat(</span><span class="s3">&quot;yyyyMMdd_HHmmss&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String fileName = date.format(</span><span class="s0">new </span><span class="s1">Date()) + </span><span class="s3">&quot;.jpg&quot;</span><span class="s0">;</span>
+        <span class="s1">File file = </span><span class="s0">new </span><span class="s1">File(context.getExternalFilesDir(Environment.DIRECTORY_DCIM).getAbsolutePath() + File.separator + fileName)</span><span class="s0">;</span>
+        <span class="s0">return </span><span class="s1">file</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<html>
+<head>
+<title>RequestNetworkController.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+RequestNetworkController.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.sonawane_ad.societymanagement</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">com.google.gson.Gson</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.io.IOException</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.security.cert.CertificateException</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.HashMap</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.concurrent.TimeUnit</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">javax.net.ssl.HostnameVerifier</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javax.net.ssl.SSLContext</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javax.net.ssl.SSLSession</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javax.net.ssl.SSLSocketFactory</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javax.net.ssl.TrustManager</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javax.net.ssl.X509TrustManager</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">okhttp3.Call</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">okhttp3.Callback</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">okhttp3.FormBody</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">okhttp3.Headers</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">okhttp3.HttpUrl</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">okhttp3.OkHttpClient</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">okhttp3.Request</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">okhttp3.RequestBody</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">okhttp3.Response</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">RequestNetworkController {</span>
+<span class="s0">public static final </span><span class="s1">String GET      = </span><span class="s2">&quot;GET&quot;</span><span class="s0">;</span>
+<span class="s0">public static final </span><span class="s1">String POST     = </span><span class="s2">&quot;POST&quot;</span><span class="s0">;</span>
+<span class="s0">public static final </span><span class="s1">String PUT      = </span><span class="s2">&quot;PUT&quot;</span><span class="s0">;</span>
+<span class="s0">public static final </span><span class="s1">String DELETE   = </span><span class="s2">&quot;DELETE&quot;</span><span class="s0">;</span>
+
+<span class="s0">public static final int </span><span class="s1">REQUEST_PARAM = </span><span class="s3">0</span><span class="s0">;</span>
+<span class="s0">public static final int </span><span class="s1">REQUEST_BODY  = </span><span class="s3">1</span><span class="s0">;</span>
+
+<span class="s0">private static final int </span><span class="s1">SOCKET_TIMEOUT = </span><span class="s3">15000</span><span class="s0">;</span>
+<span class="s0">private static final int </span><span class="s1">READ_TIMEOUT   = </span><span class="s3">25000</span><span class="s0">;</span>
+
+<span class="s0">protected </span><span class="s1">OkHttpClient client</span><span class="s0">;</span>
+
+<span class="s0">private static </span><span class="s1">RequestNetworkController mInstance</span><span class="s0">;</span>
+
+<span class="s0">public static synchronized </span><span class="s1">RequestNetworkController getInstance() {</span>
+<span class="s0">if</span><span class="s1">(mInstance == </span><span class="s0">null</span><span class="s1">) {</span>
+<span class="s1">mInstance = </span><span class="s0">new </span><span class="s1">RequestNetworkController()</span><span class="s0">;</span>
+<span class="s1">}</span>
+<span class="s0">return </span><span class="s1">mInstance</span><span class="s0">;</span>
+<span class="s1">}</span>
+
+<span class="s0">private </span><span class="s1">OkHttpClient getClient() {</span>
+<span class="s0">if </span><span class="s1">(client == </span><span class="s0">null</span><span class="s1">) {</span>
+<span class="s1">OkHttpClient.Builder builder = </span><span class="s0">new </span><span class="s1">OkHttpClient.Builder()</span><span class="s0">;</span>
+
+<span class="s0">try </span><span class="s1">{</span>
+<span class="s0">final </span><span class="s1">TrustManager[] trustAllCerts = </span><span class="s0">new </span><span class="s1">TrustManager[]{</span>
+<span class="s0">new </span><span class="s1">X509TrustManager() {</span>
+<span class="s1">@Override</span>
+<span class="s0">public void </span><span class="s1">checkClientTrusted(java.security.cert.X509Certificate[] chain</span><span class="s0">, </span><span class="s1">String authType)</span>
+<span class="s0">throws </span><span class="s1">CertificateException {</span>
+<span class="s1">}</span>
+
+<span class="s1">@Override</span>
+<span class="s0">public void </span><span class="s1">checkServerTrusted(java.security.cert.X509Certificate[] chain</span><span class="s0">, </span><span class="s1">String authType)</span>
+<span class="s0">throws </span><span class="s1">CertificateException {</span>
+<span class="s1">}</span>
+
+<span class="s1">@Override</span>
+<span class="s0">public </span><span class="s1">java.security.cert.X509Certificate[] getAcceptedIssuers() {</span>
+<span class="s0">return new </span><span class="s1">java.security.cert.X509Certificate[]{}</span><span class="s0">;</span>
+<span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s1">}</span><span class="s0">;</span>
+
+<span class="s0">final </span><span class="s1">SSLContext sslContext = SSLContext.getInstance(</span><span class="s2">&quot;TLS&quot;</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s1">sslContext.init(</span><span class="s0">null, </span><span class="s1">trustAllCerts</span><span class="s0">, new </span><span class="s1">java.security.SecureRandom())</span><span class="s0">;</span>
+<span class="s0">final </span><span class="s1">SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory()</span><span class="s0">;</span>
+<span class="s1">builder.sslSocketFactory(sslSocketFactory</span><span class="s0">, </span><span class="s1">(X509TrustManager) trustAllCerts[</span><span class="s3">0</span><span class="s1">])</span><span class="s0">;</span>
+<span class="s1">builder.connectTimeout(SOCKET_TIMEOUT</span><span class="s0">, </span><span class="s1">TimeUnit.MILLISECONDS)</span><span class="s0">;</span>
+<span class="s1">builder.readTimeout(READ_TIMEOUT</span><span class="s0">, </span><span class="s1">TimeUnit.MILLISECONDS)</span><span class="s0">;</span>
+<span class="s1">builder.writeTimeout(READ_TIMEOUT</span><span class="s0">, </span><span class="s1">TimeUnit.MILLISECONDS)</span><span class="s0">;</span>
+<span class="s1">builder.hostnameVerifier(</span><span class="s0">new </span><span class="s1">HostnameVerifier() {</span>
+<span class="s1">@Override</span>
+<span class="s0">public boolean </span><span class="s1">verify(String hostname</span><span class="s0">, </span><span class="s1">SSLSession session) {</span>
+<span class="s0">return true;</span>
+<span class="s1">}</span>
+<span class="s1">})</span><span class="s0">;</span>
+<span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception e) {</span>
+<span class="s1">}</span>
+
+<span class="s1">client = builder.build()</span><span class="s0">;</span>
+<span class="s1">}</span>
+
+<span class="s0">return </span><span class="s1">client</span><span class="s0">;</span>
+<span class="s1">}</span>
+
+<span class="s0">public void </span><span class="s1">execute(</span><span class="s0">final </span><span class="s1">RequestNetwork requestNetwork</span><span class="s0">, </span><span class="s1">String method</span><span class="s0">, </span><span class="s1">String url</span><span class="s0">, final </span><span class="s1">String tag</span><span class="s0">, final </span><span class="s1">RequestNetwork.RequestListener requestListener) {</span>
+<span class="s1">Request.Builder reqBuilder = </span><span class="s0">new </span><span class="s1">Request.Builder()</span><span class="s0">;</span>
+<span class="s1">Headers.Builder headerBuilder = </span><span class="s0">new </span><span class="s1">Headers.Builder()</span><span class="s0">;</span>
+
+<span class="s0">if</span><span class="s1">(requestNetwork.getHeaders().size() &gt; </span><span class="s3">0</span><span class="s1">) {</span>
+<span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; headers = requestNetwork.getHeaders()</span><span class="s0">;</span>
+
+<span class="s0">for</span><span class="s1">(HashMap.Entry&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; header : headers.entrySet()) {</span>
+<span class="s1">headerBuilder.add(header.getKey()</span><span class="s0">, </span><span class="s1">String.valueOf(header.getValue()))</span><span class="s0">;</span>
+<span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s0">try </span><span class="s1">{</span>
+<span class="s0">if </span><span class="s1">(requestNetwork.getRequestType() == REQUEST_PARAM) {</span>
+<span class="s0">if </span><span class="s1">(method.equals(GET)) {</span>
+<span class="s1">HttpUrl.Builder httpBuilder</span><span class="s0">;</span>
+
+<span class="s0">try </span><span class="s1">{</span>
+<span class="s1">httpBuilder = HttpUrl.parse(url).newBuilder()</span><span class="s0">;</span>
+<span class="s1">} </span><span class="s0">catch </span><span class="s1">(NullPointerException ne) {</span>
+<span class="s0">throw new </span><span class="s1">NullPointerException(</span><span class="s2">&quot;unexpected url: &quot; </span><span class="s1">+ url)</span><span class="s0">;</span>
+<span class="s1">}</span>
+
+<span class="s0">if </span><span class="s1">(requestNetwork.getParams().size() &gt; </span><span class="s3">0</span><span class="s1">) {</span>
+<span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; params = requestNetwork.getParams()</span><span class="s0">;</span>
+
+<span class="s0">for </span><span class="s1">(HashMap.Entry&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; param : params.entrySet()) {</span>
+<span class="s1">httpBuilder.addQueryParameter(param.getKey()</span><span class="s0">, </span><span class="s1">String.valueOf(param.getValue()))</span><span class="s0">;</span>
+<span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s1">reqBuilder.url(httpBuilder.build()).headers(headerBuilder.build()).get()</span><span class="s0">;</span>
+<span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+<span class="s1">FormBody.Builder formBuilder = </span><span class="s0">new </span><span class="s1">FormBody.Builder()</span><span class="s0">;</span>
+<span class="s0">if </span><span class="s1">(requestNetwork.getParams().size() &gt; </span><span class="s3">0</span><span class="s1">) {</span>
+<span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; params = requestNetwork.getParams()</span><span class="s0">;</span>
+
+<span class="s0">for </span><span class="s1">(HashMap.Entry&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; param : params.entrySet()) {</span>
+<span class="s1">formBuilder.add(param.getKey()</span><span class="s0">, </span><span class="s1">String.valueOf(param.getValue()))</span><span class="s0">;</span>
+<span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s1">RequestBody reqBody = formBuilder.build()</span><span class="s0">;</span>
+
+<span class="s1">reqBuilder.url(url).headers(headerBuilder.build()).method(method</span><span class="s0">, </span><span class="s1">reqBody)</span><span class="s0">;</span>
+<span class="s1">}</span>
+<span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+<span class="s1">RequestBody reqBody = RequestBody.create(okhttp3.MediaType.parse(</span><span class="s2">&quot;application/json&quot;</span><span class="s1">)</span><span class="s0">, new </span><span class="s1">Gson().toJson(requestNetwork.getParams()))</span><span class="s0">;</span>
+
+<span class="s0">if </span><span class="s1">(method.equals(GET)) {</span>
+<span class="s1">reqBuilder.url(url).headers(headerBuilder.build()).get()</span><span class="s0">;</span>
+<span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+<span class="s1">reqBuilder.url(url).headers(headerBuilder.build()).method(method</span><span class="s0">, </span><span class="s1">reqBody)</span><span class="s0">;</span>
+<span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s1">Request req = reqBuilder.build()</span><span class="s0">;</span>
+
+<span class="s1">getClient().newCall(req).enqueue(</span><span class="s0">new </span><span class="s1">Callback() {</span>
+<span class="s1">@Override</span>
+<span class="s0">public void </span><span class="s1">onFailure(Call call</span><span class="s0">, final </span><span class="s1">IOException e) {</span>
+<span class="s1">requestNetwork.getActivity().runOnUiThread(</span><span class="s0">new </span><span class="s1">Runnable() {</span>
+<span class="s1">@Override</span>
+<span class="s0">public void </span><span class="s1">run() {</span>
+<span class="s1">requestListener.onErrorResponse(tag</span><span class="s0">, </span><span class="s1">e.getMessage())</span><span class="s0">;</span>
+<span class="s1">}</span>
+<span class="s1">})</span><span class="s0">;</span>
+<span class="s1">}</span>
+
+<span class="s1">@Override</span>
+<span class="s0">public void </span><span class="s1">onResponse(Call call</span><span class="s0">, final </span><span class="s1">Response response) </span><span class="s0">throws </span><span class="s1">IOException {</span>
+<span class="s0">final </span><span class="s1">String responseBody = response.body().string().trim()</span><span class="s0">;</span>
+<span class="s1">requestNetwork.getActivity().runOnUiThread(</span><span class="s0">new </span><span class="s1">Runnable() {</span>
+<span class="s1">@Override</span>
+<span class="s0">public void </span><span class="s1">run() {</span>
+<span class="s1">requestListener.onResponse(tag</span><span class="s0">, </span><span class="s1">responseBody)</span><span class="s0">;</span>
+<span class="s1">}</span>
+<span class="s1">})</span><span class="s0">;</span>
+<span class="s1">}</span>
+<span class="s1">})</span><span class="s0">;</span>
+<span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception e) {</span>
+<span class="s1">requestListener.onErrorResponse(tag</span><span class="s0">, </span><span class="s1">e.getMessage())</span><span class="s0">;</span>
+<span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

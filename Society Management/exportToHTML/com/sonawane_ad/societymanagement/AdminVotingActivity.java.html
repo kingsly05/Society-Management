@@ -1,0 +1,376 @@
+<html>
+<head>
+<title>AdminVotingActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+AdminVotingActivity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.sonawane_ad.societymanagement</span><span class="s0">;</span>
+
+
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AppCompatActivity</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.appcompat.widget.Toolbar</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.OnCompleteListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.OnFailureListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.OnSuccessListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.material.floatingactionbutton.FloatingActionButton</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.app.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.drawable.ColorDrawable</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.View.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.media.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.net.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.text.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.util.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.webkit.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.animation.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.animation.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.text.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.HashMap</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.ListView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.ArrayAdapter</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.BaseAdapter</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.net.Uri</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.app.Activity</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.SharedPreferences</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.FirebaseDatabase</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.DatabaseReference</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.ValueEventListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.DataSnapshot</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.DatabaseError</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.GenericTypeIndicator</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.ChildEventListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.bumptech.glide.Glide</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.storage.FileDownloadTask</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.storage.FirebaseStorage</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.storage.OnProgressListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.storage.StorageReference</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">AdminVotingActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity {</span>
+
+    <span class="s0">private </span><span class="s1">FirebaseDatabase _firebase = FirebaseDatabase.getInstance()</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">Toolbar _toolbar</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">FloatingActionButton _fab</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">ArrayList&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; votelistmap = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">ArrayList&lt;String&gt; liststring = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ListView listview1</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">FirebaseStorage _firebase_storage = FirebaseStorage.getInstance()</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">StorageReference votestore = _firebase_storage.getReference(</span><span class="s2">&quot;votestore&quot;</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnCompleteListener&lt;Uri&gt; _votestore_upload_success_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnSuccessListener&lt;FileDownloadTask.TaskSnapshot&gt; _votestore_download_success_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnSuccessListener _votestore_delete_success_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnProgressListener _votestore_upload_progress_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnProgressListener _votestore_download_progress_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnFailureListener _votestore_failure_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Intent intent = </span><span class="s0">new </span><span class="s1">Intent()</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">SharedPreferences file</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">DatabaseReference Currdata = _firebase.getReference(</span><span class="s2">&quot;Currdata&quot;</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ChildEventListener _Currdata_child_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">DatabaseReference Vote = _firebase.getReference(</span><span class="s2">&quot;Vote&quot;</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ChildEventListener _Vote_child_listener</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">LinearLayout nointernet</span><span class="s0">,</span><span class="s1">linear</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Button retry</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">RequestNetwork internet</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">RequestNetwork.RequestListener _internet_request_listener</span><span class="s0">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span>
+        <span class="s1">setContentView(R.layout.activity_admin_voting)</span><span class="s0">;</span>
+        <span class="s1">com.google.firebase.FirebaseApp.initializeApp(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">initialize()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">initialize() {</span>
+
+        <span class="s1">_fab = (FloatingActionButton) findViewById(R.id._fab)</span><span class="s0">;</span>
+        <span class="s1">listview1 = (ListView) findViewById(R.id.listview1)</span><span class="s0">;</span>
+        <span class="s1">file = getSharedPreferences(</span><span class="s2">&quot;file&quot;</span><span class="s0">, </span><span class="s1">Activity.MODE_PRIVATE)</span><span class="s0">;</span>
+
+        <span class="s1">internet = </span><span class="s0">new </span><span class="s1">RequestNetwork(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">nointernet = findViewById(R.id.nointernet)</span><span class="s0">;</span>
+        <span class="s1">linear = findViewById(R.id.linear)</span><span class="s0">;</span>
+        <span class="s1">retry = findViewById(R.id.retry)</span><span class="s0">;</span>
+
+
+
+
+        <span class="s1">_fab.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View _view) {</span>
+                <span class="s1">intent.setClass(getApplicationContext()</span><span class="s0">, </span><span class="s1">AdminVotingDetActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">startActivity(intent)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">_Currdata_child_listener = </span><span class="s0">new </span><span class="s1">ChildEventListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildAdded(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildChanged(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildMoved(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildRemoved(DataSnapshot _param1) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onCancelled(DatabaseError _param1) {</span>
+                <span class="s0">final int </span><span class="s1">_errorCode = _param1.getCode()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _errorMessage = _param1.getMessage()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+        <span class="s1">Currdata.addChildEventListener(_Currdata_child_listener)</span><span class="s0">;</span>
+
+        <span class="s1">_internet_request_listener = </span><span class="s0">new </span><span class="s1">RequestNetwork.RequestListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onResponse(String _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s0">final </span><span class="s1">String _tag = _param1</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _response = _param2</span><span class="s0">;</span>
+                <span class="s1">linear.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                <span class="s1">nointernet.setVisibility(View.GONE)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onErrorResponse(String _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s0">final </span><span class="s1">String _tag = _param1</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _message = _param2</span><span class="s0">;</span>
+                <span class="s1">linear.setVisibility(View.GONE)</span><span class="s0">;</span>
+                <span class="s1">_fab.setVisibility(View.GONE)</span><span class="s0">;</span>
+                <span class="s1">nointernet.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+
+        <span class="s1">_Vote_child_listener = </span><span class="s0">new </span><span class="s1">ChildEventListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildAdded(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+                <span class="s1">Vote.addListenerForSingleValueEvent(</span><span class="s0">new </span><span class="s1">ValueEventListener() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onDataChange(DataSnapshot _dataSnapshot) {</span>
+                        <span class="s1">votelistmap = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+                        <span class="s0">try </span><span class="s1">{</span>
+                            <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                            <span class="s0">for </span><span class="s1">(DataSnapshot _data : _dataSnapshot.getChildren()) {</span>
+                                <span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _map = _data.getValue(_ind)</span><span class="s0">;</span>
+                                <span class="s1">votelistmap.add(_map)</span><span class="s0">;</span>
+                            <span class="s1">}</span>
+                        <span class="s1">}</span>
+                        <span class="s0">catch </span><span class="s1">(Exception _e) {</span>
+                            <span class="s1">_e.printStackTrace()</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                        <span class="s1">liststring.clear()</span><span class="s0">;</span>
+                        <span class="s0">for</span><span class="s1">(DataSnapshot dshot:_dataSnapshot.getChildren()){liststring.add(dshot.getKey())</span><span class="s0">;</span><span class="s1">}</span>
+                        <span class="s1">listview1.setAdapter(</span><span class="s0">new </span><span class="s1">Listview1Adapter(votelistmap))</span><span class="s0">;</span>
+                        <span class="s1">((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged()</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onCancelled(DatabaseError _databaseError) {</span>
+                    <span class="s1">}</span>
+                <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildChanged(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+                <span class="s1">Vote.addListenerForSingleValueEvent(</span><span class="s0">new </span><span class="s1">ValueEventListener() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onDataChange(DataSnapshot _dataSnapshot) {</span>
+                        <span class="s1">votelistmap = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+                        <span class="s0">try </span><span class="s1">{</span>
+                            <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                            <span class="s0">for </span><span class="s1">(DataSnapshot _data : _dataSnapshot.getChildren()) {</span>
+                                <span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _map = _data.getValue(_ind)</span><span class="s0">;</span>
+                                <span class="s1">votelistmap.add(_map)</span><span class="s0">;</span>
+                            <span class="s1">}</span>
+                        <span class="s1">}</span>
+                        <span class="s0">catch </span><span class="s1">(Exception _e) {</span>
+                            <span class="s1">_e.printStackTrace()</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                        <span class="s1">liststring.clear()</span><span class="s0">;</span>
+                        <span class="s0">for</span><span class="s1">(DataSnapshot dshot:_dataSnapshot.getChildren()){liststring.add(dshot.getKey())</span><span class="s0">;</span><span class="s1">}</span>
+                        <span class="s1">listview1.setAdapter(</span><span class="s0">new </span><span class="s1">Listview1Adapter(votelistmap))</span><span class="s0">;</span>
+                        <span class="s1">((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged()</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onCancelled(DatabaseError _databaseError) {</span>
+                    <span class="s1">}</span>
+                <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildMoved(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildRemoved(DataSnapshot _param1) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onCancelled(DatabaseError _param1) {</span>
+                <span class="s0">final int </span><span class="s1">_errorCode = _param1.getCode()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _errorMessage = _param1.getMessage()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+        <span class="s1">Vote.addChildEventListener(_Vote_child_listener)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+    <span class="s0">public class </span><span class="s1">Listview1Adapter </span><span class="s0">extends </span><span class="s1">BaseAdapter {</span>
+        <span class="s1">ArrayList&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _data</span><span class="s0">;</span>
+        <span class="s0">public </span><span class="s1">Listview1Adapter(ArrayList&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _arr) {</span>
+            <span class="s1">_data = _arr</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">@Override</span>
+        <span class="s0">public int </span><span class="s1">getCount() {</span>
+            <span class="s0">return </span><span class="s1">_data.size()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">@Override</span>
+        <span class="s0">public </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; getItem(</span><span class="s0">int </span><span class="s1">_index) {</span>
+            <span class="s0">return </span><span class="s1">_data.get(_index)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">@Override</span>
+        <span class="s0">public long </span><span class="s1">getItemId(</span><span class="s0">int </span><span class="s1">_index) {</span>
+            <span class="s0">return </span><span class="s1">_index</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s1">@Override</span>
+        <span class="s0">public </span><span class="s1">View getView(</span><span class="s0">final int </span><span class="s1">_position</span><span class="s0">, </span><span class="s1">View _view</span><span class="s0">, </span><span class="s1">ViewGroup _viewGroup) {</span>
+            <span class="s1">LayoutInflater _inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)</span><span class="s0">;</span>
+            <span class="s1">View _v = _view</span><span class="s0">;</span>
+            <span class="s0">if </span><span class="s1">(_v == </span><span class="s0">null</span><span class="s1">) {</span>
+                <span class="s1">_v = _inflater.inflate(R.layout.custom_vote_details</span><span class="s0">, null</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+            <span class="s0">final </span><span class="s1">LinearLayout linear1 = (LinearLayout) _v.findViewById(R.id.linear1)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">LinearLayout linear7 = (LinearLayout) _v.findViewById(R.id.linear7)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">LinearLayout linear3 = (LinearLayout) _v.findViewById(R.id.linear3)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">LinearLayout linear4 = (LinearLayout) _v.findViewById(R.id.linear4)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">ImageView imageview1 = (ImageView) _v.findViewById(R.id.imageview1)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">LinearLayout linear5 = (LinearLayout) _v.findViewById(R.id.linear5)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">LinearLayout linear6 = (LinearLayout) _v.findViewById(R.id.linear6)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">TextView name = (TextView) _v.findViewById(R.id.name)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">TextView age = (TextView) _v.findViewById(R.id.age)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">TextView gender = (TextView) _v.findViewById(R.id.gender)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">TextView votecount = (TextView) _v.findViewById(R.id.votecount)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">TextView textview2 = (TextView) _v.findViewById(R.id.textview2)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">Button delete = (Button) _v.findViewById(R.id.delete)</span><span class="s0">;</span>
+
+            <span class="s0">if </span><span class="s1">(votelistmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s2">&quot;profileurl&quot;</span><span class="s1">).toString().equals(</span><span class="s2">&quot;&quot;</span><span class="s1">)) {</span>
+                <span class="s1">imageview1.setImageResource(R.drawable.default_profile)</span><span class="s0">;</span>
+                <span class="s1">name.setText(votelistmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s2">&quot;name&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                <span class="s1">age.setText(votelistmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s2">&quot;age&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                <span class="s1">gender.setText(votelistmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s2">&quot;gender&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                <span class="s1">votecount.setText(votelistmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s2">&quot;votecount&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+            <span class="s1">}</span>
+            <span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">name.setText(votelistmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s2">&quot;name&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                <span class="s1">age.setText(votelistmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s2">&quot;age&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                <span class="s1">gender.setText(votelistmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s2">&quot;gender&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                <span class="s1">votecount.setText(votelistmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s2">&quot;votecount&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                <span class="s1">Glide.with(getApplicationContext()).load(Uri.parse(votelistmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s2">&quot;profileurl&quot;</span><span class="s1">).toString())).into(imageview1)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+            <span class="s1">delete.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+                <span class="s1">@Override</span>
+                <span class="s0">public void </span><span class="s1">onClick(View _view) {</span>
+                    <span class="s1">Vote.child(liststring.get((</span><span class="s0">int</span><span class="s1">)(_position))).removeValue()</span><span class="s0">;</span>
+                    <span class="s1">_firebase_storage.getReferenceFromUrl(votelistmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s2">&quot;profileurl&quot;</span><span class="s1">).toString()).delete().addOnSuccessListener(_votestore_delete_success_listener).addOnFailureListener(_votestore_failure_listener)</span><span class="s0">;</span>
+                    <span class="s1">finish()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">imageview1.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+                <span class="s1">@Override</span>
+                <span class="s0">public void </span><span class="s1">onClick(View view) {</span>
+                    <span class="s0">if </span><span class="s1">(!(votelistmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s2">&quot;profileurl&quot;</span><span class="s1">).toString().equals(</span><span class="s2">&quot;&quot;</span><span class="s1">))) {</span>
+                        <span class="s1">ImageView imageView</span><span class="s0">, </span><span class="s1">imageView1</span><span class="s0">;</span>
+                        <span class="s1">Button btnok</span><span class="s0">, </span><span class="s1">btncancel</span><span class="s0">;</span>
+                        <span class="s1">AlertDialog.Builder builder = </span><span class="s0">new </span><span class="s1">AlertDialog.Builder(AdminVotingActivity.</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+
+                        <span class="s1">View view1 = getLayoutInflater().inflate(R.layout.custom_image_pop_up</span><span class="s0">, null</span><span class="s1">)</span><span class="s0">;</span>
+
+                        <span class="s1">builder.setView(view1)</span><span class="s0">;</span>
+                        <span class="s0">final </span><span class="s1">AlertDialog alertDialog = builder.create()</span><span class="s0">;</span>
+                        <span class="s1">imageView = view1.findViewById(R.id.imageview1)</span><span class="s0">;</span>
+                        <span class="s1">Glide.with(getApplicationContext()).load(Uri.parse(votelistmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s2">&quot;profileurl&quot;</span><span class="s1">).toString())).into(imageView)</span><span class="s0">;</span>
+
+                        <span class="s1">alertDialog.show()</span><span class="s0">;</span>
+                        <span class="s1">alertDialog.getWindow().setBackgroundDrawable(</span><span class="s0">new </span><span class="s1">ColorDrawable(Color.TRANSPARENT))</span><span class="s0">;</span>
+                    <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+                        <span class="s1">ImageView imageView</span><span class="s0">, </span><span class="s1">imageView1</span><span class="s0">;</span>
+                        <span class="s1">Button btnok</span><span class="s0">, </span><span class="s1">btncancel</span><span class="s0">;</span>
+                        <span class="s1">AlertDialog.Builder builder = </span><span class="s0">new </span><span class="s1">AlertDialog.Builder(AdminVotingActivity.</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+
+                        <span class="s1">View view1 = getLayoutInflater().inflate(R.layout.custom_image_pop_up</span><span class="s0">, null</span><span class="s1">)</span><span class="s0">;</span>
+
+                        <span class="s1">builder.setView(view1)</span><span class="s0">;</span>
+                        <span class="s0">final </span><span class="s1">AlertDialog alertDialog = builder.create()</span><span class="s0">;</span>
+                        <span class="s1">imageView = view1.findViewById(R.id.imageview1)</span><span class="s0">;</span>
+                        <span class="s1">imageView.setImageResource(R.drawable.default_profile)</span><span class="s0">;</span>
+                        <span class="s1">alertDialog.show()</span><span class="s0">;</span>
+                        <span class="s1">alertDialog.getWindow().setBackgroundDrawable(</span><span class="s0">new </span><span class="s1">ColorDrawable(Color.TRANSPARENT))</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s0">return </span><span class="s1">_v</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

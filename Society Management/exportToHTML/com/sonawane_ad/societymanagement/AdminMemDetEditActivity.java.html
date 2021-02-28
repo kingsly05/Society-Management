@@ -1,0 +1,510 @@
+<html>
+<head>
+<title>AdminMemDetEditActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+AdminMemDetEditActivity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.sonawane_ad.societymanagement</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AppCompatActivity</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.appcompat.widget.Toolbar</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.app.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.drawable.ColorDrawable</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.View.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.media.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.net.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.text.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.util.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.webkit.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.animation.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.animation.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.text.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.HashMap</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.ScrollView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.LinearLayout</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.ImageView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.EditText</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.Button</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.net.Uri</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.app.Activity</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.SharedPreferences</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.Task</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.FirebaseDatabase</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.DatabaseReference</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.ValueEventListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.DataSnapshot</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.DatabaseError</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.GenericTypeIndicator</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.ChildEventListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.storage.FileDownloadTask</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.storage.FirebaseStorage</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.storage.StorageReference</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.storage.UploadTask</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.storage.OnProgressListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.OnSuccessListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.OnFailureListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.OnCompleteListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.Continuation</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.File</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.app.AlertDialog</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.DialogInterface</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.ClipData</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.provider.MediaStore</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.Build</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.core.content.FileProvider</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.Calendar</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.text.SimpleDateFormat</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.bumptech.glide.Glide</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.sdsmdg.tastytoast.TastyToast</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.core.content.ContextCompat</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.core.app.ActivityCompat</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.Manifest</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.pm.PackageManager</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">AdminMemDetEditActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity {</span>
+
+    <span class="s0">public final int </span><span class="s1">REQ_CD_FILEPICKER = </span><span class="s2">101</span><span class="s0">;</span>
+    <span class="s0">public final int </span><span class="s1">REQ_CD_CAMERA = </span><span class="s2">102</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">FirebaseDatabase _firebase = FirebaseDatabase.getInstance()</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">FirebaseStorage _firebase_storage = FirebaseStorage.getInstance()</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">Toolbar _toolbar</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; map = </span><span class="s0">new </span><span class="s1">HashMap&lt;&gt;()</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">String imgname = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">String imgpath = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+    <span class="s0">private double </span><span class="s1">img = </span><span class="s2">0</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">String editmemberid=</span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">ImageView profileimage</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">LinearLayout linear12</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ImageView delprofile</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ImageView addimg</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">EditText name</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">EditText emailid</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">EditText flattype</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">EditText memberid</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">EditText phonenumber</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">EditText maintenance</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">EditText miscellaneous</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">EditText status</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Button button1</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ProgressDialog progressDialog</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">Intent intent = </span><span class="s0">new </span><span class="s1">Intent()</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">SharedPreferences file</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">DatabaseReference Currdata = _firebase.getReference(</span><span class="s3">&quot;Currdata&quot;</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ChildEventListener _Currdata_child_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">StorageReference profile = _firebase_storage.getReference(</span><span class="s3">&quot;profile&quot;</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnCompleteListener&lt;Uri&gt; _profile_upload_success_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnSuccessListener&lt;FileDownloadTask.TaskSnapshot&gt; _profile_download_success_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnSuccessListener _profile_delete_success_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnProgressListener _profile_upload_progress_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnProgressListener _profile_download_progress_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnFailureListener _profile_failure_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">AlertDialog.Builder dialog</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Intent filepicker = </span><span class="s0">new </span><span class="s1">Intent(Intent.ACTION_GET_CONTENT)</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Intent camera = </span><span class="s0">new </span><span class="s1">Intent(MediaStore.ACTION_IMAGE_CAPTURE)</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">File _file_camera</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Calendar calendar = Calendar.getInstance()</span><span class="s0">;</span>
+    <span class="s0">private  </span><span class="s1">Window window</span><span class="s0">;</span>
+    <span class="s0">private double </span><span class="s1">imgsize = </span><span class="s2">0</span><span class="s0">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span>
+        <span class="s1">setContentView(R.layout.activity_admin_mem_det_edit)</span><span class="s0">;</span>
+        <span class="s1">com.google.firebase.FirebaseApp.initializeApp(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">window = </span><span class="s0">this</span><span class="s1">.getWindow()</span><span class="s0">;</span>
+        <span class="s1">getSupportActionBar().setDisplayOptions(androidx.appcompat.app.ActionBar.DISPLAY_SHOW_CUSTOM)</span><span class="s0">;</span>
+        <span class="s1">getSupportActionBar().setCustomView(R.layout.custom_appbar)</span><span class="s0">;</span>
+        <span class="s1">getSupportActionBar().setDisplayHomeAsUpEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION</span><span class="s0">, </span><span class="s1">WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)</span><span class="s0">;</span>
+        <span class="s1">getSupportActionBar().setBackgroundDrawable(</span><span class="s0">new </span><span class="s1">ColorDrawable(Color.TRANSPARENT))</span><span class="s0">;</span>
+        <span class="s1">window.setStatusBarColor(ContextCompat.getColor(</span><span class="s0">this,</span><span class="s1">R.color.semi_transparent))</span><span class="s0">;</span>
+        <span class="s1">initialize()</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(ContextCompat.checkSelfPermission(</span><span class="s0">this, </span><span class="s1">Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED</span>
+                <span class="s1">|| ContextCompat.checkSelfPermission(</span><span class="s0">this, </span><span class="s1">Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED</span>
+                <span class="s1">|| ContextCompat.checkSelfPermission(</span><span class="s0">this, </span><span class="s1">Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {</span>
+            <span class="s1">ActivityCompat.requestPermissions(</span><span class="s0">this, new </span><span class="s1">String[] {Manifest.permission.CAMERA</span><span class="s0">, </span><span class="s1">Manifest.permission.READ_EXTERNAL_STORAGE</span><span class="s0">, </span><span class="s1">Manifest.permission.WRITE_EXTERNAL_STORAGE}</span><span class="s0">, </span><span class="s2">1000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">initializeLogic()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onRequestPermissionsResult(</span><span class="s0">int </span><span class="s1">requestCode</span><span class="s0">, </span><span class="s1">String[] permissions</span><span class="s0">, int</span><span class="s1">[] grantResults) {</span>
+        <span class="s0">super</span><span class="s1">.onRequestPermissionsResult(requestCode</span><span class="s0">, </span><span class="s1">permissions</span><span class="s0">, </span><span class="s1">grantResults)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(requestCode == </span><span class="s2">1000</span><span class="s1">) {</span>
+            <span class="s1">initializeLogic()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">initialize() {</span>
+        <span class="s1">profileimage = (ImageView) findViewById(R.id.profileimage)</span><span class="s0">;</span>
+        <span class="s1">linear12 = (LinearLayout) findViewById(R.id.linear12)</span><span class="s0">;</span>
+        <span class="s1">delprofile = (ImageView) findViewById(R.id.delprofile)</span><span class="s0">;</span>
+        <span class="s1">addimg = (ImageView) findViewById(R.id.addimg)</span><span class="s0">;</span>
+        <span class="s1">name = (EditText) findViewById(R.id.name)</span><span class="s0">;</span>
+        <span class="s1">emailid = (EditText) findViewById(R.id.emailid)</span><span class="s0">;</span>
+        <span class="s1">flattype = (EditText) findViewById(R.id.flattype)</span><span class="s0">;</span>
+        <span class="s1">memberid = (EditText) findViewById(R.id.memberid)</span><span class="s0">;</span>
+        <span class="s1">phonenumber = (EditText) findViewById(R.id.phonenumber)</span><span class="s0">;</span>
+        <span class="s1">maintenance = (EditText) findViewById(R.id.maintenance)</span><span class="s0">;</span>
+        <span class="s1">miscellaneous = (EditText) findViewById(R.id.miscellaneous)</span><span class="s0">;</span>
+        <span class="s1">status = (EditText) findViewById(R.id.status)</span><span class="s0">;</span>
+        <span class="s1">button1 = (Button) findViewById(R.id.button1)</span><span class="s0">;</span>
+        <span class="s1">file = getSharedPreferences(</span><span class="s3">&quot;file&quot;</span><span class="s0">, </span><span class="s1">Activity.MODE_PRIVATE)</span><span class="s0">;</span>
+        <span class="s1">dialog = </span><span class="s0">new </span><span class="s1">AlertDialog.Builder(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">filepicker.setType(</span><span class="s3">&quot;image/*&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">filepicker.putExtra(Intent.EXTRA_ALLOW_MULTIPLE</span><span class="s0">, true</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">progressDialog = </span><span class="s0">new </span><span class="s1">ProgressDialog(AdminMemDetEditActivity.</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">_file_camera = FileUtil.createNewPictureFile(getApplicationContext())</span><span class="s0">;</span>
+        <span class="s1">Uri _uri_camera = </span><span class="s0">null;</span>
+        <span class="s0">if </span><span class="s1">(Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.N) {</span>
+            <span class="s1">_uri_camera= FileProvider.getUriForFile(getApplicationContext()</span><span class="s0">, </span><span class="s1">getApplicationContext().getPackageName() + </span><span class="s3">&quot;.provider&quot;</span><span class="s0">, </span><span class="s1">_file_camera)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">_uri_camera = Uri.fromFile(_file_camera)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s1">camera.putExtra(MediaStore.EXTRA_OUTPUT</span><span class="s0">, </span><span class="s1">_uri_camera)</span><span class="s0">;</span>
+        <span class="s1">camera.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)</span><span class="s0">;</span>
+
+        <span class="s1">delprofile.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View _view) {</span>
+                <span class="s0">if </span><span class="s1">(file.getString(</span><span class="s3">&quot;editprofileurl&quot;</span><span class="s0">, </span><span class="s3">&quot;&quot;</span><span class="s1">).equals(</span><span class="s3">&quot;&quot;</span><span class="s1">)) {</span>
+                    <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;Can't able to delete profile&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.WARNING)</span><span class="s0">;</span>
+                <span class="s1">}</span>
+                <span class="s0">else </span><span class="s1">{</span>
+                    <span class="s1">imgname = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                    <span class="s1">imgpath = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                    <span class="s1">_firebase_storage.getReferenceFromUrl(file.getString(</span><span class="s3">&quot;editprofileurl&quot;</span><span class="s0">,</span><span class="s3">&quot;&quot;</span><span class="s1">)).delete().addOnSuccessListener(_profile_delete_success_listener).addOnFailureListener(_profile_failure_listener)</span><span class="s0">;</span>
+
+                    <span class="s1">map = </span><span class="s0">new </span><span class="s1">HashMap&lt;&gt;()</span><span class="s0">;</span>
+                    <span class="s1">map.put(</span><span class="s3">&quot;profilename&quot;</span><span class="s0">, </span><span class="s3">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">map.put(</span><span class="s3">&quot;profileurl&quot;</span><span class="s0">, </span><span class="s3">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">calendar = Calendar.getInstance()</span><span class="s0">;</span>
+                    <span class="s1">map.put(</span><span class="s3">&quot;time&quot;</span><span class="s0">, new </span><span class="s1">SimpleDateFormat(</span><span class="s3">&quot;E dd/MM hh:mm a&quot;</span><span class="s1">).format(calendar.getTime()))</span><span class="s0">;</span>
+                    <span class="s1">Currdata.child(editmemberid).updateChildren(map)</span><span class="s0">;</span>
+                    <span class="s1">delprofile.setVisibility(View.GONE)</span><span class="s0">;</span>
+                    <span class="s1">addimg.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                    <span class="s1">profileimage.setImageResource(R.drawable.default_profile)</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">addimg.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View _view) {</span>
+                <span class="s1">dialog.setTitle(</span><span class="s3">&quot;Profile Picture&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">dialog.setMessage(</span><span class="s3">&quot;Choose picture from&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">dialog.setPositiveButton(</span><span class="s3">&quot;Camera&quot;</span><span class="s0">, new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onClick(DialogInterface _dialog</span><span class="s0">, int </span><span class="s1">_which) {</span>
+                        <span class="s1">startActivityForResult(camera</span><span class="s0">, </span><span class="s1">REQ_CD_CAMERA)</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">})</span><span class="s0">;</span>
+                <span class="s1">dialog.setNeutralButton(</span><span class="s3">&quot;File&quot;</span><span class="s0">, new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onClick(DialogInterface _dialog</span><span class="s0">, int </span><span class="s1">_which) {</span>
+                        <span class="s1">startActivityForResult(filepicker</span><span class="s0">, </span><span class="s1">REQ_CD_FILEPICKER)</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">})</span><span class="s0">;</span>
+                <span class="s1">dialog.show()</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">button1.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View _view) {</span>
+                <span class="s0">if </span><span class="s1">(miscellaneous.getText().toString().equals(</span><span class="s3">&quot;&quot;</span><span class="s1">) &amp;&amp; (status.getText().toString().equals(</span><span class="s3">&quot;&quot;</span><span class="s1">) &amp;&amp; (name.getText().toString().equals(</span><span class="s3">&quot;&quot;</span><span class="s1">) &amp;&amp; (emailid.getText().toString().equals(</span><span class="s3">&quot;&quot;</span><span class="s1">) &amp;&amp; (flattype.getText().toString().equals(</span><span class="s3">&quot;&quot;</span><span class="s1">) &amp;&amp; (memberid.getText().toString().equals(</span><span class="s3">&quot;&quot;</span><span class="s1">) &amp;&amp; (phonenumber.getText().toString().equals(</span><span class="s3">&quot;&quot;</span><span class="s1">) &amp;&amp; maintenance.getText().toString().equals(</span><span class="s3">&quot;&quot;</span><span class="s1">)))))))) {</span>
+                    <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;Please Enter all credentials&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.WARNING)</span><span class="s0">;</span>
+                <span class="s1">}</span>
+                <span class="s0">else </span><span class="s1">{</span>
+                    <span class="s0">if </span><span class="s1">(img == </span><span class="s2">0</span><span class="s1">) {</span>
+                        <span class="s1">map = </span><span class="s0">new </span><span class="s1">HashMap&lt;&gt;()</span><span class="s0">;</span>
+                        <span class="s1">map.put(</span><span class="s3">&quot;name&quot;</span><span class="s0">, </span><span class="s1">name.getText().toString())</span><span class="s0">;</span>
+                        <span class="s1">map.put(</span><span class="s3">&quot;emailid&quot;</span><span class="s0">, </span><span class="s1">emailid.getText().toString())</span><span class="s0">;</span>
+                        <span class="s1">map.put(</span><span class="s3">&quot;memberid&quot;</span><span class="s0">, </span><span class="s1">memberid.getText().toString())</span><span class="s0">;</span>
+                        <span class="s1">map.put(</span><span class="s3">&quot;flattype&quot;</span><span class="s0">, </span><span class="s1">flattype.getText().toString())</span><span class="s0">;</span>
+                        <span class="s1">map.put(</span><span class="s3">&quot;phonenumber&quot;</span><span class="s0">, </span><span class="s1">phonenumber.getText().toString())</span><span class="s0">;</span>
+                        <span class="s1">map.put(</span><span class="s3">&quot;maintenance&quot;</span><span class="s0">, </span><span class="s1">maintenance.getText().toString())</span><span class="s0">;</span>
+                        <span class="s1">map.put(</span><span class="s3">&quot;miscellaneous&quot;</span><span class="s0">, </span><span class="s1">miscellaneous.getText().toString())</span><span class="s0">;</span>
+                        <span class="s1">calendar = Calendar.getInstance()</span><span class="s0">;</span>
+                        <span class="s1">map.put(</span><span class="s3">&quot;time&quot;</span><span class="s0">, new </span><span class="s1">SimpleDateFormat(</span><span class="s3">&quot;E dd/MM hh:mm a&quot;</span><span class="s1">).format(calendar.getTime()))</span><span class="s0">;</span>
+                        <span class="s1">map.put(</span><span class="s3">&quot;status&quot;</span><span class="s0">, </span><span class="s1">status.getText().toString())</span><span class="s0">;</span>
+                        <span class="s1">Currdata.child(memberid.getText().toString()).updateChildren(map)</span><span class="s0">;</span>
+                        <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;Updated Successfully&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.SUCCESS)</span><span class="s0">;</span>
+                        <span class="s1">finish()</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                    <span class="s0">else </span><span class="s1">{</span>
+                        <span class="s1">profile.child(imgname).putFile(Uri.fromFile(</span><span class="s0">new </span><span class="s1">File(imgpath))).addOnFailureListener(_profile_failure_listener).addOnProgressListener(_profile_upload_progress_listener).continueWithTask(</span><span class="s0">new </span><span class="s1">Continuation&lt;UploadTask.TaskSnapshot</span><span class="s0">, </span><span class="s1">Task&lt;Uri&gt;&gt;() {</span>
+                            <span class="s1">@Override</span>
+                            <span class="s0">public </span><span class="s1">Task&lt;Uri&gt; then(Task&lt;UploadTask.TaskSnapshot&gt; task) </span><span class="s0">throws </span><span class="s1">Exception {</span>
+                                <span class="s0">return </span><span class="s1">profile.child(imgname).getDownloadUrl()</span><span class="s0">;</span>
+                            <span class="s1">}}).addOnCompleteListener(_profile_upload_success_listener)</span><span class="s0">;</span>
+                        <span class="s1">button1.setEnabled(</span><span class="s0">false</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s1">progressDialog.show()</span><span class="s0">;</span>
+                        <span class="s1">progressDialog.setContentView(R.layout.custom_loading_box)</span><span class="s0">;</span>
+                        <span class="s1">progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent)</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">_Currdata_child_listener = </span><span class="s0">new </span><span class="s1">ChildEventListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildAdded(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(!(file.getString(</span><span class="s3">&quot;editmemberid&quot;</span><span class="s0">, </span><span class="s3">&quot;&quot;</span><span class="s1">).equals(</span><span class="s3">&quot;&quot;</span><span class="s1">))) {</span>
+                    <span class="s0">if </span><span class="s1">(_childValue.get(</span><span class="s3">&quot;memberid&quot;</span><span class="s1">).toString().equals(editmemberid)) {</span>
+                        <span class="s1">name.setText(_childValue.get(</span><span class="s3">&quot;name&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                        <span class="s1">emailid.setText(_childValue.get(</span><span class="s3">&quot;emailid&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                        <span class="s1">flattype.setText(_childValue.get(</span><span class="s3">&quot;flattype&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                        <span class="s1">memberid.setText(_childValue.get(</span><span class="s3">&quot;memberid&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                        <span class="s1">phonenumber.setText(_childValue.get(</span><span class="s3">&quot;phonenumber&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                        <span class="s1">maintenance.setText(_childValue.get(</span><span class="s3">&quot;maintenance&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                        <span class="s1">miscellaneous.setText(_childValue.get(</span><span class="s3">&quot;miscellaneous&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                        <span class="s1">status.setText(_childValue.get(</span><span class="s3">&quot;status&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                        <span class="s0">if </span><span class="s1">(_childValue.get(</span><span class="s3">&quot;profileurl&quot;</span><span class="s1">).toString().equals(</span><span class="s3">&quot;&quot;</span><span class="s1">)) {</span>
+                            <span class="s1">delprofile.setVisibility(View.GONE)</span><span class="s0">;</span>
+                            <span class="s1">profileimage.setImageResource(R.drawable.default_profile)</span><span class="s0">;</span>
+                            <span class="s1">addimg.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                        <span class="s0">else </span><span class="s1">{</span>
+                            <span class="s1">Glide.with(getApplicationContext()).load(Uri.parse(_childValue.get(</span><span class="s3">&quot;profileurl&quot;</span><span class="s1">).toString())).into(profileimage)</span><span class="s0">;</span>
+                            <span class="s1">delprofile.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                            <span class="s1">addimg.setVisibility(View.GONE)</span><span class="s0">;</span>
+                            <span class="s1">file.edit().putString(</span><span class="s3">&quot;editprofileurl&quot;</span><span class="s0">, </span><span class="s1">_childValue.get(</span><span class="s3">&quot;profileurl&quot;</span><span class="s1">).toString()).commit()</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+                <span class="s0">else </span><span class="s1">{</span>
+                    <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;No data found&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.WARNING)</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildChanged(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildMoved(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildRemoved(DataSnapshot _param1) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onCancelled(DatabaseError _param1) {</span>
+                <span class="s0">final int </span><span class="s1">_errorCode = _param1.getCode()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _errorMessage = _param1.getMessage()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+        <span class="s1">Currdata.addChildEventListener(_Currdata_child_listener)</span><span class="s0">;</span>
+
+        <span class="s1">_profile_upload_progress_listener = </span><span class="s0">new </span><span class="s1">OnProgressListener&lt;UploadTask.TaskSnapshot&gt;() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onProgress(UploadTask.TaskSnapshot _param1) {</span>
+                <span class="s0">double </span><span class="s1">_progressValue = (</span><span class="s2">100.0 </span><span class="s1">* _param1.getBytesTransferred()) / _param1.getTotalByteCount()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s1">_profile_download_progress_listener = </span><span class="s0">new </span><span class="s1">OnProgressListener&lt;FileDownloadTask.TaskSnapshot&gt;() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onProgress(FileDownloadTask.TaskSnapshot _param1) {</span>
+                <span class="s0">double </span><span class="s1">_progressValue = (</span><span class="s2">100.0 </span><span class="s1">* _param1.getBytesTransferred()) / _param1.getTotalByteCount()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s1">_profile_upload_success_listener = </span><span class="s0">new </span><span class="s1">OnCompleteListener&lt;Uri&gt;() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onComplete(Task&lt;Uri&gt; _param1) {</span>
+                <span class="s0">final </span><span class="s1">String _downloadUrl = _param1.getResult().toString()</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(!(img == </span><span class="s2">0</span><span class="s1">)) {</span>
+                    <span class="s1">map = </span><span class="s0">new </span><span class="s1">HashMap&lt;&gt;()</span><span class="s0">;</span>
+                    <span class="s1">map.put(</span><span class="s3">&quot;name&quot;</span><span class="s0">, </span><span class="s1">name.getText().toString())</span><span class="s0">;</span>
+                    <span class="s1">map.put(</span><span class="s3">&quot;emailid&quot;</span><span class="s0">, </span><span class="s1">emailid.getText().toString())</span><span class="s0">;</span>
+                    <span class="s1">map.put(</span><span class="s3">&quot;memberid&quot;</span><span class="s0">, </span><span class="s1">memberid.getText().toString())</span><span class="s0">;</span>
+                    <span class="s1">map.put(</span><span class="s3">&quot;flattype&quot;</span><span class="s0">, </span><span class="s1">flattype.getText().toString())</span><span class="s0">;</span>
+                    <span class="s1">map.put(</span><span class="s3">&quot;phonenumber&quot;</span><span class="s0">, </span><span class="s1">phonenumber.getText().toString())</span><span class="s0">;</span>
+                    <span class="s1">map.put(</span><span class="s3">&quot;maintenance&quot;</span><span class="s0">, </span><span class="s1">maintenance.getText().toString())</span><span class="s0">;</span>
+                    <span class="s1">map.put(</span><span class="s3">&quot;status&quot;</span><span class="s0">, </span><span class="s1">status.getText().toString())</span><span class="s0">;</span>
+                    <span class="s1">map.put(</span><span class="s3">&quot;miscellaneous&quot;</span><span class="s0">, </span><span class="s1">miscellaneous.getText().toString())</span><span class="s0">;</span>
+                    <span class="s1">map.put(</span><span class="s3">&quot;maintenancep&quot;</span><span class="s0">, </span><span class="s1">file.getString(</span><span class="s3">&quot;editmaintenance&quot;</span><span class="s0">, </span><span class="s3">&quot;&quot;</span><span class="s1">))</span><span class="s0">;</span>
+                    <span class="s1">map.put(</span><span class="s3">&quot;miscellaneousp&quot;</span><span class="s0">, </span><span class="s1">file.getString(</span><span class="s3">&quot;editmiscellaneous&quot;</span><span class="s0">, </span><span class="s3">&quot;&quot;</span><span class="s1">))</span><span class="s0">;</span>
+                    <span class="s1">map.put(</span><span class="s3">&quot;profilename&quot;</span><span class="s0">, </span><span class="s1">imgname)</span><span class="s0">;</span>
+                    <span class="s1">map.put(</span><span class="s3">&quot;profileurl&quot;</span><span class="s0">, </span><span class="s1">_downloadUrl)</span><span class="s0">;</span>
+                    <span class="s1">calendar = Calendar.getInstance()</span><span class="s0">;</span>
+                    <span class="s1">map.put(</span><span class="s3">&quot;time&quot;</span><span class="s0">, new </span><span class="s1">SimpleDateFormat(</span><span class="s3">&quot;E dd/MM hh:mm a&quot;</span><span class="s1">).format(calendar.getTime()))</span><span class="s0">;</span>
+                    <span class="s1">Currdata.child(memberid.getText().toString()).updateChildren(map)</span><span class="s0">;</span>
+                    <span class="s1">button1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;Updated Successfully&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.SUCCESS)</span><span class="s0">;</span>
+                    <span class="s1">map.clear()</span><span class="s0">;</span>
+                    <span class="s1">progressDialog.dismiss()</span><span class="s0">;</span>
+                    <span class="s1">finish()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+                <span class="s0">else </span><span class="s1">{</span>
+                      <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;Unknown Error Occured&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.ERROR)</span><span class="s0">;</span>
+                    <span class="s1">progressDialog.dismiss()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s1">_profile_download_success_listener = </span><span class="s0">new </span><span class="s1">OnSuccessListener&lt;FileDownloadTask.TaskSnapshot&gt;() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onSuccess(FileDownloadTask.TaskSnapshot _param1) {</span>
+                <span class="s0">final long </span><span class="s1">_totalByteCount = _param1.getTotalByteCount()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s1">_profile_delete_success_listener = </span><span class="s0">new </span><span class="s1">OnSuccessListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onSuccess(Object _param1) {</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s1">_profile_failure_listener = </span><span class="s0">new </span><span class="s1">OnFailureListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onFailure(Exception _param1) {</span>
+                <span class="s0">final </span><span class="s1">String _message = _param1.getMessage()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+    <span class="s1">}</span>
+    <span class="s0">private void </span><span class="s1">initializeLogic() {</span>
+        <span class="s1">img = </span><span class="s2">0</span><span class="s0">;</span>
+        <span class="s1">addimg.setVisibility(View.GONE)</span><span class="s0">;</span>
+        <span class="s1">delprofile.setVisibility(View.GONE)</span><span class="s0">;</span>
+        <span class="s1">memberid.setEnabled(</span><span class="s0">false</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">editmemberid = file.getString(</span><span class="s3">&quot;editmemberid&quot;</span><span class="s0">,</span><span class="s3">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onActivityResult(</span><span class="s0">int </span><span class="s1">_requestCode</span><span class="s0">, int </span><span class="s1">_resultCode</span><span class="s0">, </span><span class="s1">Intent _data) {</span>
+        <span class="s0">super</span><span class="s1">.onActivityResult(_requestCode</span><span class="s0">, </span><span class="s1">_resultCode</span><span class="s0">, </span><span class="s1">_data)</span><span class="s0">;</span>
+
+        <span class="s0">switch </span><span class="s1">(_requestCode) {</span>
+            <span class="s0">case </span><span class="s1">REQ_CD_CAMERA:</span>
+                <span class="s0">if </span><span class="s1">(_resultCode == Activity.RESULT_OK) {</span>
+                    <span class="s1">String _filePath = _file_camera.getAbsolutePath()</span><span class="s0">;</span>
+                    <span class="s1">imgpath = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                    <span class="s1">imgname = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                    <span class="s1">imgsize = </span><span class="s2">0</span><span class="s0">;</span>
+                    <span class="s1">img = </span><span class="s2">1</span><span class="s0">;</span>
+                    <span class="s1">imgpath = _filePath</span><span class="s0">;</span>
+
+                    <span class="s1">imgsize= </span><span class="s0">new </span><span class="s1">java.io.File(imgpath).length()/</span><span class="s2">1024</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">((imgsize &lt; </span><span class="s2">2000</span><span class="s1">) &amp;&amp; (imgsize &gt; </span><span class="s2">0</span><span class="s1">)) {</span>
+                        <span class="s1">imgname = Uri.parse(_filePath).getLastPathSegment()</span><span class="s0">;</span>
+                        <span class="s1">profileimage.setImageBitmap(FileUtil.decodeSampleBitmapFromPath(_filePath</span><span class="s0">, </span><span class="s2">1024</span><span class="s0">, </span><span class="s2">1024</span><span class="s1">))</span><span class="s0">;</span>
+                        <span class="s1">profileimage.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                        <span class="s1">delprofile.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">addimg.setVisibility(View.GONE)</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                    <span class="s0">else </span><span class="s1">{</span>
+                        <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;Captured image must be less than 2Mb&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.WARNING)</span><span class="s0">;</span>
+                        <span class="s1">profileimage.setImageResource(R.drawable.default_profile)</span><span class="s0">;</span>
+                        <span class="s1">delprofile.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">addimg.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                        <span class="s1">imgpath = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                        <span class="s1">imgname = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                        <span class="s1">img = </span><span class="s2">0</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+                <span class="s0">else </span><span class="s1">{</span>
+
+                <span class="s1">}</span>
+                <span class="s0">break;</span>
+
+            <span class="s0">case </span><span class="s1">REQ_CD_FILEPICKER:</span>
+                <span class="s0">if </span><span class="s1">(_resultCode == Activity.RESULT_OK) {</span>
+                    <span class="s1">ArrayList&lt;String&gt; _filePath = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(_data != </span><span class="s0">null</span><span class="s1">) {</span>
+                        <span class="s0">if </span><span class="s1">(_data.getClipData() != </span><span class="s0">null</span><span class="s1">) {</span>
+                            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">_index = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">_index &lt; _data.getClipData().getItemCount()</span><span class="s0">; </span><span class="s1">_index++) {</span>
+                                <span class="s1">ClipData.Item _item = _data.getClipData().getItemAt(_index)</span><span class="s0">;</span>
+                                <span class="s1">_filePath.add(FileUtil.convertUriToFilePath(getApplicationContext()</span><span class="s0">, </span><span class="s1">_item.getUri()))</span><span class="s0">;</span>
+                            <span class="s1">}</span>
+                        <span class="s1">}</span>
+                        <span class="s0">else </span><span class="s1">{</span>
+                            <span class="s1">_filePath.add(FileUtil.convertUriToFilePath(getApplicationContext()</span><span class="s0">, </span><span class="s1">_data.getData()))</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+
+                        <span class="s1">imgname = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                        <span class="s1">imgpath = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                        <span class="s1">imgsize = </span><span class="s2">0</span><span class="s0">;</span>
+                        <span class="s1">img = </span><span class="s2">1</span><span class="s0">;</span>
+                        <span class="s1">imgpath = _filePath.get((</span><span class="s0">int</span><span class="s1">)(</span><span class="s2">0</span><span class="s1">))</span><span class="s0">;</span>
+
+                        <span class="s1">imgsize= </span><span class="s0">new </span><span class="s1">java.io.File(imgpath).length()/</span><span class="s2">1024</span><span class="s0">;</span>
+                        <span class="s0">if </span><span class="s1">((imgsize &lt; </span><span class="s2">2000</span><span class="s1">) &amp;&amp; (imgsize &gt; </span><span class="s2">0</span><span class="s1">)) {</span>
+                            <span class="s1">imgname = Uri.parse(_filePath.get((</span><span class="s0">int</span><span class="s1">)(</span><span class="s2">0</span><span class="s1">))).getLastPathSegment()</span><span class="s0">;</span>
+                            <span class="s1">profileimage.setImageBitmap(FileUtil.decodeSampleBitmapFromPath(_filePath.get((</span><span class="s0">int</span><span class="s1">)(</span><span class="s2">0</span><span class="s1">))</span><span class="s0">, </span><span class="s2">1024</span><span class="s0">, </span><span class="s2">1024</span><span class="s1">))</span><span class="s0">;</span>
+                            <span class="s1">profileimage.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                            <span class="s1">delprofile.setVisibility(View.GONE)</span><span class="s0">;</span>
+                            <span class="s1">addimg.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                        <span class="s0">else </span><span class="s1">{</span>
+                            <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;Attachment must be less than 2Mb&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.WARNING)</span><span class="s0">;</span>
+                            <span class="s1">profileimage.setImageResource(R.drawable.default_profile)</span><span class="s0">;</span>
+                            <span class="s1">delprofile.setVisibility(View.GONE)</span><span class="s0">;</span>
+                            <span class="s1">addimg.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                            <span class="s1">imgpath = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                            <span class="s1">imgname = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                            <span class="s1">img = </span><span class="s2">0</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+
+
+                <span class="s1">}</span>
+
+                <span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">}</span>
+                <span class="s0">break;</span>
+            <span class="s0">default</span><span class="s1">:</span>
+                <span class="s0">break;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+<span class="s1">}</span></pre>
+</body>
+</html>

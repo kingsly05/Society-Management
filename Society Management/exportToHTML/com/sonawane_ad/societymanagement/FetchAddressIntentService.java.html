@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>FetchAddressIntentService.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+FetchAddressIntentService.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.sonawane_ad.societymanagement</span><span class="s0">;</span>
+<span class="s2">//For Fetching Address (Constants, FetchAddressIntentService)</span>
+<span class="s0">import </span><span class="s1">android.app.IntentService</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.location.Address</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.location.Geocoder</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.location.Location</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.ResultReceiver</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.text.TextUtils</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.annotation.Nullable</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.List</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.Locale</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.Objects</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">FetchAddressIntentService </span><span class="s0">extends </span><span class="s1">IntentService {</span>
+    <span class="s0">private </span><span class="s1">ResultReceiver resultReceiver</span><span class="s0">;</span>
+    <span class="s0">public </span><span class="s1">FetchAddressIntentService()</span>
+    <span class="s1">{</span>
+        <span class="s0">super</span><span class="s1">(</span><span class="s3">&quot;FetchAddressIntentService&quot;</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onHandleIntent(@Nullable Intent intent) {</span>
+        <span class="s0">if</span><span class="s1">(intent !=</span><span class="s0">null</span><span class="s1">)</span>
+        <span class="s1">{</span>
+            <span class="s1">String errorMessage=</span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+            <span class="s1">resultReceiver=intent.getParcelableExtra(Constants.RECEIVER)</span><span class="s0">;</span>
+            <span class="s1">Location location=intent.getParcelableExtra(Constants.LOCATION_DATA_EXTRA)</span><span class="s0">;</span>
+            <span class="s0">if</span><span class="s1">(location ==</span><span class="s0">null</span><span class="s1">)</span>
+            <span class="s1">{</span>
+                <span class="s0">return;</span>
+            <span class="s1">}</span>
+            <span class="s1">Geocoder geocoder=</span><span class="s0">new </span><span class="s1">Geocoder(</span><span class="s0">this, </span><span class="s1">Locale.getDefault())</span><span class="s0">;</span>
+            <span class="s1">List&lt;Address&gt; addresses=</span><span class="s0">null;</span>
+            <span class="s0">try</span><span class="s1">{</span>
+                <span class="s1">addresses=geocoder.getFromLocation(location.getLatitude()</span><span class="s0">,</span><span class="s1">location.getLongitude()</span><span class="s0">,</span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">}</span><span class="s0">catch</span><span class="s1">(Exception exception){</span>
+                <span class="s1">errorMessage=exception.getMessage()</span><span class="s0">;</span>
+            <span class="s1">}</span><span class="s0">if</span><span class="s1">(addresses== </span><span class="s0">null</span><span class="s1">|| addresses.isEmpty())</span>
+        <span class="s1">{</span>
+            <span class="s1">deliverResultReceiver(Constants.FAILURE_RESULT</span><span class="s0">,</span><span class="s1">errorMessage)</span><span class="s0">;</span>
+        <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+            <span class="s1">Address address=addresses.get(</span><span class="s4">0</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">ArrayList&lt;String&gt; addressFragments=</span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+            <span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">i=</span><span class="s4">0</span><span class="s0">;</span><span class="s1">i&lt;=address.getMaxAddressLineIndex()</span><span class="s0">;</span><span class="s1">i++)</span>
+            <span class="s1">{</span>
+                <span class="s1">addressFragments.add(address.getAddressLine(i))</span><span class="s0">;</span>
+            <span class="s1">}</span>
+            <span class="s1">deliverResultReceiver(Constants.SUCCESS_RESULT</span><span class="s0">, </span><span class="s1">TextUtils.join(Objects.requireNonNull(System.getProperty(</span><span class="s3">&quot;line.separator&quot;</span><span class="s1">))</span>
+                    <span class="s0">,</span><span class="s1">addressFragments))</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s0">private void </span><span class="s1">deliverResultReceiver(</span><span class="s0">int </span><span class="s1">resultCode</span><span class="s0">,</span><span class="s1">String addressMessage)</span>
+    <span class="s1">{</span>
+        <span class="s1">Bundle bundle=</span><span class="s0">new </span><span class="s1">Bundle()</span><span class="s0">;</span>
+        <span class="s1">bundle.putString(Constants.RESULT_DATA_KEY</span><span class="s0">,</span><span class="s1">addressMessage)</span><span class="s0">;</span>
+        <span class="s1">resultReceiver.send(resultCode</span><span class="s0">,</span><span class="s1">bundle)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

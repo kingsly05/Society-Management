@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="#FFC107"
+    android:layout_centerVertical="true"
+    android:layout_centerInParent="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:id="@+id/nointernet"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/UI_cardviewnointernet"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            app:cardBackgroundColor="@color/white"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="10dp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="30dp"
+            android:layout_margin="8dp"
+            android:padding="12dp"
+            >
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_height="280dp"
+                android:layout_width="280dp"
+                android:layout_gravity="center"
+                app:lottie_rawRes="@raw/no_internet_json"
+                app:lottie_autoPlay="true"
+                android:padding="10dp"
+                app:lottie_loop="true"
+                />
+            <Button
+                android:id="@+id/retry"
+                android:layout_marginTop="190dp"
+                android:background="@drawable/oval"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="Retry"
+                android:padding="10dp"
+                android:fontFamily="casual"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/delprofile"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignEnd="@+id/imageview1"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="-15dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/close_black" />
+
+        <ImageView
+            android:id="@+id/addprofile"
+            android:src="@drawable/add_profile"
+            android:scaleType="fitXY"
+            android:layout_width="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="-15dp"
+            android:layout_alignEnd="@+id/imageview1"
+            android:layout_height="20dp"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageview1"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:elevation="40dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/default_profile"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#FF000000"/>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            card_view:cardBackgroundColor="#ffffff"
+            card_view:cardCornerRadius="30dp"
+            card_view:cardElevation="10dp"
+            android:layout_marginBottom="20dp"
+            card_view:cardUseCompatPadding="false" >
+
+            <LinearLayout
+                android:id="@+id/linear1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:paddingTop="0dp"
+                android:layout_marginTop="45dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/linear8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|right"
+
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/editbtn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="8dp"
+                        android:background="@drawable/edit"
+                        android:textSize="12sp"
+                        android:textColor="#000000"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/textview1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="Member ID"
+                        android:textSize="12sp"
+                        android:textColor="#000000"/>
+                    <TextView
+                        android:id="@+id/memberid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="TextView"
+                        android:textSize="12sp"
+                        android:textColor="#000000"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linear3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/textview3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="Name"
+                        android:textSize="12sp"
+                        android:textColor="#000000"/>
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:transitionName="UI_Username_textTrans"
+                        android:text="TextView"
+                        android:textSize="12sp"
+                        android:textColor="#000000"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="casual"
+                        android:id="@+id/etnamelayout"
+                        app:hintTextColor="@color/black"
+                        app:boxStrokeColor="#000000"
+                        android:textColorHighlight="#000000">
+                        <EditText android:id="@+id/etname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000000"
+                            android:textSize="12dp"
+                            android:inputType="text"
+                            android:hint="Name" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linear4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/textview5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="Contact no. "
+                        android:textSize="12sp"
+                        android:textColor="#000000"/>
+                    <TextView
+                        android:id="@+id/phonenumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="TextView"
+                        android:textSize="12sp"
+                        android:textColor="#000000"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="casual"
+                        android:id="@+id/etphonenumberlayout"
+                        app:hintTextColor="@color/black"
+                        app:boxStrokeColor="#000000"
+                        android:textColorHighlight="#000000">
+                        <EditText android:id="@+id/etphonenumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000000"
+                            android:textSize="12dp"
+                            android:inputType="phone"
+                            android:hint="Phone number" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linear5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/textview7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="Flat Type"
+                        android:textSize="12sp"
+                        android:textColor="#000000"/>
+                    <TextView
+                        android:id="@+id/flattype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="TextView"
+                        android:textSize="12sp"
+                        android:textColor="#000000"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linear6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/textview9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="Payment Status"
+                        android:textSize="12sp"
+                        android:textColor="#000000"/>
+                    <TextView
+                        android:id="@+id/status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="TextView"
+                        android:textSize="12sp"
+                        android:textColor="#000000"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linear7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/backbtn"
+                        android:layout_width="150dp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.35"
+                        android:textColor="#000000"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|right"
+                        android:background="@drawable/oval_btn"
+                        android:fontFamily="casual"
+                        android:padding="12dp"
+                        android:text="BACK"/>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/updatebtn"
+                        android:layout_width="150dp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.35"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|right"
+                        android:background="@drawable/oval_btn"
+                        android:fontFamily="casual"
+                        android:padding="12dp"
+                        android:text="UPDATE"/>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,187 @@
+<html>
+<head>
+<title>activity_login.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #e8bf6a;}
+.s1 { color: #bababa;}
+.s2 { color: #6a8759;}
+.s3 { color: #a9b7c6;}
+.s4 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+activity_login.xml</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;?</span><span class="s1">xml version</span><span class="s2">=&quot;1.0&quot; </span><span class="s1">encoding</span><span class="s2">=&quot;utf-8&quot;</span><span class="s0">?&gt;</span>
+<span class="s0">&lt;RelativeLayout</span>
+    <span class="s1">xmlns:android</span><span class="s2">=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="s1">xmlns:app</span><span class="s2">=&quot;http://schemas.android.com/apk/res-auto&quot;</span>
+    <span class="s1">xmlns:tools</span><span class="s2">=&quot;http://schemas.android.com/tools&quot;</span>
+    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+    <span class="s1">android:padding</span><span class="s2">=&quot;0dp&quot;</span>
+    <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span>
+    <span class="s1">tools:context</span><span class="s2">=&quot;.LoginActivity&quot;</span><span class="s0">&gt;</span>
+
+
+    <span class="s0">&lt;LinearLayout</span>
+        <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span>
+        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+        <span class="s1">android:background</span><span class="s2">=&quot;@drawable/login_page_background&quot;</span>
+        <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span>
+        <span class="s1">android:paddingTop</span><span class="s2">=&quot;56dp&quot;</span>
+        <span class="s1">android:paddingLeft</span><span class="s2">=&quot;24dp&quot;</span>
+        <span class="s1">android:paddingRight</span><span class="s2">=&quot;14dp&quot;</span><span class="s0">&gt;</span>
+
+
+        <span class="s0">&lt;com.airbnb.lottie.LottieAnimationView</span>
+            <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_login_lottie&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;120dp&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;120dp&quot;</span>
+            <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center|right&quot;</span>
+            <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;15dp&quot;</span>
+            <span class="s1">android:layout_marginRight</span><span class="s2">=&quot;0dp&quot;</span>
+            <span class="s1">android:layout_marginBottom</span><span class="s2">=&quot;25dp&quot;</span>
+            <span class="s1">android:padding</span><span class="s2">=&quot;0dp&quot;</span>
+            <span class="s1">app:lottie_autoPlay</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">app:lottie_loop</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">app:lottie_rawRes</span><span class="s2">=&quot;@raw/login_new_json&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;TextView</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+            <span class="s1">android:text</span><span class="s2">=&quot;Login&quot;</span>
+            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span>
+            <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+            <span class="s1">android:textSize</span><span class="s2">=&quot;30dp&quot;</span>
+            <span class="s1">android:letterSpacing</span><span class="s2">=&quot;0.5&quot;</span>
+            <span class="s1">android:textAllCaps</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s0">/&gt;</span>
+        <span class="s4">&lt;!-- Email Label --&gt;</span>
+        <span class="s0">&lt;com.google.android.material.textfield.TextInputLayout</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;8dp&quot;</span>
+            <span class="s1">android:layout_marginRight</span><span class="s2">=&quot;10dp&quot;</span>
+            <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+            <span class="s1">app:boxStrokeColor</span><span class="s2">=&quot;#000000&quot;</span>
+            <span class="s1">android:textColorHint</span><span class="s2">=&quot;#000000&quot;</span>
+            <span class="s1">android:textColorHighlight</span><span class="s2">=&quot;#000000&quot;</span>
+            <span class="s1">android:layout_marginBottom</span><span class="s2">=&quot;8dp&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;EditText </span><span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_email_et&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span>
+                <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                <span class="s1">android:inputType</span><span class="s2">=&quot;textEmailAddress&quot;</span>
+                <span class="s1">android:hint</span><span class="s2">=&quot;Email&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;/com.google.android.material.textfield.TextInputLayout&gt;</span>
+
+        <span class="s4">&lt;!-- Password Label --&gt;</span>
+        <span class="s0">&lt;com.google.android.material.textfield.TextInputLayout</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;8dp&quot;</span>
+            <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+            <span class="s1">android:layout_marginRight</span><span class="s2">=&quot;10dp&quot;</span>
+            <span class="s1">android:textColorHint</span><span class="s2">=&quot;#000000&quot;</span>
+            <span class="s1">android:layout_marginBottom</span><span class="s2">=&quot;8dp&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;EditText </span><span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_password_et&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span>
+                <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                <span class="s1">android:letterSpacing</span><span class="s2">=&quot;0.23&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                <span class="s1">android:inputType</span><span class="s2">=&quot;textPassword&quot;</span>
+                <span class="s1">android:hint</span><span class="s2">=&quot;Password&quot;</span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;/com.google.android.material.textfield.TextInputLayout&gt;</span>
+        <span class="s0">&lt;TextView</span>
+            <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_forget_txt&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;5dp&quot;</span>
+            <span class="s1">android:layout_marginRight</span><span class="s2">=&quot;10dp&quot;</span>
+            <span class="s1">android:transitionName</span><span class="s2">=&quot;forgetTrans&quot;</span>
+            <span class="s1">android:layout_gravity</span><span class="s2">=&quot;right&quot;</span>
+            <span class="s1">android:textColor</span><span class="s2">=&quot;#BA504D4D&quot;</span>
+            <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+            <span class="s1">android:text</span><span class="s2">=&quot;Forget Password ?&quot;</span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;androidx.appcompat.widget.AppCompatButton</span>
+            <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_login_btn&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;150dp&quot;</span>
+            <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+            <span class="s1">android:letterSpacing</span><span class="s2">=&quot;0.35&quot;</span>
+            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span>
+            <span class="s1">android:layout_marginRight</span><span class="s2">=&quot;10dp&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;24dp&quot;</span>
+            <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center|right&quot;</span>
+            <span class="s1">android:background</span><span class="s2">=&quot;@drawable/oval_btn&quot;</span>
+            <span class="s1">android:layout_marginBottom</span><span class="s2">=&quot;24dp&quot;</span>
+            <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+            <span class="s1">android:padding</span><span class="s2">=&quot;12dp&quot;</span>
+            <span class="s1">android:text</span><span class="s2">=&quot;Login&quot;</span><span class="s0">/&gt;</span>
+
+        <span class="s0">&lt;TextView </span><span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_signup_txt&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_marginBottom</span><span class="s2">=&quot;24dp&quot;</span>
+            <span class="s1">android:text</span><span class="s2">=&quot;No account yet? Create one&quot;</span>
+            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span>
+            <span class="s1">android:transitionName</span><span class="s2">=&quot;signupTrans&quot;</span>
+            <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center|right&quot;</span>
+            <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+            <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+            <span class="s1">android:layout_marginRight</span><span class="s2">=&quot;10dp&quot;</span>
+            <span class="s1">android:textSize</span><span class="s2">=&quot;12dp&quot;</span><span class="s0">/&gt;</span>
+
+
+        <span class="s0">&lt;LinearLayout</span>
+            <span class="s1">android:id</span><span class="s2">=&quot;@+id/signupmethod&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;0dp&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;0dp&quot;</span>
+            <span class="s1">android:visibility</span><span class="s2">=&quot;gone&quot;</span>
+            <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+            <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+            <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;15dp&quot;</span>
+            <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;com.airbnb.lottie.LottieAnimationView</span>
+                <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_facebook_lottie&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;60dp&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;60dp&quot;</span>
+                <span class="s1">android:layout_marginBottom</span><span class="s2">=&quot;24dp&quot;</span>
+                <span class="s1">app:lottie_rawRes</span><span class="s2">=&quot;@raw/signup_facebook_json&quot;</span>
+                <span class="s1">app:lottie_autoPlay</span><span class="s2">=&quot;true&quot;</span>
+                <span class="s1">android:layout_marginRight</span><span class="s2">=&quot;10dp&quot;</span>
+                <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+                <span class="s1">app:lottie_loop</span><span class="s2">=&quot;true&quot; </span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;com.airbnb.lottie.LottieAnimationView</span>
+                <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_google_lottie&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;60dp&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;60dp&quot;</span>
+                <span class="s1">android:layout_marginBottom</span><span class="s2">=&quot;24dp&quot;</span>
+                <span class="s1">app:lottie_rawRes</span><span class="s2">=&quot;@raw/signup_google_json&quot;</span>
+                <span class="s1">app:lottie_autoPlay</span><span class="s2">=&quot;true&quot;</span>
+                <span class="s1">android:layout_marginRight</span><span class="s2">=&quot;10dp&quot;</span>
+                <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+                <span class="s1">app:lottie_loop</span><span class="s2">=&quot;true&quot; </span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;com.airbnb.lottie.LottieAnimationView</span>
+                <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_linkedin_lottie&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;60dp&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;60dp&quot;</span>
+                <span class="s1">android:layout_marginBottom</span><span class="s2">=&quot;24dp&quot;</span>
+                <span class="s1">app:lottie_rawRes</span><span class="s2">=&quot;@raw/signup_linkedin_json&quot;</span>
+                <span class="s1">app:lottie_autoPlay</span><span class="s2">=&quot;true&quot;</span>
+                <span class="s1">android:layout_marginRight</span><span class="s2">=&quot;10dp&quot;</span>
+                <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+                <span class="s1">app:lottie_loop</span><span class="s2">=&quot;true&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;/LinearLayout&gt;</span>
+
+    <span class="s0">&lt;/LinearLayout&gt;</span>
+<span class="s0">&lt;/RelativeLayout&gt;</span></pre>
+</body>
+</html>

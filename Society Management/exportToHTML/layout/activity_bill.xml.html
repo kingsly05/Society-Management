@@ -1,0 +1,338 @@
+<html>
+<head>
+<title>activity_bill.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #e8bf6a;}
+.s1 { color: #bababa;}
+.s2 { color: #6a8759;}
+.s3 { color: #a9b7c6;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+activity_bill.xml</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;androidx.coordinatorlayout.widget.CoordinatorLayout</span>
+    <span class="s1">xmlns:android</span><span class="s2">=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="s1">xmlns:app</span><span class="s2">=&quot;http://schemas.android.com/apk/res-auto&quot;</span>
+    <span class="s1">xmlns:tools</span><span class="s2">=&quot;http://schemas.android.com/tools&quot;</span>
+    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+    <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+    <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span><span class="s0">&gt;</span>
+
+    <span class="s0">&lt;LinearLayout</span>
+        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+        <span class="s1">android:background</span><span class="s2">=&quot;@drawable/bill_page_background&quot;</span>
+        <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span>
+        <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span>
+        <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+        <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+        <span class="s1">app:layout_behavior</span><span class="s2">=&quot;@string/appbar_scrolling_view_behavior&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;ScrollView</span>
+            <span class="s1">android:id</span><span class="s2">=&quot;@+id/vscroll1&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+            <span class="s1">android:background</span><span class="s2">=&quot;@drawable/bill_page_background&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+            <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+            <span class="s1">android:scrollbars</span><span class="s2">=&quot;none&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;LinearLayout</span>
+                <span class="s1">android:paddingTop</span><span class="s2">=&quot;20dp&quot;</span>
+                <span class="s1">android:paddingBottom</span><span class="s2">=&quot;20dp&quot;</span>
+                <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear1&quot;</span>
+                <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+                <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;LinearLayout</span>
+                    <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear10&quot;</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                    <span class="s1">android:background</span><span class="s2">=&quot;@color/transparent&quot;</span>
+                    <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;LinearLayout</span>
+                        <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear9&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                        <span class="s1">android:gravity</span><span class="s2">=&quot;center_horizontal|center_vertical&quot;</span>
+                        <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span>
+                        <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center_horizontal|center_vertical&quot;</span><span class="s0">&gt;</span>
+                        <span class="s0">&lt;TextView</span>
+                            <span class="s1">android:id</span><span class="s2">=&quot;@+id/textview10&quot;</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                            <span class="s1">android:text</span><span class="s2">=&quot;Housing Society Management System&quot;</span>
+                            <span class="s1">android:textSize</span><span class="s2">=&quot;18sp&quot;</span>
+                            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+                    <span class="s0">&lt;/LinearLayout&gt;</span>
+                    <span class="s0">&lt;LinearLayout</span>
+                        <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear16&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:gravity</span><span class="s2">=&quot;center_vertical&quot;</span>
+                        <span class="s1">android:paddingLeft</span><span class="s2">=&quot;10dp&quot;</span>
+                        <span class="s1">android:paddingRight</span><span class="s2">=&quot;10dp&quot;</span>
+                        <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span><span class="s0">&gt;</span>
+                        <span class="s0">&lt;de.hdodenhof.circleimageview.CircleImageView</span>
+                            <span class="s1">android:id</span><span class="s2">=&quot;@+id/imageview1&quot;</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;50dp&quot;</span>
+                            <span class="s1">android:transitionName</span><span class="s2">=&quot;imageview1Trans&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;55dp&quot;</span>
+                            <span class="s1">android:src</span><span class="s2">=&quot;@drawable/default_profile&quot;</span><span class="s0">/&gt;</span>
+                        <span class="s0">&lt;TextView</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:layout_weight</span><span class="s2">=&quot;1&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span><span class="s0">/&gt;</span>
+                        <span class="s0">&lt;TextView</span>
+                            <span class="s1">android:id</span><span class="s2">=&quot;@+id/textview21&quot;</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                            <span class="s1">android:text</span><span class="s2">=&quot;Reg:TW1/DWW3/5677&quot;</span>
+                            <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+                    <span class="s0">&lt;/LinearLayout&gt;</span>
+                    <span class="s0">&lt;LinearLayout</span>
+                        <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear2&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                        <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span><span class="s0">&gt;</span>
+                        <span class="s0">&lt;TextView</span>
+                            <span class="s1">android:id</span><span class="s2">=&quot;@+id/textview1&quot;</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                            <span class="s1">android:text</span><span class="s2">=&quot;Member Id&quot;</span>
+                            <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+                        <span class="s0">&lt;TextView</span>
+                            <span class="s1">android:id</span><span class="s2">=&quot;@+id/memberid&quot;</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                            <span class="s1">android:text</span><span class="s2">=&quot;TextView&quot;</span>
+                            <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+                    <span class="s0">&lt;/LinearLayout&gt;</span>
+                    <span class="s0">&lt;LinearLayout</span>
+                        <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear3&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                        <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span><span class="s0">&gt;</span>
+                        <span class="s0">&lt;TextView</span>
+                            <span class="s1">android:id</span><span class="s2">=&quot;@+id/textview3&quot;</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                            <span class="s1">android:text</span><span class="s2">=&quot;Name&quot;</span>
+                            <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+                        <span class="s0">&lt;TextView</span>
+                            <span class="s1">android:id</span><span class="s2">=&quot;@+id/name&quot;</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                            <span class="s1">android:text</span><span class="s2">=&quot;TextView&quot;</span>
+                            <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+                    <span class="s0">&lt;/LinearLayout&gt;</span>
+                    <span class="s0">&lt;LinearLayout</span>
+                        <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear4&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                        <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span><span class="s0">&gt;</span>
+                        <span class="s0">&lt;TextView</span>
+                            <span class="s1">android:id</span><span class="s2">=&quot;@+id/textview5&quot;</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                            <span class="s1">android:text</span><span class="s2">=&quot;Maintenance Bill&quot;</span>
+                            <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+                        <span class="s0">&lt;TextView</span>
+                            <span class="s1">android:id</span><span class="s2">=&quot;@+id/maintenance&quot;</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                            <span class="s1">android:text</span><span class="s2">=&quot;TextView&quot;</span>
+                            <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+                    <span class="s0">&lt;/LinearLayout&gt;</span>
+                    <span class="s0">&lt;LinearLayout</span>
+                        <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear5&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                        <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span><span class="s0">&gt;</span>
+                        <span class="s0">&lt;TextView</span>
+                            <span class="s1">android:id</span><span class="s2">=&quot;@+id/textview7&quot;</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                            <span class="s1">android:text</span><span class="s2">=&quot;Miscellaneous Bill&quot;</span>
+                            <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+                        <span class="s0">&lt;TextView</span>
+                            <span class="s1">android:id</span><span class="s2">=&quot;@+id/miscellaneous&quot;</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                            <span class="s1">android:text</span><span class="s2">=&quot;TextView&quot;</span>
+                            <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+                    <span class="s0">&lt;/LinearLayout&gt;</span>
+                    <span class="s0">&lt;LinearLayout</span>
+                        <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear6&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                        <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span><span class="s0">&gt;</span>
+                        <span class="s0">&lt;TextView</span>
+                            <span class="s1">android:id</span><span class="s2">=&quot;@+id/textview9&quot;</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                            <span class="s1">android:text</span><span class="s2">=&quot;Status&quot;</span>
+                            <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+                        <span class="s0">&lt;TextView</span>
+                            <span class="s1">android:id</span><span class="s2">=&quot;@+id/status&quot;</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                            <span class="s1">android:text</span><span class="s2">=&quot;TextView&quot;</span>
+                            <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+                    <span class="s0">&lt;/LinearLayout&gt;</span>
+                    <span class="s0">&lt;LinearLayout</span>
+                        <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear7&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;5dp&quot;</span>
+                        <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                        <span class="s1">android:background</span><span class="s2">=&quot;@color/yellow&quot;</span>
+                        <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span><span class="s0">/&gt;</span>
+                    <span class="s0">&lt;LinearLayout</span>
+                        <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear11&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                        <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span><span class="s0">&gt;</span>
+                        <span class="s0">&lt;TextView</span>
+                            <span class="s1">android:id</span><span class="s2">=&quot;@+id/textview12&quot;</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                            <span class="s1">android:text</span><span class="s2">=&quot;Previous Maintenance Bill&quot;</span>
+                            <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+                        <span class="s0">&lt;TextView</span>
+                            <span class="s1">android:id</span><span class="s2">=&quot;@+id/maintenancep&quot;</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                            <span class="s1">android:text</span><span class="s2">=&quot;TextView&quot;</span>
+                            <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+                    <span class="s0">&lt;/LinearLayout&gt;</span>
+                    <span class="s0">&lt;LinearLayout</span>
+                        <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear12&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                        <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span><span class="s0">&gt;</span>
+                        <span class="s0">&lt;TextView</span>
+                            <span class="s1">android:id</span><span class="s2">=&quot;@+id/textview14&quot;</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                            <span class="s1">android:text</span><span class="s2">=&quot;Previous Miscellaneous Bill&quot;</span>
+                            <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+                        <span class="s0">&lt;TextView</span>
+                            <span class="s1">android:id</span><span class="s2">=&quot;@+id/miscellaneousp&quot;</span>
+                            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                            <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                            <span class="s1">android:text</span><span class="s2">=&quot;TextView&quot;</span>
+                            <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                            <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+                    <span class="s0">&lt;/LinearLayout&gt;</span>
+                <span class="s0">&lt;/LinearLayout&gt;</span>
+                <span class="s0">&lt;LinearLayout</span>
+                    <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear8&quot;</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                    <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;EditText</span>
+                        <span class="s1">android:id</span><span class="s2">=&quot;@+id/edittext1&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                        <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                        <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span>
+                        <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                        <span class="s1">android:hint</span><span class="s2">=&quot;File Name&quot;</span>
+                        <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+                        <span class="s1">android:textColorHint</span><span class="s2">=&quot;#607D8B&quot;</span>
+                        <span class="s1">android:layout_weight</span><span class="s2">=&quot;1&quot;</span><span class="s0">/&gt;</span>
+                    <span class="s0">&lt;Button</span>
+                        <span class="s1">android:id</span><span class="s2">=&quot;@+id/save&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                        <span class="s1">android:background</span><span class="s2">=&quot;@drawable/oval&quot;</span>
+                        <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+                        <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                        <span class="s1">android:text</span><span class="s2">=&quot;Save&quot;</span>
+                        <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                        <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;/LinearLayout&gt;</span>
+                <span class="s0">&lt;LinearLayout</span>
+                    <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear13&quot;</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                    <span class="s1">android:orientation</span><span class="s2">=&quot;horizontal&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;Button</span>
+                        <span class="s1">android:id</span><span class="s2">=&quot;@+id/payment&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                        <span class="s1">android:background</span><span class="s2">=&quot;@drawable/oval&quot;</span>
+                        <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+                        <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                        <span class="s1">android:text</span><span class="s2">=&quot;Pay Bill&quot;</span>
+                        <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                        <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span>
+                        <span class="s1">android:layout_weight</span><span class="s2">=&quot;1&quot;</span><span class="s0">/&gt;</span>
+                    <span class="s0">&lt;Button</span>
+                        <span class="s1">android:id</span><span class="s2">=&quot;@+id/back&quot;</span>
+                        <span class="s1">android:background</span><span class="s2">=&quot;@drawable/oval&quot;</span>
+                        <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+                        <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                        <span class="s1">android:text</span><span class="s2">=&quot;Back&quot;</span>
+                        <span class="s1">android:textSize</span><span class="s2">=&quot;12sp&quot;</span>
+                        <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span>
+                        <span class="s1">android:layout_weight</span><span class="s2">=&quot;1&quot;</span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;/LinearLayout&gt;</span>
+            <span class="s0">&lt;/LinearLayout&gt;</span>
+        <span class="s0">&lt;/ScrollView&gt;</span>
+    <span class="s0">&lt;/LinearLayout&gt;</span>
+<span class="s0">&lt;/androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</span>
+</pre>
+</body>
+</html>

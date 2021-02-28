@@ -1,0 +1,491 @@
+<html>
+<head>
+<title>activity_dashboard.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #e8bf6a;}
+.s1 { color: #bababa;}
+.s2 { color: #6a8759;}
+.s3 { color: #a9b7c6;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+activity_dashboard.xml</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;?</span><span class="s1">xml version</span><span class="s2">=&quot;1.0&quot; </span><span class="s1">encoding</span><span class="s2">=&quot;utf-8&quot;</span><span class="s0">?&gt;</span>
+<span class="s0">&lt;RelativeLayout</span>
+    <span class="s1">xmlns:android</span><span class="s2">=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="s1">xmlns:app</span><span class="s2">=&quot;http://schemas.android.com/apk/res-auto&quot;</span>
+    <span class="s1">xmlns:tools</span><span class="s2">=&quot;http://schemas.android.com/tools&quot;</span>
+    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+    <span class="s1">android:background</span><span class="s2">=&quot;#FFC107&quot;</span>
+    <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+    <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+
+    <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span>
+    <span class="s1">tools:context</span><span class="s2">=&quot;.DashboardActivity&quot;</span><span class="s0">&gt;</span>
+
+    <span class="s0">&lt;LinearLayout</span>
+        <span class="s1">android:id</span><span class="s2">=&quot;@+id/nointernet&quot;</span>
+        <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+        <span class="s1">android:visibility</span><span class="s2">=&quot;gone&quot;</span>
+        <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span>
+        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+        <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span><span class="s0">&gt;</span>
+
+        <span class="s0">&lt;androidx.cardview.widget.CardView</span>
+            <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_cardviewnointernet&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;500dp&quot;</span>
+            <span class="s1">app:cardBackgroundColor</span><span class="s2">=&quot;@color/white&quot;</span>
+            <span class="s1">android:layout_columnWeight</span><span class="s2">=&quot;1&quot;</span>
+            <span class="s1">android:layout_rowWeight</span><span class="s2">=&quot;1&quot;</span>
+            <span class="s1">app:cardElevation</span><span class="s2">=&quot;10dp&quot;</span>
+            <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+            <span class="s1">app:cardCornerRadius</span><span class="s2">=&quot;30dp&quot;</span>
+            <span class="s1">android:layout_margin</span><span class="s2">=&quot;8dp&quot;</span>
+            <span class="s1">android:padding</span><span class="s2">=&quot;12dp&quot;</span>
+            <span class="s0">&gt;</span>
+                <span class="s0">&lt;com.airbnb.lottie.LottieAnimationView</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;280dp&quot;</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;280dp&quot;</span>
+                    <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+                    <span class="s1">app:lottie_rawRes</span><span class="s2">=&quot;@raw/no_internet_json&quot;</span>
+                    <span class="s1">app:lottie_autoPlay</span><span class="s2">=&quot;true&quot;</span>
+                    <span class="s1">android:padding</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">app:lottie_loop</span><span class="s2">=&quot;true&quot;</span>
+                    <span class="s0">/&gt;</span>
+                <span class="s0">&lt;Button</span>
+                    <span class="s1">android:id</span><span class="s2">=&quot;@+id/retry&quot;</span>
+                    <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;190dp&quot;</span>
+                    <span class="s1">android:background</span><span class="s2">=&quot;@drawable/oval&quot;</span>
+                    <span class="s1">android:textColor</span><span class="s2">=&quot;@color/black&quot;</span>
+                    <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+                    <span class="s1">android:text</span><span class="s2">=&quot;Retry&quot;</span>
+                    <span class="s1">android:padding</span><span class="s2">=&quot;10dp&quot;</span>
+                    <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                    <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span><span class="s0">/&gt;</span>
+
+        <span class="s0">&lt;/androidx.cardview.widget.CardView&gt;</span>
+
+    <span class="s0">&lt;/LinearLayout&gt;</span>
+
+    <span class="s0">&lt;LinearLayout</span>
+        <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear&quot;</span>
+        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+        <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+        <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+        <span class="s1">android:visibility</span><span class="s2">=&quot;visible&quot;</span>
+        <span class="s1">android:layout_weight</span><span class="s2">=&quot;1&quot;</span>
+        <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;ScrollView</span>
+            <span class="s1">xmlns:android</span><span class="s2">=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+            <span class="s1">xmlns:app</span><span class="s2">=&quot;http://schemas.android.com/apk/res-auto&quot;</span>
+            <span class="s1">xmlns:tools</span><span class="s2">=&quot;http://schemas.android.com/tools&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span>
+            <span class="s1">android:scrollbars</span><span class="s2">=&quot;none&quot;</span>
+            <span class="s1">android:background</span><span class="s2">=&quot;@drawable/background&quot;</span>
+            <span class="s1">tools:context</span><span class="s2">=&quot;.DashboardActivity&quot;</span><span class="s0">&gt;</span>
+
+    <span class="s0">&lt;LinearLayout</span>
+        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+        <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span>
+        <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span><span class="s0">&gt;</span>
+
+        <span class="s0">&lt;RelativeLayout</span>
+            <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;52dp&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_marginLeft</span><span class="s2">=&quot;22dp&quot;</span>
+            <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+            <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+            <span class="s1">android:layout_marginRight</span><span class="s2">=&quot;22dp&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span><span class="s0">&gt;</span>
+
+            <span class="s0">&lt;de.hdodenhof.circleimageview.CircleImageView</span>
+                <span class="s1">android:id</span><span class="s2">=&quot;@+id/imageview1&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;50dp&quot;</span>
+                <span class="s1">android:transitionName</span><span class="s2">=&quot;imageview1Trans&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;55dp&quot;</span>
+                <span class="s1">android:src</span><span class="s2">=&quot;@drawable/default_profile&quot;</span><span class="s0">/&gt;</span>
+
+            <span class="s0">&lt;TextView</span>
+                <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_Username_txt&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;250dp&quot;</span>
+                <span class="s1">android:maxLines</span><span class="s2">=&quot;3&quot;</span>
+                <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+                <span class="s1">android:text</span><span class="s2">=&quot;Hi, &quot;</span>
+                <span class="s1">android:transitionName</span><span class="s2">=&quot;UI_Username_textTrans&quot;</span>
+                <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                <span class="s1">android:textSize</span><span class="s2">=&quot;25dp&quot;</span>
+                <span class="s1">android:textColor</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+                <span class="s1">android:layout_marginLeft</span><span class="s2">=&quot;60dp&quot;</span>
+                <span class="s1">android:layout_alignLeft</span><span class="s2">=&quot;@+id/imageview1&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;TextView</span>
+                <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_address_txt&quot;</span>
+                <span class="s1">android:text</span><span class="s2">=&quot;address, &quot;</span>
+                <span class="s1">android:textSize</span><span class="s2">=&quot;15dp&quot;</span>
+                <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;15dp&quot;</span>
+                <span class="s1">android:textColor</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+                <span class="s1">android:layout_below</span><span class="s2">=&quot;@+id/UI_Username_txt&quot;</span>
+                <span class="s1">android:layout_alignLeft</span><span class="s2">=&quot;@+id/imageview1&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;300dp&quot;</span>
+                <span class="s1">android:maxLines</span><span class="s2">=&quot;3&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span><span class="s0">/&gt;</span>
+
+            <span class="s0">&lt;ImageButton</span>
+                <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_login_btn&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;42dp&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;42dp&quot;</span>
+                <span class="s1">android:layout_alignParentRight</span><span class="s2">=&quot;true&quot;</span>
+                <span class="s1">android:background</span><span class="s2">=&quot;@drawable/logout&quot;</span><span class="s0">/&gt;</span>
+
+
+        <span class="s0">&lt;/RelativeLayout&gt;</span>
+
+        <span class="s0">&lt;GridLayout</span>
+        <span class="s1">android:alignmentMode</span><span class="s2">=&quot;alignMargins&quot;</span>
+        <span class="s1">android:rowCount</span><span class="s2">=&quot;5&quot;</span>
+        <span class="s1">android:columnCount</span><span class="s2">=&quot;2&quot;</span>
+        <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;10dp&quot;</span>
+        <span class="s1">android:columnOrderPreserved</span><span class="s2">=&quot;false&quot;</span>
+        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+        <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span><span class="s0">&gt;</span>
+
+        <span class="s0">&lt;androidx.cardview.widget.CardView</span>
+        <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_cardview1&quot;</span>
+        <span class="s1">android:background</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+        <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+        <span class="s1">android:layout_height</span><span class="s2">=&quot;160dp&quot;</span>
+        <span class="s1">android:layout_columnWeight</span><span class="s2">=&quot;1&quot;</span>
+        <span class="s1">android:layout_rowWeight</span><span class="s2">=&quot;1&quot;</span>
+        <span class="s1">app:cardElevation</span><span class="s2">=&quot;10dp&quot;</span>
+        <span class="s1">app:cardCornerRadius</span><span class="s2">=&quot;30dp&quot;</span>
+        <span class="s1">android:layout_margin</span><span class="s2">=&quot;8dp&quot;</span>
+        <span class="s1">android:padding</span><span class="s2">=&quot;12dp&quot;</span>
+        <span class="s0">&gt;</span>
+
+        <span class="s0">&lt;LinearLayout</span>
+            <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+            <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+            <span class="s1">android:background</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+            <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span><span class="s0">&gt;</span>
+
+            <span class="s0">&lt;com.airbnb.lottie.LottieAnimationView</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;80dp&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;80dp&quot;</span>
+                <span class="s1">app:lottie_rawRes</span><span class="s2">=&quot;@raw/profile_json&quot;</span>
+                <span class="s1">app:lottie_autoPlay</span><span class="s2">=&quot;true&quot;</span>
+                <span class="s1">app:lottie_loop</span><span class="s2">=&quot;true&quot;</span>
+                <span class="s0">/&gt;</span>
+
+            <span class="s0">&lt;TextView</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                <span class="s1">android:text</span><span class="s2">=&quot;Profile&quot;</span>
+                <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span>
+                <span class="s1">android:textSize</span><span class="s2">=&quot;15dp&quot;</span>
+                <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;/LinearLayout&gt;</span>
+
+    <span class="s0">&lt;/androidx.cardview.widget.CardView&gt;</span>
+
+        <span class="s0">&lt;androidx.cardview.widget.CardView</span>
+            <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_cardview2&quot;</span>
+            <span class="s1">android:background</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;160dp&quot;</span>
+            <span class="s1">android:layout_columnWeight</span><span class="s2">=&quot;1&quot;</span>
+            <span class="s1">android:layout_rowWeight</span><span class="s2">=&quot;1&quot;</span>
+            <span class="s1">app:cardElevation</span><span class="s2">=&quot;10dp&quot;</span>
+            <span class="s1">app:cardCornerRadius</span><span class="s2">=&quot;30dp&quot;</span>
+            <span class="s1">android:layout_margin</span><span class="s2">=&quot;8dp&quot;</span>
+            <span class="s1">android:padding</span><span class="s2">=&quot;12dp&quot;</span>
+            <span class="s0">&gt;</span>
+
+            <span class="s0">&lt;LinearLayout</span>
+                <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+                <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                <span class="s1">android:background</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+                <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span><span class="s0">&gt;</span>
+
+                <span class="s0">&lt;com.airbnb.lottie.LottieAnimationView</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;80dp&quot;</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;80dp&quot;</span>
+                    <span class="s1">app:lottie_rawRes</span><span class="s2">=&quot;@raw/bill_json&quot;</span>
+                    <span class="s1">app:lottie_autoPlay</span><span class="s2">=&quot;true&quot;</span>
+                    <span class="s1">app:lottie_loop</span><span class="s2">=&quot;true&quot;</span>
+                    <span class="s0">/&gt;</span>
+                <span class="s0">&lt;TextView</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:textSize</span><span class="s2">=&quot;15dp&quot;</span>
+                    <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span>
+                    <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                    <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+                    <span class="s1">android:text</span><span class="s2">=&quot;Bill&quot;</span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;/LinearLayout&gt;</span>
+
+        <span class="s0">&lt;/androidx.cardview.widget.CardView&gt;</span>
+
+        <span class="s0">&lt;androidx.cardview.widget.CardView</span>
+            <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_cardview3&quot;</span>
+            <span class="s1">android:background</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;160dp&quot;</span>
+            <span class="s1">android:layout_columnWeight</span><span class="s2">=&quot;1&quot;</span>
+            <span class="s1">android:layout_rowWeight</span><span class="s2">=&quot;1&quot;</span>
+            <span class="s1">app:cardElevation</span><span class="s2">=&quot;10dp&quot;</span>
+            <span class="s1">app:cardCornerRadius</span><span class="s2">=&quot;30dp&quot;</span>
+            <span class="s1">android:layout_margin</span><span class="s2">=&quot;8dp&quot;</span>
+            <span class="s1">android:padding</span><span class="s2">=&quot;12dp&quot;</span>
+            <span class="s0">&gt;</span>
+
+            <span class="s0">&lt;LinearLayout</span>
+                <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+                <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                <span class="s1">android:background</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+                <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span><span class="s0">&gt;</span>
+
+                <span class="s0">&lt;com.airbnb.lottie.LottieAnimationView</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;80dp&quot;</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;80dp&quot;</span>
+                    <span class="s1">app:lottie_rawRes</span><span class="s2">=&quot;@raw/notice_json&quot;</span>
+                    <span class="s1">app:lottie_autoPlay</span><span class="s2">=&quot;true&quot;</span>
+                    <span class="s1">app:lottie_loop</span><span class="s2">=&quot;true&quot;</span>
+                    <span class="s0">/&gt;</span>
+                <span class="s0">&lt;TextView</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:textSize</span><span class="s2">=&quot;15dp&quot;</span>
+                    <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span>
+                    <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                    <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+                    <span class="s1">android:text</span><span class="s2">=&quot;Notice&quot;</span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;/LinearLayout&gt;</span>
+
+        <span class="s0">&lt;/androidx.cardview.widget.CardView&gt;</span>
+
+        <span class="s0">&lt;androidx.cardview.widget.CardView</span>
+            <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_cardview4&quot;</span>
+            <span class="s1">android:background</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;160dp&quot;</span>
+            <span class="s1">android:layout_columnWeight</span><span class="s2">=&quot;1&quot;</span>
+            <span class="s1">android:layout_rowWeight</span><span class="s2">=&quot;1&quot;</span>
+            <span class="s1">app:cardElevation</span><span class="s2">=&quot;10dp&quot;</span>
+            <span class="s1">app:cardCornerRadius</span><span class="s2">=&quot;30dp&quot;</span>
+            <span class="s1">android:layout_margin</span><span class="s2">=&quot;8dp&quot;</span>
+            <span class="s1">android:padding</span><span class="s2">=&quot;12dp&quot;</span>
+            <span class="s0">&gt;</span>
+
+            <span class="s0">&lt;LinearLayout</span>
+                <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+                <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                <span class="s1">android:background</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+                <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span><span class="s0">&gt;</span>
+
+                <span class="s0">&lt;com.airbnb.lottie.LottieAnimationView</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;80dp&quot;</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;080dp&quot;</span>
+                    <span class="s1">app:lottie_rawRes</span><span class="s2">=&quot;@raw/complaint_json&quot;</span>
+                    <span class="s1">app:lottie_autoPlay</span><span class="s2">=&quot;true&quot;</span>
+                    <span class="s1">app:lottie_loop</span><span class="s2">=&quot;true&quot;</span>
+                    <span class="s0">/&gt;</span>
+                <span class="s0">&lt;TextView</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:textSize</span><span class="s2">=&quot;15dp&quot;</span>
+                    <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span>
+                    <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                    <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+                    <span class="s1">android:text</span><span class="s2">=&quot;Complaint&quot;</span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;/LinearLayout&gt;</span>
+
+        <span class="s0">&lt;/androidx.cardview.widget.CardView&gt;</span>
+
+        <span class="s0">&lt;androidx.cardview.widget.CardView</span>
+            <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_cardview5&quot;</span>
+            <span class="s1">android:background</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;160dp&quot;</span>
+            <span class="s1">android:layout_columnWeight</span><span class="s2">=&quot;1&quot;</span>
+            <span class="s1">android:layout_rowWeight</span><span class="s2">=&quot;1&quot;</span>
+            <span class="s1">app:cardElevation</span><span class="s2">=&quot;10dp&quot;</span>
+            <span class="s1">app:cardCornerRadius</span><span class="s2">=&quot;30dp&quot;</span>
+            <span class="s1">android:layout_margin</span><span class="s2">=&quot;8dp&quot;</span>
+            <span class="s1">android:padding</span><span class="s2">=&quot;12dp&quot;</span>
+            <span class="s0">&gt;</span>
+
+            <span class="s0">&lt;LinearLayout</span>
+                <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+                <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                <span class="s1">android:background</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+                <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span><span class="s0">&gt;</span>
+
+                <span class="s0">&lt;com.airbnb.lottie.LottieAnimationView</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;80dp&quot;</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;80dp&quot;</span>
+                    <span class="s1">app:lottie_rawRes</span><span class="s2">=&quot;@raw/payment_json&quot;</span>
+                    <span class="s1">app:lottie_autoPlay</span><span class="s2">=&quot;true&quot;</span>
+                    <span class="s1">app:lottie_loop</span><span class="s2">=&quot;true&quot;</span>
+                    <span class="s0">/&gt;</span>
+                <span class="s0">&lt;TextView</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:textSize</span><span class="s2">=&quot;15dp&quot;</span>
+                    <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span>
+                    <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                    <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+                    <span class="s1">android:text</span><span class="s2">=&quot;Payment&quot;</span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;/LinearLayout&gt;</span>
+
+        <span class="s0">&lt;/androidx.cardview.widget.CardView&gt;</span>
+
+        <span class="s0">&lt;androidx.cardview.widget.CardView</span>
+            <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_cardview6&quot;</span>
+            <span class="s1">android:background</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;160dp&quot;</span>
+            <span class="s1">android:layout_columnWeight</span><span class="s2">=&quot;1&quot;</span>
+            <span class="s1">android:layout_rowWeight</span><span class="s2">=&quot;1&quot;</span>
+            <span class="s1">app:cardElevation</span><span class="s2">=&quot;10dp&quot;</span>
+            <span class="s1">android:padding</span><span class="s2">=&quot;12dp&quot;</span>
+            <span class="s1">app:cardCornerRadius</span><span class="s2">=&quot;30dp&quot;</span>
+            <span class="s1">android:layout_margin</span><span class="s2">=&quot;8dp&quot;</span>
+            <span class="s0">&gt;</span>
+
+            <span class="s0">&lt;LinearLayout</span>
+                <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+                <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                <span class="s1">android:background</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+                <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span><span class="s0">&gt;</span>
+
+                <span class="s0">&lt;com.airbnb.lottie.LottieAnimationView</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;80dp&quot;</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;80dp&quot;</span>
+                    <span class="s1">app:lottie_rawRes</span><span class="s2">=&quot;@raw/chat_json&quot;</span>
+                    <span class="s1">app:lottie_autoPlay</span><span class="s2">=&quot;true&quot;</span>
+                    <span class="s1">app:lottie_loop</span><span class="s2">=&quot;true&quot;</span>
+                    <span class="s0">/&gt;</span>
+                <span class="s0">&lt;TextView</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                    <span class="s1">android:textSize</span><span class="s2">=&quot;15dp&quot;</span>
+                    <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span>
+                    <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                    <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+                    <span class="s1">android:text</span><span class="s2">=&quot;Chat&quot;</span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;/LinearLayout&gt;</span>
+
+        <span class="s0">&lt;/androidx.cardview.widget.CardView&gt;</span>
+
+        <span class="s0">&lt;androidx.cardview.widget.CardView</span>
+                <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_cardview7&quot;</span>
+                <span class="s1">android:background</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;160dp&quot;</span>
+                <span class="s1">android:layout_columnWeight</span><span class="s2">=&quot;1&quot;</span>
+                <span class="s1">android:layout_rowWeight</span><span class="s2">=&quot;1&quot;</span>
+                <span class="s1">app:cardElevation</span><span class="s2">=&quot;10dp&quot;</span>
+                <span class="s1">app:cardCornerRadius</span><span class="s2">=&quot;30dp&quot;</span>
+                <span class="s1">android:layout_margin</span><span class="s2">=&quot;8dp&quot;</span>
+                <span class="s1">android:padding</span><span class="s2">=&quot;12dp&quot;</span>
+                <span class="s0">&gt;</span>
+
+                <span class="s0">&lt;LinearLayout</span>
+                    <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+                    <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                    <span class="s1">android:background</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+                    <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span><span class="s0">&gt;</span>
+
+                    <span class="s0">&lt;com.airbnb.lottie.LottieAnimationView</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;80dp&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;80dp&quot;</span>
+                        <span class="s1">app:lottie_rawRes</span><span class="s2">=&quot;@raw/vote_json&quot;</span>
+                        <span class="s1">app:lottie_autoPlay</span><span class="s2">=&quot;true&quot;</span>
+                        <span class="s1">app:lottie_loop</span><span class="s2">=&quot;true&quot;</span>
+                        <span class="s0">/&gt;</span>
+                    <span class="s0">&lt;TextView</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:textSize</span><span class="s2">=&quot;15dp&quot;</span>
+                        <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span>
+                        <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                        <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+                        <span class="s1">android:text</span><span class="s2">=&quot;Vote&quot;</span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;/LinearLayout&gt;</span>
+
+            <span class="s0">&lt;/androidx.cardview.widget.CardView&gt;</span>
+
+        <span class="s0">&lt;androidx.cardview.widget.CardView</span>
+                <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_cardview8&quot;</span>
+                <span class="s1">android:background</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s2">=&quot;160dp&quot;</span>
+                <span class="s1">android:layout_columnWeight</span><span class="s2">=&quot;1&quot;</span>
+                <span class="s1">android:layout_rowWeight</span><span class="s2">=&quot;1&quot;</span>
+                <span class="s1">app:cardElevation</span><span class="s2">=&quot;10dp&quot;</span>
+                <span class="s1">android:padding</span><span class="s2">=&quot;12dp&quot;</span>
+                <span class="s1">app:cardCornerRadius</span><span class="s2">=&quot;30dp&quot;</span>
+                <span class="s1">android:layout_margin</span><span class="s2">=&quot;8dp&quot;</span>
+                <span class="s0">&gt;</span>
+
+                <span class="s0">&lt;LinearLayout</span>
+                    <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+                    <span class="s1">android:padding</span><span class="s2">=&quot;8dp&quot;</span>
+                    <span class="s1">android:background</span><span class="s2">=&quot;#FFFFFF&quot;</span>
+                    <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span>
+                    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+                    <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span><span class="s0">&gt;</span>
+
+                    <span class="s0">&lt;com.airbnb.lottie.LottieAnimationView</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;80dp&quot;</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;80dp&quot;</span>
+                        <span class="s1">app:lottie_rawRes</span><span class="s2">=&quot;@raw/member_details_json&quot;</span>
+                        <span class="s1">app:lottie_autoPlay</span><span class="s2">=&quot;true&quot;</span>
+                        <span class="s1">app:lottie_loop</span><span class="s2">=&quot;true&quot;</span>
+                        <span class="s0">/&gt;</span>
+                    <span class="s0">&lt;TextView</span>
+                        <span class="s1">android:layout_width</span><span class="s2">=&quot;80dp&quot;</span>
+                        <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+                        <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+                        <span class="s1">android:textSize</span><span class="s2">=&quot;15dp&quot;</span>
+                        <span class="s1">android:textColor</span><span class="s2">=&quot;#000000&quot;</span>
+                        <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+                        <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+                        <span class="s1">android:text</span><span class="s2">=&quot;Member Details&quot;</span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;/LinearLayout&gt;</span>
+
+            <span class="s0">&lt;/androidx.cardview.widget.CardView&gt;</span>
+
+        <span class="s0">&lt;/GridLayout&gt;</span>
+    <span class="s0">&lt;/LinearLayout&gt;</span>
+    <span class="s0">&lt;/ScrollView&gt;</span>
+    <span class="s0">&lt;/LinearLayout&gt;</span>
+
+<span class="s0">&lt;/RelativeLayout&gt;</span></pre>
+</body>
+</html>

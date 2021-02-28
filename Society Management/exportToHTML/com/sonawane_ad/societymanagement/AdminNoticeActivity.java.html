@@ -1,0 +1,1036 @@
+<html>
+<head>
+<title>AdminNoticeActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+.s4 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+AdminNoticeActivity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.sonawane_ad.societymanagement</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AppCompatActivity</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.appcompat.widget.Toolbar</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.app.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.View.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.media.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.net.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.text.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.util.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.webkit.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.animation.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.animation.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.text.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.HashMap</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.LinearLayout</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.ListView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.ArrayAdapter</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.BaseAdapter</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.ImageView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.EditText</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.Button</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.FirebaseDatabase</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.DatabaseReference</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.ValueEventListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.DataSnapshot</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.DatabaseError</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.GenericTypeIndicator</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.ChildEventListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.ClipData</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.net.Uri</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.provider.MediaStore</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.Build</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.core.content.FileProvider</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.File</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.Calendar</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.text.SimpleDateFormat</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.app.Activity</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.SharedPreferences</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.storage.FileDownloadTask</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.storage.FirebaseStorage</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.storage.StorageReference</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.storage.UploadTask</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.storage.OnProgressListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.OnSuccessListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.OnFailureListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.OnCompleteListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.Continuation</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.auth.AuthResult</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.auth.FirebaseAuth</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.Task</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.AdapterView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.text.DecimalFormat</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.bumptech.glide.Glide</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.sdsmdg.tastytoast.TastyToast</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.core.content.ContextCompat</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.core.app.ActivityCompat</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.Manifest</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.pm.PackageManager</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">AdminNoticeActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity {</span>
+
+    <span class="s0">public final int </span><span class="s1">REQ_CD_FILEPICKER = </span><span class="s2">101</span><span class="s0">;</span>
+    <span class="s0">public final int </span><span class="s1">REQ_CD_CAMERA = </span><span class="s2">102</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">FirebaseDatabase _firebase = FirebaseDatabase.getInstance()</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">FirebaseStorage _firebase_storage = FirebaseStorage.getInstance()</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; mm = </span><span class="s0">new </span><span class="s1">HashMap&lt;&gt;()</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">Toolbar _toolbar</span><span class="s0">;</span>
+    <span class="s0">private double </span><span class="s1">img = </span><span class="s2">0</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">String imgpath = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">String imgname = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+    <span class="s0">private double </span><span class="s1">imgsize = </span><span class="s2">0</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">String filename = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">String myurl = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+    <span class="s0">private double </span><span class="s1">videosize = </span><span class="s2">0</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">String path = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+    <span class="s0">private double </span><span class="s1">size = </span><span class="s2">0</span><span class="s0">;</span>
+    <span class="s0">private double </span><span class="s1">sumCount = </span><span class="s2">0</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">String result = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">ArrayList&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; listmap = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ArrayList&lt;String&gt; liststring = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">LinearLayout linear3</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">LinearLayout linear1</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">LinearLayout linear2</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ListView listview2</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ImageView imageview1</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">TextView textview1</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">EditText edittext1</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ImageView attachment</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ImageView camer</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ImageView back</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ImageView button1</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ProgressBar progress</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">VideoView videoView</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ImageView attach</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">LinearLayout attachex</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">AlertDialog.Builder dialog</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">DatabaseReference notice = _firebase.getReference(</span><span class="s3">&quot;notice&quot;</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ChildEventListener _notice_child_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">DatabaseReference Currdata = _firebase.getReference(</span><span class="s3">&quot;Currdata&quot;</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ChildEventListener _Currdata_child_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Intent filepicker = </span><span class="s0">new </span><span class="s1">Intent(Intent.ACTION_GET_CONTENT)</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Intent camera = </span><span class="s0">new </span><span class="s1">Intent(MediaStore.ACTION_IMAGE_CAPTURE)</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">File _file_camera</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Calendar calendar = Calendar.getInstance()</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Intent intent = </span><span class="s0">new </span><span class="s1">Intent()</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">SharedPreferences file</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">StorageReference noticestore = _firebase_storage.getReference(</span><span class="s3">&quot;noticestore&quot;</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnCompleteListener&lt;Uri&gt; _noticestore_upload_success_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnSuccessListener&lt;FileDownloadTask.TaskSnapshot&gt; _noticestore_download_success_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnSuccessListener _noticestore_delete_success_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnProgressListener _noticestore_upload_progress_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnProgressListener _noticestore_download_progress_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnFailureListener _noticestore_failure_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">FirebaseAuth Currauth</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnCompleteListener&lt;AuthResult&gt; _Currauth_create_user_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnCompleteListener&lt;AuthResult&gt; _Currauth_sign_in_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">OnCompleteListener&lt;Void&gt; _Currauth_reset_password_listener</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">LinearLayout nointernet</span><span class="s0">,</span><span class="s1">linear</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Button retry</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">RequestNetwork internet</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">RequestNetwork.RequestListener _internet_request_listener</span><span class="s0">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span>
+        <span class="s1">setContentView(R.layout.activity_admin_notice)</span><span class="s0">;</span>
+        <span class="s1">com.google.firebase.FirebaseApp.initializeApp(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">initialize()</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(ContextCompat.checkSelfPermission(</span><span class="s0">this, </span><span class="s1">Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED</span>
+                <span class="s1">|| ContextCompat.checkSelfPermission(</span><span class="s0">this, </span><span class="s1">Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED</span>
+                <span class="s1">|| ContextCompat.checkSelfPermission(</span><span class="s0">this, </span><span class="s1">Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {</span>
+            <span class="s1">ActivityCompat.requestPermissions(</span><span class="s0">this, new </span><span class="s1">String[] {Manifest.permission.CAMERA</span><span class="s0">, </span><span class="s1">Manifest.permission.READ_EXTERNAL_STORAGE</span><span class="s0">, </span><span class="s1">Manifest.permission.WRITE_EXTERNAL_STORAGE}</span><span class="s0">, </span><span class="s2">1000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">initializeLogic()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onRequestPermissionsResult(</span><span class="s0">int </span><span class="s1">requestCode</span><span class="s0">, </span><span class="s1">String[] permissions</span><span class="s0">, int</span><span class="s1">[] grantResults) {</span>
+        <span class="s0">super</span><span class="s1">.onRequestPermissionsResult(requestCode</span><span class="s0">, </span><span class="s1">permissions</span><span class="s0">, </span><span class="s1">grantResults)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(requestCode == </span><span class="s2">1000</span><span class="s1">) {</span>
+            <span class="s1">initializeLogic()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">initialize()</span>
+    <span class="s1">{</span>
+        <span class="s1">listview2 = (ListView) findViewById(R.id.listview2)</span><span class="s0">;</span>
+        <span class="s1">imageview1 = (ImageView) findViewById(R.id.imageview1)</span><span class="s0">;</span>
+        <span class="s1">textview1 = (TextView) findViewById(R.id.textview1)</span><span class="s0">;</span>
+        <span class="s1">edittext1 = (EditText) findViewById(R.id.edittext1)</span><span class="s0">;</span>
+        <span class="s1">attachment = (ImageView) findViewById(R.id.attachment)</span><span class="s0">;</span>
+        <span class="s1">camer = (ImageView) findViewById(R.id.camera)</span><span class="s0">;</span>
+        <span class="s1">button1 = (ImageView) findViewById(R.id.button1)</span><span class="s0">;</span>
+        <span class="s1">progress = findViewById(R.id.progress)</span><span class="s0">;</span>
+        <span class="s1">videoView = findViewById(R.id.videoview)</span><span class="s0">;</span>
+        <span class="s1">back = findViewById(R.id.back)</span><span class="s0">;</span>
+        <span class="s1">attach = findViewById(R.id.attach)</span><span class="s0">;</span>
+        <span class="s1">attachex = findViewById(R.id.attachex)</span><span class="s0">;</span>
+        <span class="s1">dialog = </span><span class="s0">new </span><span class="s1">AlertDialog.Builder(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">internet = </span><span class="s0">new </span><span class="s1">RequestNetwork(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">nointernet = findViewById(R.id.nointernet)</span><span class="s0">;</span>
+        <span class="s1">linear = findViewById(R.id.linear)</span><span class="s0">;</span>
+        <span class="s1">retry = findViewById(R.id.retry)</span><span class="s0">;</span>
+
+
+
+        <span class="s1">filepicker.setType(</span><span class="s3">&quot;*/*&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">filepicker.putExtra(Intent.EXTRA_ALLOW_MULTIPLE</span><span class="s0">, true</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">_file_camera = FileUtil.createNewPictureFile(getApplicationContext())</span><span class="s0">;</span>
+        <span class="s1">Uri _uri_camera = </span><span class="s0">null;</span>
+        <span class="s0">if </span><span class="s1">(Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.N) {</span>
+            <span class="s1">_uri_camera= FileProvider.getUriForFile(getApplicationContext()</span><span class="s0">, </span><span class="s1">getApplicationContext().getPackageName() + </span><span class="s3">&quot;.provider&quot;</span><span class="s0">, </span><span class="s1">_file_camera)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">_uri_camera = Uri.fromFile(_file_camera)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s1">camera.putExtra(MediaStore.EXTRA_OUTPUT</span><span class="s0">, </span><span class="s1">_uri_camera)</span><span class="s0">;</span>
+        <span class="s1">camera.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)</span><span class="s0">;</span>
+        <span class="s1">file = getSharedPreferences(</span><span class="s3">&quot;file&quot;</span><span class="s0">, </span><span class="s1">Activity.MODE_PRIVATE)</span><span class="s0">;</span>
+        <span class="s1">Currauth = FirebaseAuth.getInstance()</span><span class="s0">;</span>
+
+        <span class="s1">listview2.setOnItemLongClickListener(</span><span class="s0">new </span><span class="s1">AdapterView.OnItemLongClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public boolean </span><span class="s1">onItemLongClick(AdapterView&lt;?&gt; _param1</span><span class="s0">, </span><span class="s1">View _param2</span><span class="s0">, int </span><span class="s1">_param3</span><span class="s0">, long </span><span class="s1">_param4) {</span>
+                <span class="s0">final int </span><span class="s1">_position = _param3</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s3">&quot;user_uid&quot;</span><span class="s1">).toString().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {</span>
+                    <span class="s1">dialog.setMessage(</span><span class="s3">&quot;Delete message?&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">dialog.setPositiveButton(</span><span class="s3">&quot;DELETE FOR EVERYONE&quot;</span><span class="s0">, new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+                        <span class="s1">@Override</span>
+                        <span class="s0">public void </span><span class="s1">onClick(DialogInterface _dialog</span><span class="s0">, int </span><span class="s1">_which) {</span>
+                            <span class="s1">notice.child(liststring.get((</span><span class="s0">int</span><span class="s1">)(_position))).removeValue()</span><span class="s0">;</span>
+                            <span class="s1">liststring.remove((</span><span class="s0">int</span><span class="s1">)(_position))</span><span class="s0">;</span>
+                            <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;Deleted&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.INFO)</span><span class="s0">;</span>
+                            <span class="s0">if </span><span class="s1">(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).containsKey(</span><span class="s3">&quot;image&quot;</span><span class="s1">)) {</span>
+                                <span class="s1">_firebase_storage.getReferenceFromUrl(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s3">&quot;image&quot;</span><span class="s1">).toString()).delete().addOnSuccessListener(_noticestore_delete_success_listener).addOnFailureListener(_noticestore_failure_listener)</span><span class="s0">;</span>
+                                <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;Deleted&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.INFO)</span><span class="s0">;</span>
+                            <span class="s1">}</span>
+                        <span class="s1">}</span>
+                    <span class="s1">})</span><span class="s0">;</span>
+                    <span class="s1">dialog.setNegativeButton(</span><span class="s3">&quot;CANCEL&quot;</span><span class="s0">, new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+                        <span class="s1">@Override</span>
+                        <span class="s0">public void </span><span class="s1">onClick(DialogInterface _dialog</span><span class="s0">, int </span><span class="s1">_which) {</span>
+
+                        <span class="s1">}</span>
+                    <span class="s1">})</span><span class="s0">;</span>
+                    <span class="s1">dialog.create().show()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+                <span class="s1">listview2.setAdapter(</span><span class="s0">new </span><span class="s1">Listview2Adapter(listmap))</span><span class="s0">;</span>
+                <span class="s1">((BaseAdapter)listview2.getAdapter()).notifyDataSetChanged()</span><span class="s0">;</span>
+                <span class="s0">return true;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">listview2.setOnItemClickListener(</span><span class="s0">new </span><span class="s1">AdapterView.OnItemClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onItemClick(AdapterView&lt;?&gt; _param1</span><span class="s0">, </span><span class="s1">View _param2</span><span class="s0">, int </span><span class="s1">_param3</span><span class="s0">, long </span><span class="s1">_param4) {</span>
+                <span class="s0">final int </span><span class="s1">_position = _param3</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).containsKey(</span><span class="s3">&quot;image&quot;</span><span class="s1">)) {</span>
+                    <span class="s1">dialog.setTitle(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s3">&quot;username&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                    <span class="s1">dialog.setMessage(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s3">&quot;image&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                    <span class="s1">dialog.setPositiveButton(</span><span class="s3">&quot;Download&quot;</span><span class="s0">, new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+                        <span class="s1">@Override</span>
+                        <span class="s0">public void </span><span class="s1">onClick(DialogInterface _dialog</span><span class="s0">, int </span><span class="s1">_which) {</span>
+                            <span class="s1">myurl = listmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s3">&quot;image&quot;</span><span class="s1">).toString()</span><span class="s0">;</span>
+                            <span class="s0">new </span><span class="s1">DownloadTask().execute(myurl)</span><span class="s0">;</span>
+                            <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;Downloading......&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.INFO)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">})</span><span class="s0">;</span>
+                    <span class="s1">dialog.setNegativeButton(</span><span class="s3">&quot;Cancel&quot;</span><span class="s0">, new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+                        <span class="s1">@Override</span>
+                        <span class="s0">public void </span><span class="s1">onClick(DialogInterface _dialog</span><span class="s0">, int </span><span class="s1">_which) {</span>
+
+                        <span class="s1">}</span>
+                    <span class="s1">})</span><span class="s0">;</span>
+                    <span class="s1">dialog.create().show()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+                <span class="s0">else if </span><span class="s1">(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).containsKey(</span><span class="s3">&quot;video&quot;</span><span class="s1">)) {</span>
+                    <span class="s1">dialog.setTitle(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s3">&quot;username&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                    <span class="s1">dialog.setMessage(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s3">&quot;video&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                    <span class="s1">dialog.setPositiveButton(</span><span class="s3">&quot;Download&quot;</span><span class="s0">, new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+                        <span class="s1">@Override</span>
+                        <span class="s0">public void </span><span class="s1">onClick(DialogInterface _dialog</span><span class="s0">, int </span><span class="s1">_which) {</span>
+                            <span class="s1">myurl = listmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s3">&quot;video&quot;</span><span class="s1">).toString()</span><span class="s0">;</span>
+                            <span class="s0">new </span><span class="s1">DownloadTask().execute(myurl)</span><span class="s0">;</span>
+                            <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;Downloading......&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.INFO)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">})</span><span class="s0">;</span>
+                    <span class="s1">dialog.setNegativeButton(</span><span class="s3">&quot;Cancel&quot;</span><span class="s0">, new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+                        <span class="s1">@Override</span>
+                        <span class="s0">public void </span><span class="s1">onClick(DialogInterface _dialog</span><span class="s0">, int </span><span class="s1">_which) {</span>
+
+                        <span class="s1">}</span>
+                    <span class="s1">})</span><span class="s0">;</span>
+                    <span class="s1">dialog.create().show()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+                <span class="s0">else </span><span class="s1">{</span>
+                    <span class="s1">dialog.setTitle(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s3">&quot;username&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                    <span class="s1">dialog.setMessage(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s3">&quot;message&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                    <span class="s1">dialog.setPositiveButton(</span><span class="s3">&quot;Ok&quot;</span><span class="s0">, new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+                        <span class="s1">@Override</span>
+                        <span class="s0">public void </span><span class="s1">onClick(DialogInterface _dialog</span><span class="s0">, int </span><span class="s1">_which) {</span>
+
+                        <span class="s1">}</span>
+                    <span class="s1">})</span><span class="s0">;</span>
+                    <span class="s1">dialog.setNegativeButton(</span><span class="s3">&quot;Cancel&quot;</span><span class="s0">, new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+                        <span class="s1">@Override</span>
+                        <span class="s0">public void </span><span class="s1">onClick(DialogInterface _dialog</span><span class="s0">, int </span><span class="s1">_which) {</span>
+
+                        <span class="s1">}</span>
+                    <span class="s1">})</span><span class="s0">;</span>
+                    <span class="s1">dialog.create().show()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+
+        <span class="s1">back.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View _view) {</span>
+                <span class="s1">finish()</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">attach.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View view) {</span>
+                <span class="s0">if</span><span class="s1">(attachex.getVisibility() == View.GONE)</span>
+                <span class="s1">{</span>
+                    <span class="s1">attachex.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+                    <span class="s1">attachex.setVisibility(View.GONE)</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+        <span class="s1">attachment.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View _view) {</span>
+                <span class="s1">startActivityForResult(filepicker</span><span class="s0">, </span><span class="s1">REQ_CD_FILEPICKER)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">camer.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View _view) {</span>
+                <span class="s1">startActivityForResult(camera</span><span class="s0">, </span><span class="s1">REQ_CD_CAMERA)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">button1.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View _view) {</span>
+                <span class="s0">if </span><span class="s1">(img == </span><span class="s2">0</span><span class="s1">) {</span>
+                    <span class="s0">if </span><span class="s1">(edittext1.getText().toString().trim().equals(</span><span class="s3">&quot;&quot;</span><span class="s1">)) {</span>
+                        <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;Type a message&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.WARNING)</span><span class="s0">;</span>
+                        <span class="s1">edittext1.setText(</span><span class="s3">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                    <span class="s0">else </span><span class="s1">{</span>
+                        <span class="s1">mm = </span><span class="s0">new </span><span class="s1">HashMap&lt;&gt;()</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;username&quot;</span><span class="s0">, </span><span class="s3">&quot;Admin&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;message&quot;</span><span class="s0">, </span><span class="s1">edittext1.getText().toString().trim())</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;user_uid&quot;</span><span class="s0">, </span><span class="s1">FirebaseAuth.getInstance().getCurrentUser().getUid())</span><span class="s0">;</span>
+                        <span class="s1">calendar = Calendar.getInstance()</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;time&quot;</span><span class="s0">, new </span><span class="s1">SimpleDateFormat(</span><span class="s3">&quot;E dd/MM hh:mm a&quot;</span><span class="s1">).format(calendar.getTime()))</span><span class="s0">;</span>
+                        <span class="s1">notice.push().updateChildren(mm)</span><span class="s0">;</span>
+                        <span class="s1">mm.clear()</span><span class="s0">;</span>
+                        <span class="s1">edittext1.setText(</span><span class="s3">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+                <span class="s0">else </span><span class="s1">{</span>
+                    <span class="s0">if </span><span class="s1">(img == </span><span class="s2">1</span><span class="s1">) {</span>
+                        <span class="s0">if </span><span class="s1">((imgsize &lt; </span><span class="s2">2000</span><span class="s1">) &amp;&amp; (imgsize &gt; </span><span class="s2">0</span><span class="s1">)) {</span>
+                            <span class="s1">noticestore.child(imgname).putFile(Uri.fromFile(</span><span class="s0">new </span><span class="s1">File(imgpath))).addOnFailureListener(_noticestore_failure_listener).addOnProgressListener(_noticestore_upload_progress_listener).continueWithTask(</span><span class="s0">new </span><span class="s1">Continuation&lt;UploadTask.TaskSnapshot</span><span class="s0">, </span><span class="s1">Task&lt;Uri&gt;&gt;() {</span>
+                                <span class="s1">@Override</span>
+                                <span class="s0">public </span><span class="s1">Task&lt;Uri&gt; then(Task&lt;UploadTask.TaskSnapshot&gt; task) </span><span class="s0">throws </span><span class="s1">Exception {</span>
+                                    <span class="s0">return </span><span class="s1">noticestore.child(imgname).getDownloadUrl()</span><span class="s0">;</span>
+                                <span class="s1">}}).addOnCompleteListener(_noticestore_upload_success_listener)</span><span class="s0">;</span>
+                            <span class="s1">button1.setEnabled(</span><span class="s0">false</span><span class="s1">)</span><span class="s0">;</span>
+                            <span class="s1">edittext1.setEnabled(</span><span class="s0">false</span><span class="s1">)</span><span class="s0">;</span>
+                            <span class="s1">progress.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                        <span class="s0">else </span><span class="s1">{</span>
+                            <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;Attachment size must be less than 1Mb&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.WARNING)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+                    <span class="s0">if </span><span class="s1">(img == </span><span class="s2">2</span><span class="s1">) {</span>
+                        <span class="s0">if </span><span class="s1">((videosize &lt; </span><span class="s2">5000</span><span class="s1">) &amp;&amp; (videosize &gt; </span><span class="s2">0</span><span class="s1">)) {</span>
+                            <span class="s1">noticestore.child(imgname).putFile(Uri.fromFile(</span><span class="s0">new </span><span class="s1">File(imgpath))).addOnFailureListener(_noticestore_failure_listener).addOnProgressListener(_noticestore_upload_progress_listener).continueWithTask(</span><span class="s0">new </span><span class="s1">Continuation&lt;UploadTask.TaskSnapshot</span><span class="s0">, </span><span class="s1">Task&lt;Uri&gt;&gt;() {</span>
+                                <span class="s1">@Override</span>
+                                <span class="s0">public </span><span class="s1">Task&lt;Uri&gt; then(Task&lt;UploadTask.TaskSnapshot&gt; task) </span><span class="s0">throws </span><span class="s1">Exception {</span>
+                                    <span class="s0">return </span><span class="s1">noticestore.child(imgname).getDownloadUrl()</span><span class="s0">;</span>
+                                <span class="s1">}}).addOnCompleteListener(_noticestore_upload_success_listener)</span><span class="s0">;</span>
+                            <span class="s1">button1.setEnabled(</span><span class="s0">false</span><span class="s1">)</span><span class="s0">;</span>
+                            <span class="s1">edittext1.setEnabled(</span><span class="s0">false</span><span class="s1">)</span><span class="s0">;</span>
+                            <span class="s1">progress.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                        <span class="s0">else </span><span class="s1">{</span>
+                            <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;Attachment size must be less than 5Mb&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.WARNING)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+
+        <span class="s1">_notice_child_listener = </span><span class="s0">new </span><span class="s1">ChildEventListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildAdded(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+                <span class="s1">notice.addListenerForSingleValueEvent(</span><span class="s0">new </span><span class="s1">ValueEventListener() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onDataChange(DataSnapshot _dataSnapshot) {</span>
+                        <span class="s1">listmap = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+                        <span class="s0">try </span><span class="s1">{</span>
+                            <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                            <span class="s0">for </span><span class="s1">(DataSnapshot _data : _dataSnapshot.getChildren()) {</span>
+                                <span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _map = _data.getValue(_ind)</span><span class="s0">;</span>
+                                <span class="s1">listmap.add(_map)</span><span class="s0">;</span>
+                            <span class="s1">}</span>
+                        <span class="s1">}</span>
+                        <span class="s0">catch </span><span class="s1">(Exception _e) {</span>
+                            <span class="s1">_e.printStackTrace()</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                        <span class="s1">liststring.add(_childKey)</span><span class="s0">;</span>
+                        <span class="s1">listview2.setAdapter(</span><span class="s0">new </span><span class="s1">Listview2Adapter(listmap))</span><span class="s0">;</span>
+                        <span class="s1">((BaseAdapter)listview2.getAdapter()).notifyDataSetChanged()</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onCancelled(DatabaseError _databaseError) {</span>
+                    <span class="s1">}</span>
+                <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildChanged(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+                <span class="s1">notice.addListenerForSingleValueEvent(</span><span class="s0">new </span><span class="s1">ValueEventListener() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onDataChange(DataSnapshot _dataSnapshot) {</span>
+                        <span class="s1">listmap = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+                        <span class="s0">try </span><span class="s1">{</span>
+                            <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                            <span class="s0">for </span><span class="s1">(DataSnapshot _data : _dataSnapshot.getChildren()) {</span>
+                                <span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _map = _data.getValue(_ind)</span><span class="s0">;</span>
+                                <span class="s1">listmap.add(_map)</span><span class="s0">;</span>
+                            <span class="s1">}</span>
+                        <span class="s1">}</span>
+                        <span class="s0">catch </span><span class="s1">(Exception _e) {</span>
+                            <span class="s1">_e.printStackTrace()</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                        <span class="s1">listview2.setAdapter(</span><span class="s0">new </span><span class="s1">Listview2Adapter(listmap))</span><span class="s0">;</span>
+                        <span class="s1">((BaseAdapter)listview2.getAdapter()).notifyDataSetChanged()</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onCancelled(DatabaseError _databaseError) {</span>
+                    <span class="s1">}</span>
+                <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildMoved(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildRemoved(DataSnapshot _param1) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+                <span class="s1">notice.addListenerForSingleValueEvent(</span><span class="s0">new </span><span class="s1">ValueEventListener() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onDataChange(DataSnapshot _dataSnapshot) {</span>
+                        <span class="s1">listmap = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+                        <span class="s0">try </span><span class="s1">{</span>
+                            <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                            <span class="s0">for </span><span class="s1">(DataSnapshot _data : _dataSnapshot.getChildren()) {</span>
+                                <span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _map = _data.getValue(_ind)</span><span class="s0">;</span>
+                                <span class="s1">listmap.add(_map)</span><span class="s0">;</span>
+                            <span class="s1">}</span>
+                        <span class="s1">}</span>
+                        <span class="s0">catch </span><span class="s1">(Exception _e) {</span>
+                            <span class="s1">_e.printStackTrace()</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                        <span class="s1">listview2.setAdapter(</span><span class="s0">new </span><span class="s1">Listview2Adapter(listmap))</span><span class="s0">;</span>
+                        <span class="s1">((BaseAdapter)listview2.getAdapter()).notifyDataSetChanged()</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onCancelled(DatabaseError _databaseError) {</span>
+                    <span class="s1">}</span>
+                <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onCancelled(DatabaseError _param1) {</span>
+                <span class="s0">final int </span><span class="s1">_errorCode = _param1.getCode()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _errorMessage = _param1.getMessage()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+        <span class="s1">notice.addChildEventListener(_notice_child_listener)</span><span class="s0">;</span>
+
+        <span class="s1">_Currdata_child_listener = </span><span class="s0">new </span><span class="s1">ChildEventListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildAdded(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildChanged(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildMoved(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildRemoved(DataSnapshot _param1) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onCancelled(DatabaseError _param1) {</span>
+                <span class="s0">final int </span><span class="s1">_errorCode = _param1.getCode()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _errorMessage = _param1.getMessage()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+        <span class="s1">Currdata.addChildEventListener(_Currdata_child_listener)</span><span class="s0">;</span>
+
+
+
+
+
+        <span class="s1">_noticestore_upload_progress_listener = </span><span class="s0">new </span><span class="s1">OnProgressListener&lt;UploadTask.TaskSnapshot&gt;() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onProgress(UploadTask.TaskSnapshot _param1) {</span>
+                <span class="s0">double </span><span class="s1">_progressValue = (</span><span class="s2">100.0 </span><span class="s1">* _param1.getBytesTransferred()) / _param1.getTotalByteCount()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s1">_noticestore_download_progress_listener = </span><span class="s0">new </span><span class="s1">OnProgressListener&lt;FileDownloadTask.TaskSnapshot&gt;() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onProgress(FileDownloadTask.TaskSnapshot _param1) {</span>
+                <span class="s0">double </span><span class="s1">_progressValue = (</span><span class="s2">100.0 </span><span class="s1">* _param1.getBytesTransferred()) / _param1.getTotalByteCount()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s1">_noticestore_upload_success_listener = </span><span class="s0">new </span><span class="s1">OnCompleteListener&lt;Uri&gt;() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onComplete(Task&lt;Uri&gt; _param1) {</span>
+                <span class="s0">final </span><span class="s1">String _downloadUrl = _param1.getResult().toString()</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(edittext1.getText().toString().trim().equals(</span><span class="s3">&quot;&quot;</span><span class="s1">)) {</span>
+                    <span class="s0">if </span><span class="s1">(img == </span><span class="s2">1</span><span class="s1">) {</span>
+                        <span class="s1">mm = </span><span class="s0">new </span><span class="s1">HashMap&lt;&gt;()</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;username&quot;</span><span class="s0">, </span><span class="s3">&quot;Admin&quot;</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s4">//                      mm.put(&quot;message&quot;, edittext1.getText().toString().trim());</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;image&quot;</span><span class="s0">, </span><span class="s1">_downloadUrl)</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;user_uid&quot;</span><span class="s0">, </span><span class="s1">FirebaseAuth.getInstance().getCurrentUser().getUid())</span><span class="s0">;</span>
+                        <span class="s1">calendar = Calendar.getInstance()</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;time&quot;</span><span class="s0">, new </span><span class="s1">SimpleDateFormat(</span><span class="s3">&quot;E dd/MM hh:mm a&quot;</span><span class="s1">).format(calendar.getTime()))</span><span class="s0">;</span>
+                        <span class="s1">notice.push().updateChildren(mm)</span><span class="s0">;</span>
+                        <span class="s1">mm.clear()</span><span class="s0">;</span>
+                        <span class="s1">img = </span><span class="s2">0</span><span class="s0">;</span>
+                        <span class="s1">button1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s1">imageview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">videoView.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">textview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">progress.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">edittext1.setText(</span><span class="s3">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s1">edittext1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                    <span class="s0">else </span><span class="s1">{</span>
+                        <span class="s1">mm = </span><span class="s0">new </span><span class="s1">HashMap&lt;&gt;()</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;username&quot;</span><span class="s0">, </span><span class="s3">&quot;Admin&quot;</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s4">//                      mm.put(&quot;message&quot;, edittext1.getText().toString().trim());</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;video&quot;</span><span class="s0">, </span><span class="s1">_downloadUrl)</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;user_uid&quot;</span><span class="s0">, </span><span class="s1">FirebaseAuth.getInstance().getCurrentUser().getUid())</span><span class="s0">;</span>
+                        <span class="s1">calendar = Calendar.getInstance()</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;time&quot;</span><span class="s0">, new </span><span class="s1">SimpleDateFormat(</span><span class="s3">&quot;E dd/MM hh:mm a&quot;</span><span class="s1">).format(calendar.getTime()))</span><span class="s0">;</span>
+                        <span class="s1">notice.push().updateChildren(mm)</span><span class="s0">;</span>
+                        <span class="s1">mm.clear()</span><span class="s0">;</span>
+                        <span class="s1">img = </span><span class="s2">0</span><span class="s0">;</span>
+                        <span class="s1">button1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s1">imageview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">videoView.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">textview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">progress.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">edittext1.setText(</span><span class="s3">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s1">edittext1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+                    <span class="s0">if </span><span class="s1">(img == </span><span class="s2">1</span><span class="s1">) {</span>
+                        <span class="s1">mm = </span><span class="s0">new </span><span class="s1">HashMap&lt;&gt;()</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;username&quot;</span><span class="s0">, </span><span class="s3">&quot;Admin&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;message&quot;</span><span class="s0">, </span><span class="s1">edittext1.getText().toString().trim())</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;image&quot;</span><span class="s0">, </span><span class="s1">_downloadUrl)</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;user_uid&quot;</span><span class="s0">, </span><span class="s1">FirebaseAuth.getInstance().getCurrentUser().getUid())</span><span class="s0">;</span>
+                        <span class="s1">calendar = Calendar.getInstance()</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;time&quot;</span><span class="s0">, new </span><span class="s1">SimpleDateFormat(</span><span class="s3">&quot;E dd/MM hh:mm a&quot;</span><span class="s1">).format(calendar.getTime()))</span><span class="s0">;</span>
+                        <span class="s1">notice.push().updateChildren(mm)</span><span class="s0">;</span>
+                        <span class="s1">mm.clear()</span><span class="s0">;</span>
+                        <span class="s1">img = </span><span class="s2">0</span><span class="s0">;</span>
+                        <span class="s1">button1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s1">imageview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">videoView.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">textview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">progress.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">edittext1.setText(</span><span class="s3">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s1">edittext1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                    <span class="s0">else </span><span class="s1">{</span>
+                        <span class="s1">mm = </span><span class="s0">new </span><span class="s1">HashMap&lt;&gt;()</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;username&quot;</span><span class="s0">, </span><span class="s3">&quot;Admin&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;message&quot;</span><span class="s0">, </span><span class="s1">edittext1.getText().toString().trim())</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;video&quot;</span><span class="s0">, </span><span class="s1">_downloadUrl)</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;user_uid&quot;</span><span class="s0">, </span><span class="s1">FirebaseAuth.getInstance().getCurrentUser().getUid())</span><span class="s0">;</span>
+                        <span class="s1">calendar = Calendar.getInstance()</span><span class="s0">;</span>
+                        <span class="s1">mm.put(</span><span class="s3">&quot;time&quot;</span><span class="s0">, new </span><span class="s1">SimpleDateFormat(</span><span class="s3">&quot;E dd/MM hh:mm a&quot;</span><span class="s1">).format(calendar.getTime()))</span><span class="s0">;</span>
+                        <span class="s1">notice.push().updateChildren(mm)</span><span class="s0">;</span>
+                        <span class="s1">mm.clear()</span><span class="s0">;</span>
+                        <span class="s1">img = </span><span class="s2">0</span><span class="s0">;</span>
+                        <span class="s1">button1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s1">imageview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">videoView.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">textview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">progress.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">edittext1.setText(</span><span class="s3">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s1">edittext1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+
+
+        <span class="s1">_noticestore_download_success_listener = </span><span class="s0">new </span><span class="s1">OnSuccessListener&lt;FileDownloadTask.TaskSnapshot&gt;() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onSuccess(FileDownloadTask.TaskSnapshot _param1) {</span>
+                <span class="s0">final long </span><span class="s1">_totalByteCount = _param1.getTotalByteCount()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s1">_noticestore_delete_success_listener = </span><span class="s0">new </span><span class="s1">OnSuccessListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onSuccess(Object _param1) {</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s1">_noticestore_failure_listener = </span><span class="s0">new </span><span class="s1">OnFailureListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onFailure(Exception _param1) {</span>
+                <span class="s0">final </span><span class="s1">String _message = _param1.getMessage()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s1">_Currauth_create_user_listener = </span><span class="s0">new </span><span class="s1">OnCompleteListener&lt;AuthResult&gt;() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onComplete(Task&lt;AuthResult&gt; _param1) {</span>
+                <span class="s0">final boolean </span><span class="s1">_success = _param1.isSuccessful()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _errorMessage = _param1.getException() != </span><span class="s0">null </span><span class="s1">? _param1.getException().getMessage() : </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s1">_Currauth_sign_in_listener = </span><span class="s0">new </span><span class="s1">OnCompleteListener&lt;AuthResult&gt;() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onComplete(Task&lt;AuthResult&gt; _param1) {</span>
+                <span class="s0">final boolean </span><span class="s1">_success = _param1.isSuccessful()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _errorMessage = _param1.getException() != </span><span class="s0">null </span><span class="s1">? _param1.getException().getMessage() : </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+
+        <span class="s1">_Currauth_reset_password_listener = </span><span class="s0">new </span><span class="s1">OnCompleteListener&lt;Void&gt;() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onComplete(Task&lt;Void&gt; _param1) {</span>
+                <span class="s0">final boolean </span><span class="s1">_success = _param1.isSuccessful()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+    <span class="s1">}</span>
+    <span class="s0">private void </span><span class="s1">initializeLogic() {</span>
+        <span class="s1">img = </span><span class="s2">0</span><span class="s0">;</span>
+        <span class="s1">imgpath = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+        <span class="s1">imgname = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+        <span class="s1">listview2.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL)</span><span class="s0">;</span>
+        <span class="s1">listview2.setStackFromBottom(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">edittext1.setMaxLines(</span><span class="s2">5</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Currdata.addChildEventListener(_Currdata_child_listener)</span><span class="s0">;</span>
+        <span class="s1">img = </span><span class="s2">0</span><span class="s0">;</span>
+        <span class="s1">imageview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+        <span class="s1">videoView.setVisibility(View.GONE)</span><span class="s0">;</span>
+        <span class="s1">textview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+        <span class="s1">progress.setVisibility(View.GONE)</span><span class="s0">;</span>
+        <span class="s1">button1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onActivityResult(</span><span class="s0">int </span><span class="s1">_requestCode</span><span class="s0">, int </span><span class="s1">_resultCode</span><span class="s0">, </span><span class="s1">Intent _data) {</span>
+        <span class="s0">super</span><span class="s1">.onActivityResult(_requestCode</span><span class="s0">, </span><span class="s1">_resultCode</span><span class="s0">, </span><span class="s1">_data)</span><span class="s0">;</span>
+
+        <span class="s0">switch </span><span class="s1">(_requestCode) {</span>
+            <span class="s0">case </span><span class="s1">REQ_CD_CAMERA:</span>
+                <span class="s0">if </span><span class="s1">(_resultCode == Activity.RESULT_OK) {</span>
+                    <span class="s1">String _filePath = _file_camera.getAbsolutePath()</span><span class="s0">;</span>
+                    <span class="s1">attachex.setVisibility(View.GONE)</span><span class="s0">;</span>
+                    <span class="s1">edittext1.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                    <span class="s1">edittext1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">imgpath = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                    <span class="s1">imgname = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                    <span class="s1">imgsize = </span><span class="s2">0</span><span class="s0">;</span>
+                    <span class="s1">videosize = </span><span class="s2">0</span><span class="s0">;</span>
+                    <span class="s1">img = </span><span class="s2">1</span><span class="s0">;</span>
+                    <span class="s1">imgpath = _filePath</span><span class="s0">;</span>
+                    <span class="s1">imgname = Uri.parse(_filePath).getLastPathSegment()</span><span class="s0">;</span>
+                    <span class="s1">imageview1.setImageBitmap(FileUtil.decodeSampleBitmapFromPath(_filePath</span><span class="s0">, </span><span class="s2">1024</span><span class="s0">, </span><span class="s2">1024</span><span class="s1">))</span><span class="s0">;</span>
+                    <span class="s1">imageview1.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                    <span class="s1">imgsize= </span><span class="s0">new </span><span class="s1">java.io.File(imgpath).length()/</span><span class="s2">1024</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">((imgsize &lt; </span><span class="s2">2000</span><span class="s1">) &amp;&amp; (imgsize &gt; </span><span class="s2">0</span><span class="s1">)) {</span>
+                        <span class="s1">textview1.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                        <span class="s1">textview1.setText(</span><span class="s3">&quot;File Size: &quot;</span><span class="s1">.concat(String.valueOf(imgsize).concat(</span><span class="s3">&quot;Kb&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+                        <span class="s1">edittext1.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                        <span class="s1">edittext1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                    <span class="s0">else </span><span class="s1">{</span>
+                        <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;Captured image must be less than 2Mb&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.WARNING)</span><span class="s0">;</span>
+                        <span class="s1">imageview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">textview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">imgpath = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                        <span class="s1">imgname = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                        <span class="s1">img = </span><span class="s2">0</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+                <span class="s0">else </span><span class="s1">{</span>
+
+                <span class="s1">}</span>
+                <span class="s0">break;</span>
+
+            <span class="s0">case </span><span class="s1">REQ_CD_FILEPICKER:</span>
+                <span class="s0">if </span><span class="s1">(_resultCode == Activity.RESULT_OK) {</span>
+                    <span class="s1">ArrayList&lt;String&gt; _filePath = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(_data != </span><span class="s0">null</span><span class="s1">) {</span>
+                        <span class="s0">if </span><span class="s1">(_data.getClipData() != </span><span class="s0">null</span><span class="s1">) {</span>
+                            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">_index = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">_index &lt; _data.getClipData().getItemCount()</span><span class="s0">; </span><span class="s1">_index++) {</span>
+                                <span class="s1">ClipData.Item _item = _data.getClipData().getItemAt(_index)</span><span class="s0">;</span>
+                                <span class="s1">_filePath.add(FileUtil.convertUriToFilePath(getApplicationContext()</span><span class="s0">, </span><span class="s1">_item.getUri()))</span><span class="s0">;</span>
+                            <span class="s1">}</span>
+                        <span class="s1">}</span>
+                        <span class="s0">else </span><span class="s1">{</span>
+                            <span class="s1">_filePath.add(FileUtil.convertUriToFilePath(getApplicationContext()</span><span class="s0">, </span><span class="s1">_data.getData()))</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+
+                    <span class="s1">edittext1.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                    <span class="s1">edittext1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(Uri.parse(_filePath.get((</span><span class="s0">int</span><span class="s1">)(</span><span class="s2">0</span><span class="s1">))).getLastPathSegment().endsWith(</span><span class="s3">&quot;.mp4&quot;</span><span class="s1">))</span>
+                    <span class="s1">{</span>
+                        <span class="s1">attachex.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">imgpath = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                        <span class="s1">imgname = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                        <span class="s1">imageview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">img = </span><span class="s2">2</span><span class="s0">;</span>
+                        <span class="s1">edittext1.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                        <span class="s1">edittext1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s1">imgpath = _filePath.get((</span><span class="s0">int</span><span class="s1">)(</span><span class="s2">0</span><span class="s1">))</span><span class="s0">;</span>
+                        <span class="s1">imgname = Uri.parse(_filePath.get((</span><span class="s0">int</span><span class="s1">)(</span><span class="s2">0</span><span class="s1">))).getLastPathSegment()</span><span class="s0">;</span>
+                        <span class="s1">videosize=</span><span class="s0">new </span><span class="s1">java.io.File(imgpath).length()/</span><span class="s2">1024</span><span class="s0">;</span>
+                        <span class="s0">if </span><span class="s1">((videosize &lt; </span><span class="s2">5000</span><span class="s1">) &amp;&amp; (videosize &gt; </span><span class="s2">0</span><span class="s1">)) {</span>
+                            <span class="s1">videoView.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                            <span class="s1">videoView.setVideoURI(Uri.parse(imgpath))</span><span class="s0">;</span>
+                            <span class="s1">videoView.requestFocus()</span><span class="s0">;</span>
+                            <span class="s1">videoView.start()</span><span class="s0">;</span>
+                            <span class="s1">videoView.setOnCompletionListener(</span><span class="s0">new </span><span class="s1">MediaPlayer.OnCompletionListener() {</span>
+                                <span class="s1">@Override</span>
+                                <span class="s0">public void </span><span class="s1">onCompletion(MediaPlayer mediaPlayer) {</span>
+                                    <span class="s1">videoView.start()</span><span class="s0">;</span>
+                                <span class="s1">}</span>
+                            <span class="s1">})</span><span class="s0">;</span>
+
+                            <span class="s1">edittext1.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                            <span class="s1">edittext1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+                            <span class="s1">textview1.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                            <span class="s1">textview1.setText(</span><span class="s3">&quot;File Size: &quot;</span><span class="s1">.concat(String.valueOf(videosize).concat(</span><span class="s3">&quot;Kb&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                        <span class="s0">else </span><span class="s1">{</span>
+                            <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;Attachment must be less than 5Mb&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.WARNING)</span><span class="s0">;</span>
+                            <span class="s1">attachex.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                            <span class="s1">textview1.setText(</span><span class="s3">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                            <span class="s1">attachex.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                            <span class="s1">textview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+                            <span class="s1">edittext1.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                            <span class="s1">edittext1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+                            <span class="s1">imageview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+                            <span class="s1">videoView.setVisibility(View.GONE)</span><span class="s0">;</span>
+                            <span class="s1">imgpath = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                            <span class="s1">imgname = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                            <span class="s1">img = </span><span class="s2">0</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+                    <span class="s0">else</span>
+                    <span class="s1">{</span>
+                        <span class="s1">imgname = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                        <span class="s1">imgpath = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                        <span class="s1">imgsize = </span><span class="s2">0</span><span class="s0">;</span>
+                        <span class="s1">videosize =</span><span class="s2">0</span><span class="s0">;</span>
+                        <span class="s1">attachex.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">videoView.setVisibility(View.GONE)</span><span class="s0">;</span>
+                        <span class="s1">img = </span><span class="s2">1</span><span class="s0">;</span>
+                        <span class="s1">imgpath = _filePath.get((</span><span class="s0">int</span><span class="s1">)(</span><span class="s2">0</span><span class="s1">))</span><span class="s0">;</span>
+                        <span class="s1">imgname = Uri.parse(_filePath.get((</span><span class="s0">int</span><span class="s1">)(</span><span class="s2">0</span><span class="s1">))).getLastPathSegment()</span><span class="s0">;</span>
+                        <span class="s1">imageview1.setImageBitmap(FileUtil.decodeSampleBitmapFromPath(_filePath.get((</span><span class="s0">int</span><span class="s1">)(</span><span class="s2">0</span><span class="s1">))</span><span class="s0">, </span><span class="s2">1024</span><span class="s0">, </span><span class="s2">1024</span><span class="s1">))</span><span class="s0">;</span>
+                        <span class="s1">imageview1.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                        <span class="s1">imgsize= </span><span class="s0">new </span><span class="s1">java.io.File(imgpath).length()/</span><span class="s2">1024</span><span class="s0">;</span>
+                        <span class="s0">if </span><span class="s1">((imgsize &lt; </span><span class="s2">1000</span><span class="s1">) &amp;&amp; (imgsize &gt; </span><span class="s2">0</span><span class="s1">)) {</span>
+                            <span class="s1">textview1.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                            <span class="s1">edittext1.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                            <span class="s1">edittext1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+                            <span class="s1">textview1.setText(</span><span class="s3">&quot;File Size: &quot;</span><span class="s1">.concat(String.valueOf(imgsize).concat(</span><span class="s3">&quot;Kb&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                        <span class="s0">else </span><span class="s1">{</span>
+                            <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s3">&quot;Attachment must be less than 1Mb&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.WARNING)</span><span class="s0">;</span>
+                            <span class="s1">imageview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+                            <span class="s1">textview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+                            <span class="s1">attachex.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                            <span class="s1">videoView.setVisibility(View.GONE)</span><span class="s0">;</span>
+                            <span class="s1">edittext1.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                            <span class="s1">edittext1.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+                            <span class="s1">textview1.setText(</span><span class="s3">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                            <span class="s1">imgpath = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                            <span class="s1">imgname = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+                            <span class="s1">img = </span><span class="s2">0</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+
+                <span class="s1">}</span>
+
+                <span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">}</span>
+                <span class="s0">break;</span>
+            <span class="s0">default</span><span class="s1">:</span>
+                <span class="s0">break;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private class </span><span class="s1">DownloadTask </span><span class="s0">extends </span><span class="s1">AsyncTask&lt;String</span><span class="s0">, </span><span class="s1">Integer</span><span class="s0">, </span><span class="s1">String&gt; {</span>
+
+
+        <span class="s1">@Override</span>
+
+        <span class="s0">protected void </span><span class="s1">onPreExecute() {</span>
+
+        <span class="s1">}</span>
+        <span class="s0">protected </span><span class="s1">String doInBackground(String... address) {</span>
+            <span class="s0">try </span><span class="s1">{</span>
+                <span class="s1">filename= URLUtil.guessFileName(address[</span><span class="s2">0</span><span class="s1">]</span><span class="s0">, null, null</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">int </span><span class="s1">resCode = -</span><span class="s2">1</span><span class="s0">;</span>
+                <span class="s1">java.io.InputStream in = </span><span class="s0">null;</span>
+                <span class="s1">java.net.URL url = </span><span class="s0">new </span><span class="s1">java.net.URL(address[</span><span class="s2">0</span><span class="s1">])</span><span class="s0">;</span>
+                <span class="s1">java.net.URLConnection urlConn = url.openConnection()</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(!(urlConn </span><span class="s0">instanceof </span><span class="s1">java.net.HttpURLConnection)) {</span>
+                    <span class="s0">throw new </span><span class="s1">java.io.IOException(</span><span class="s3">&quot;URL is not an Http URL&quot;</span><span class="s1">)</span><span class="s0">; </span><span class="s1">}</span>
+                <span class="s1">java.net.HttpURLConnection httpConn = (java.net.HttpURLConnection) urlConn</span><span class="s0">; </span><span class="s1">httpConn.setAllowUserInteraction(</span><span class="s0">false</span><span class="s1">)</span><span class="s0">; </span><span class="s1">httpConn.setInstanceFollowRedirects(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">; </span><span class="s1">httpConn.setRequestMethod(</span><span class="s3">&quot;GET&quot;</span><span class="s1">)</span><span class="s0">; </span><span class="s1">httpConn.connect()</span><span class="s0">;</span>
+                <span class="s1">resCode = httpConn.getResponseCode()</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(resCode == java.net.HttpURLConnection.HTTP_OK) {</span>
+                    <span class="s1">in = httpConn.getInputStream()</span><span class="s0">;</span>
+                    <span class="s1">size = httpConn.getContentLength()</span><span class="s0">;</span>
+
+                <span class="s1">} </span><span class="s0">else </span><span class="s1">{ result = </span><span class="s3">&quot;There was an error&quot;</span><span class="s0">; </span><span class="s1">}</span>
+
+                <span class="s1">path = FileUtil.getPublicDir(Environment.DIRECTORY_DOWNLOADS).concat(</span><span class="s3">&quot;/&quot;</span><span class="s1">.concat(filename))</span><span class="s0">;</span>
+                <span class="s1">FileUtil.writeFile(path</span><span class="s0">, </span><span class="s3">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">java.io.File file = </span><span class="s0">new </span><span class="s1">java.io.File(path)</span><span class="s0">;</span>
+
+                <span class="s1">java.io.OutputStream output = </span><span class="s0">new </span><span class="s1">java.io.FileOutputStream(file)</span><span class="s0">;</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                    <span class="s0">int </span><span class="s1">bytesRead</span><span class="s0">;</span>
+                    <span class="s1">sumCount = </span><span class="s2">0</span><span class="s0">;</span>
+                    <span class="s0">byte</span><span class="s1">[] buffer = </span><span class="s0">new byte</span><span class="s1">[</span><span class="s2">1024</span><span class="s1">]</span><span class="s0">;</span>
+                    <span class="s0">while </span><span class="s1">((bytesRead = in.read(buffer)) != -</span><span class="s2">1</span><span class="s1">) {</span>
+                        <span class="s1">output.write(buffer</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s1">bytesRead)</span><span class="s0">;</span>
+                        <span class="s1">sumCount += bytesRead</span><span class="s0">;</span>
+                        <span class="s0">if </span><span class="s1">(size &gt; </span><span class="s2">0</span><span class="s1">) {</span>
+                            <span class="s1">publishProgress((</span><span class="s0">int</span><span class="s1">)Math.round(sumCount*</span><span class="s2">100 </span><span class="s1">/ size))</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+                <span class="s1">} </span><span class="s0">finally </span><span class="s1">{</span>
+                    <span class="s1">output.close()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+                <span class="s1">result = filename + </span><span class="s3">&quot; saved&quot;</span><span class="s0">;</span>
+                <span class="s1">in.close()</span><span class="s0">;</span>
+            <span class="s1">} </span><span class="s0">catch </span><span class="s1">(java.net.MalformedURLException e) {</span>
+                <span class="s1">result = e.getMessage()</span><span class="s0">;</span>
+            <span class="s1">} </span><span class="s0">catch </span><span class="s1">(java.io.IOException e) {</span>
+                <span class="s1">result = e.getMessage()</span><span class="s0">;</span>
+            <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception e) {</span>
+                <span class="s1">result = e.toString()</span><span class="s0">;</span>
+            <span class="s1">}</span>
+            <span class="s0">return </span><span class="s1">result</span><span class="s0">;</span>
+
+        <span class="s1">}</span>
+        <span class="s0">protected void </span><span class="s1">onPostExecute(String s){</span>
+            <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s1">s</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.SUCCESS)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public class </span><span class="s1">Listview2Adapter </span><span class="s0">extends </span><span class="s1">BaseAdapter {</span>
+        <span class="s1">ArrayList&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _data</span><span class="s0">;</span>
+        <span class="s0">public </span><span class="s1">Listview2Adapter(ArrayList&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _arr) {</span>
+            <span class="s1">_data = _arr</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">@Override</span>
+        <span class="s0">public int </span><span class="s1">getCount() {</span>
+            <span class="s0">return </span><span class="s1">_data.size()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">@Override</span>
+        <span class="s0">public </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; getItem(</span><span class="s0">int </span><span class="s1">_index) {</span>
+            <span class="s0">return </span><span class="s1">_data.get(_index)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">@Override</span>
+        <span class="s0">public long </span><span class="s1">getItemId(</span><span class="s0">int </span><span class="s1">_index) {</span>
+            <span class="s0">return </span><span class="s1">_index</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s1">@Override</span>
+        <span class="s0">public </span><span class="s1">View getView(</span><span class="s0">final int </span><span class="s1">_position</span><span class="s0">, </span><span class="s1">View _view</span><span class="s0">, </span><span class="s1">ViewGroup _viewGroup) {</span>
+            <span class="s1">LayoutInflater _inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)</span><span class="s0">;</span>
+            <span class="s1">View _v = _view</span><span class="s0">;</span>
+            <span class="s0">if </span><span class="s1">(_v == </span><span class="s0">null</span><span class="s1">) {</span>
+                <span class="s1">_v = _inflater.inflate(R.layout.custom_chat_message</span><span class="s0">, null</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+            <span class="s0">final </span><span class="s1">LinearLayout linear1 = (LinearLayout) _v.findViewById(R.id.linear1)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">ImageView noprofile = (ImageView) _v.findViewById(R.id.noprofile)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">LinearLayout linear2 = (LinearLayout) _v.findViewById(R.id.linear2)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">ImageView profile = (ImageView) _v.findViewById(R.id.profile)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">TextView username = (TextView) _v.findViewById(R.id.username)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">ImageView imageview1 = (ImageView) _v.findViewById(R.id.imageview1)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">LinearLayout linear3 = (LinearLayout) _v.findViewById(R.id.linear3)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">TextView message = (TextView) _v.findViewById(R.id.message)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">TextView time = (TextView) _v.findViewById(R.id.time)</span><span class="s0">;</span>
+            <span class="s0">final </span><span class="s1">VideoView videoView = (VideoView) _v.findViewById(R.id.videoview)</span><span class="s0">;</span>
+
+<span class="s4">//            if (listmap.get((int)_position).containsKey(&quot;message&quot;)) {</span>
+<span class="s4">//                message.setVisibility(View.VISIBLE);</span>
+<span class="s4">//            }</span>
+<span class="s4">//            else {</span>
+<span class="s4">//                message.setVisibility(View.GONE);</span>
+<span class="s4">//            }</span>
+<span class="s4">//            noprofile.setVisibility(View.GONE);</span>
+<span class="s4">//            if (listmap.get((int)_position).containsKey(&quot;image&quot;)) {</span>
+<span class="s4">//                imageview1.setVisibility(View.VISIBLE);</span>
+<span class="s4">//                Glide.with(getApplicationContext()).load(Uri.parse(listmap.get((int)_position).get(&quot;image&quot;).toString())).into(imageview1);</span>
+<span class="s4">//            }</span>
+<span class="s4">//            else {</span>
+<span class="s4">//                imageview1.setVisibility(View.GONE);</span>
+<span class="s4">//            }</span>
+<span class="s4">//            linear1.setGravity(Gravity.RIGHT);</span>
+<span class="s4">//</span>
+<span class="s4">//            android.graphics.drawable. GradientDrawable ab = new android.graphics.drawable.GradientDrawable(); ab.setColor(Color.parseColor(&quot;#BBDEFD&quot;)); ab.setCornerRadius(15);</span>
+<span class="s4">//</span>
+<span class="s4">//            ab.setStroke(5,</span>
+<span class="s4">//</span>
+<span class="s4">//                    Color.parseColor(&quot;#0D47A1&quot;)); linear2.setBackground(ab);</span>
+<span class="s4">//            username.setText(listmap.get((int)_position).get(&quot;username&quot;).toString());</span>
+<span class="s4">//            time.setText(listmap.get((int)_position).get(&quot;time&quot;).toString());</span>
+<span class="s4">//            profile.setImageResource(R.drawable.app_icon);</span>
+
+            <span class="s0">if </span><span class="s1">(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).containsKey(</span><span class="s3">&quot;message&quot;</span><span class="s1">) || listmap.get((</span><span class="s0">int</span><span class="s1">)_position).containsKey(</span><span class="s3">&quot;image&quot;</span><span class="s1">) || listmap.get((</span><span class="s0">int</span><span class="s1">)_position).containsKey(</span><span class="s3">&quot;video&quot;</span><span class="s1">)) {</span>
+                <span class="s1">username.setText(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s3">&quot;username&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                <span class="s1">time.setText(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s3">&quot;time&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+            <span class="s0">if </span><span class="s1">(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).containsKey(</span><span class="s3">&quot;message&quot;</span><span class="s1">)) {</span>
+                <span class="s1">message.setText(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s3">&quot;message&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                <span class="s1">message.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+            <span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">message.setVisibility(View.GONE)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+            <span class="s0">if </span><span class="s1">(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).containsKey(</span><span class="s3">&quot;image&quot;</span><span class="s1">)) {</span>
+                <span class="s1">imageview1.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                <span class="s1">Glide.with(getApplicationContext()).load(Uri.parse(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s3">&quot;image&quot;</span><span class="s1">).toString())).into(imageview1)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+            <span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">imageview1.setVisibility(View.GONE)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+            <span class="s0">if </span><span class="s1">((listmap.get((</span><span class="s0">int</span><span class="s1">)_position).containsKey(</span><span class="s3">&quot;video&quot;</span><span class="s1">))) {</span>
+                <span class="s1">videoView.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                <span class="s1">videoView.setVideoURI(Uri.parse(listmap.get((</span><span class="s0">int</span><span class="s1">)_position).get(</span><span class="s3">&quot;video&quot;</span><span class="s1">).toString()))</span><span class="s0">;</span>
+                <span class="s1">videoView.requestFocus()</span><span class="s0">;</span>
+                <span class="s1">videoView.start()</span><span class="s0">;</span>
+                <span class="s1">videoView.setOnCompletionListener(</span><span class="s0">new </span><span class="s1">MediaPlayer.OnCompletionListener() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onCompletion(MediaPlayer mediaPlayer) {</span>
+                        <span class="s1">videoView.start()</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">}</span>
+            <span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">videoView.setVisibility(View.GONE)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+                <span class="s1">linear1.setGravity(Gravity.RIGHT)</span><span class="s0">;</span>
+                <span class="s1">noprofile.setVisibility(View.GONE)</span><span class="s0">;</span>
+                <span class="s1">username.setText(</span><span class="s3">&quot;me&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">username.setGravity(Gravity.RIGHT)</span><span class="s0">;</span>
+                <span class="s1">profile.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                <span class="s1">profile.setImageResource(R.drawable.app_icon)</span><span class="s0">;</span>
+                <span class="s1">linear2.setBackgroundResource(R.drawable.chat_sender)</span><span class="s0">;</span>
+
+            <span class="s0">return </span><span class="s1">_v</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

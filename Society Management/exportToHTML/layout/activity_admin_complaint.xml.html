@@ -1,0 +1,94 @@
+<html>
+<head>
+<title>activity_admin_complaint.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #e8bf6a;}
+.s1 { color: #bababa;}
+.s2 { color: #6a8759;}
+.s3 { color: #a9b7c6;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+activity_admin_complaint.xml</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;?</span><span class="s1">xml version</span><span class="s2">=&quot;1.0&quot; </span><span class="s1">encoding</span><span class="s2">=&quot;utf-8&quot;</span><span class="s0">?&gt;</span>
+<span class="s0">&lt;androidx.constraintlayout.widget.ConstraintLayout</span>
+    <span class="s1">xmlns:android</span><span class="s2">=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="s1">xmlns:app</span><span class="s2">=&quot;http://schemas.android.com/apk/res-auto&quot;</span>
+    <span class="s1">xmlns:tools</span><span class="s2">=&quot;http://schemas.android.com/tools&quot;</span>
+    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+    <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span>
+    <span class="s1">android:background</span><span class="s2">=&quot;@color/yellow&quot;</span>
+    <span class="s1">tools:context</span><span class="s2">=&quot;.AdminComplaintActivity&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;LinearLayout</span>
+    <span class="s1">android:id</span><span class="s2">=&quot;@+id/nointernet&quot;</span>
+    <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+    <span class="s1">android:visibility</span><span class="s2">=&quot;gone&quot;</span>
+    <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span>
+    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+    <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span><span class="s0">&gt;</span>
+
+    <span class="s0">&lt;androidx.cardview.widget.CardView</span>
+        <span class="s1">android:id</span><span class="s2">=&quot;@+id/UI_cardviewnointernet&quot;</span>
+        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+        <span class="s1">android:layout_height</span><span class="s2">=&quot;500dp&quot;</span>
+        <span class="s1">app:cardBackgroundColor</span><span class="s2">=&quot;@color/white&quot;</span>
+        <span class="s1">android:layout_columnWeight</span><span class="s2">=&quot;1&quot;</span>
+        <span class="s1">android:layout_rowWeight</span><span class="s2">=&quot;1&quot;</span>
+        <span class="s1">app:cardElevation</span><span class="s2">=&quot;10dp&quot;</span>
+        <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+        <span class="s1">app:cardCornerRadius</span><span class="s2">=&quot;30dp&quot;</span>
+        <span class="s1">android:layout_margin</span><span class="s2">=&quot;8dp&quot;</span>
+        <span class="s1">android:padding</span><span class="s2">=&quot;12dp&quot;</span>
+        <span class="s0">&gt;</span>
+        <span class="s0">&lt;com.airbnb.lottie.LottieAnimationView</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;280dp&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;280dp&quot;</span>
+            <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+            <span class="s1">app:lottie_rawRes</span><span class="s2">=&quot;@raw/no_internet_json&quot;</span>
+            <span class="s1">app:lottie_autoPlay</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">android:padding</span><span class="s2">=&quot;10dp&quot;</span>
+            <span class="s1">app:lottie_loop</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s0">/&gt;</span>
+        <span class="s0">&lt;Button</span>
+            <span class="s1">android:id</span><span class="s2">=&quot;@+id/retry&quot;</span>
+            <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;190dp&quot;</span>
+            <span class="s1">android:background</span><span class="s2">=&quot;@drawable/oval&quot;</span>
+            <span class="s1">android:textColor</span><span class="s2">=&quot;@color/black&quot;</span>
+            <span class="s1">android:textStyle</span><span class="s2">=&quot;bold&quot;</span>
+            <span class="s1">android:text</span><span class="s2">=&quot;Retry&quot;</span>
+            <span class="s1">android:padding</span><span class="s2">=&quot;10dp&quot;</span>
+            <span class="s1">android:fontFamily</span><span class="s2">=&quot;casual&quot;</span>
+            <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span><span class="s0">/&gt;</span>
+
+    <span class="s0">&lt;/androidx.cardview.widget.CardView&gt;</span>
+
+<span class="s0">&lt;/LinearLayout&gt;</span>
+
+    <span class="s0">&lt;LinearLayout</span>
+        <span class="s1">android:id</span><span class="s2">=&quot;@+id/linear&quot;</span>
+        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+        <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span>
+        <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span>
+        <span class="s1">app:layout_behavior</span><span class="s2">=&quot;@string/appbar_scrolling_view_behavior&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;ListView</span>
+            <span class="s1">android:id</span><span class="s2">=&quot;@+id/listview1&quot;</span>
+            <span class="s1">android:layout_marginTop</span><span class="s2">=&quot;10dp&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s2">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:scrollbars</span><span class="s2">=&quot;none&quot;</span>
+            <span class="s1">android:divider</span><span class="s2">=&quot;@null&quot;</span>
+            <span class="s1">android:dividerHeight</span><span class="s2">=&quot;3dp&quot;</span>
+            <span class="s1">android:padding</span><span class="s2">=&quot;0dp&quot;</span>
+            <span class="s1">android:choiceMode</span><span class="s2">=&quot;none&quot;</span>
+            <span class="s1">android:layout_weight</span><span class="s2">=&quot;1&quot;</span><span class="s0">/&gt;</span>
+    <span class="s0">&lt;/LinearLayout&gt;</span>
+<span class="s0">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span></pre>
+</body>
+</html>

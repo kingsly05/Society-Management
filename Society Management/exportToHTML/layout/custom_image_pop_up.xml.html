@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>custom_image_pop_up.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #e8bf6a;}
+.s1 { color: #bababa;}
+.s2 { color: #6a8759;}
+.s3 { color: #a9b7c6;}
+.s4 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+custom_image_pop_up.xml</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;?</span><span class="s1">xml version</span><span class="s2">=&quot;1.0&quot; </span><span class="s1">encoding</span><span class="s2">=&quot;utf-8&quot;</span><span class="s0">?&gt;</span>
+<span class="s0">&lt;RelativeLayout </span><span class="s1">xmlns:android</span><span class="s2">=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span>
+    <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+    <span class="s1">android:layout_height</span><span class="s2">=&quot;match_parent&quot;</span>
+
+    <span class="s1">android:layout_gravity</span><span class="s2">=&quot;center&quot;</span>
+    <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span><span class="s0">&gt;</span>
+
+<span class="s0">&lt;LinearLayout</span>
+    <span class="s1">android:background</span><span class="s2">=&quot;@drawable/oval_btn&quot;</span>
+
+    <span class="s1">android:orientation</span><span class="s2">=&quot;vertical&quot;</span>
+    <span class="s1">android:layout_width</span><span class="s2">=&quot;300dp&quot;</span>
+    <span class="s1">android:padding</span><span class="s2">=&quot;20dp&quot;</span>
+    <span class="s1">android:gravity</span><span class="s2">=&quot;center&quot;</span>
+    <span class="s1">android:layout_height</span><span class="s2">=&quot;350dp&quot;</span><span class="s0">&gt;</span>
+
+    <span class="s0">&lt;ImageView</span>
+        <span class="s1">android:id</span><span class="s2">=&quot;@+id/imageview1&quot;</span>
+        <span class="s1">android:layout_width</span><span class="s2">=&quot;match_parent&quot;</span>
+        <span class="s1">android:scaleType</span><span class="s2">=&quot;fitCenter&quot;</span>
+        <span class="s1">android:src</span><span class="s2">=&quot;@drawable/default_profile&quot;</span>
+        <span class="s1">android:layout_height</span><span class="s2">=&quot;300dp&quot;</span><span class="s0">/&gt;</span>
+<span class="s0">&lt;/LinearLayout&gt;</span>
+<span class="s4">&lt;!--    &lt;LinearLayout--&gt;</span>
+<span class="s4">&lt;!--        android:layout_width=&quot;300dp&quot;--&gt;</span>
+<span class="s4">&lt;!--        android:gravity=&quot;center&quot;--&gt;</span>
+<span class="s4">&lt;!--        android:layout_marginTop=&quot;320dp&quot;--&gt;</span>
+<span class="s4">&lt;!--        android:orientation=&quot;horizontal&quot;--&gt;</span>
+<span class="s4">&lt;!--        android:layout_height=&quot;wrap_content&quot;&gt;--&gt;</span>
+
+<span class="s4">&lt;!--        &lt;Button--&gt;</span>
+<span class="s4">&lt;!--            android:id=&quot;@+id/positive&quot;--&gt;</span>
+<span class="s4">&lt;!--            android:layout_width=&quot;wrap_content&quot;--&gt;</span>
+<span class="s4">&lt;!--            android:layout_height=&quot;wrap_content&quot;--&gt;</span>
+<span class="s4">&lt;!--            android:background=&quot;#ffffff&quot;--&gt;</span>
+<span class="s4">&lt;!--            android:text=&quot;OK&quot;/&gt;--&gt;</span>
+<span class="s4">&lt;!--        &lt;Button--&gt;</span>
+<span class="s4">&lt;!--            android:id=&quot;@+id/negative&quot;--&gt;</span>
+<span class="s4">&lt;!--            android:layout_width=&quot;wrap_content&quot;--&gt;</span>
+<span class="s4">&lt;!--            android:layout_height=&quot;wrap_content&quot;--&gt;</span>
+<span class="s4">&lt;!--            android:background=&quot;#ffffff&quot;--&gt;</span>
+<span class="s4">&lt;!--            android:layout_marginLeft=&quot;50dp&quot;--&gt;</span>
+<span class="s4">&lt;!--            android:text=&quot;Cancel&quot;/&gt;--&gt;</span>
+<span class="s4">&lt;!--    &lt;/LinearLayout&gt;--&gt;</span>
+
+
+<span class="s4">&lt;!--    &lt;LinearLayout--&gt;</span>
+<span class="s4">&lt;!--        android:layout_width=&quot;match_parent&quot;--&gt;</span>
+<span class="s4">&lt;!--        android:layout_height=&quot;wrap_content&quot;--&gt;</span>
+<span class="s4">&lt;!--        android:layout_gravity=&quot;right&quot;--&gt;</span>
+<span class="s4">&lt;!--        android:gravity=&quot;right&quot;&gt;--&gt;</span>
+
+<span class="s4">&lt;!--        &lt;ImageView--&gt;</span>
+<span class="s4">&lt;!--            android:id=&quot;@+id/close&quot;--&gt;</span>
+<span class="s4">&lt;!--            android:layout_width=&quot;50dp&quot;--&gt;</span>
+<span class="s4">&lt;!--            android:layout_height=&quot;50dp&quot;--&gt;</span>
+<span class="s4">&lt;!--            android:src=&quot;@drawable/close&quot;/&gt;--&gt;</span>
+<span class="s4">&lt;!--    &lt;/LinearLayout&gt;--&gt;</span>
+<span class="s4">&lt;!--    &lt;ImageView--&gt;</span>
+<span class="s4">&lt;!--        android:id=&quot;@+id/profile&quot;--&gt;</span>
+<span class="s4">&lt;!--        android:layout_width=&quot;match_parent&quot;--&gt;</span>
+<span class="s4">&lt;!--        android:layout_height=&quot;wrap_content&quot;--&gt;</span>
+<span class="s4">&lt;!--        android:layout_weight=&quot;1&quot;--&gt;</span>
+<span class="s4">&lt;!--        android:src=&quot;@drawable/default_profile&quot;/&gt;--&gt;</span>
+<span class="s0">&lt;/RelativeLayout&gt;</span></pre>
+</body>
+</html>

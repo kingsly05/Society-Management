@@ -1,0 +1,229 @@
+<html>
+<head>
+<title>BillActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+BillActivity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.sonawane_ad.societymanagement</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.ActionBar</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AppCompatActivity</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.core.app.ActivityCompat</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.core.content.ContextCompat</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">android.Manifest</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.app.Activity</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.SharedPreferences</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.pm.PackageManager</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.Canvas</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.Color</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.Paint</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.drawable.ColorDrawable</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.net.Uri</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.WindowManager</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.Button</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.EditText</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.ImageView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.LinearLayout</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.Toast</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">com.bumptech.glide.Glide</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.ChildEventListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.DataSnapshot</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.DatabaseError</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.DatabaseReference</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.FirebaseDatabase</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.database.GenericTypeIndicator</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.sdsmdg.tastytoast.TastyToast</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.util.HashMap</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">BillActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity {</span>
+
+    <span class="s0">private </span><span class="s1">LinearLayout linear10</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">LinearLayout linear1</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">TextView memberid</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">TextView name</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">TextView maintenance</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">TextView miscellaneous</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">TextView status</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">TextView maintenancep</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">TextView miscellaneousp</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">TextView textview11</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Button save</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Button payment</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Button back</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">EditText edittext1</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Button button1</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ImageView imageview1</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; map = </span><span class="s0">new </span><span class="s1">HashMap&lt;&gt;()</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">String command = </span><span class="s2">&quot;&quot;</span><span class="s0">;</span>
+    <span class="s0">private boolean </span><span class="s1">Connected = </span><span class="s0">false;</span>
+    <span class="s0">private </span><span class="s1">String pos = </span><span class="s2">&quot;&quot;</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">String string = </span><span class="s2">&quot;&quot;</span><span class="s0">;</span>
+
+    <span class="s0">private </span><span class="s1">FirebaseDatabase _firebase = FirebaseDatabase.getInstance()</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">DatabaseReference Currdata = _firebase.getReference(</span><span class="s2">&quot;Currdata&quot;</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ChildEventListener _Currdata_child_listener</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Intent intent = </span><span class="s0">new </span><span class="s1">Intent()</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">SharedPreferences file</span><span class="s0">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span>
+        <span class="s1">setContentView(R.layout.activity_bill)</span><span class="s0">;</span>
+        <span class="s1">getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM)</span><span class="s0">;</span>
+        <span class="s1">getSupportActionBar().setCustomView(R.layout.custom_appbar)</span><span class="s0">;</span>
+        <span class="s1">getSupportActionBar().setDisplayHomeAsUpEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">initialize()</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(ContextCompat.checkSelfPermission(</span><span class="s0">this, </span><span class="s1">Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED</span>
+                <span class="s1">|| ContextCompat.checkSelfPermission(</span><span class="s0">this, </span><span class="s1">Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {</span>
+            <span class="s1">ActivityCompat.requestPermissions(</span><span class="s0">this, new </span><span class="s1">String[] {Manifest.permission.READ_EXTERNAL_STORAGE</span><span class="s0">, </span><span class="s1">Manifest.permission.WRITE_EXTERNAL_STORAGE}</span><span class="s0">, </span><span class="s3">1000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">initializeLogic()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">initializeLogic() {</span>
+        <span class="s1">getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE</span><span class="s0">, </span><span class="s1">WindowManager.LayoutParams.FLAG_SECURE)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onBackPressed() {</span>
+        <span class="s0">super</span><span class="s1">.onBackPressed()</span><span class="s0">;</span>
+        <span class="s1">finish()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">initialize() {</span>
+        <span class="s1">memberid = (TextView) findViewById(R.id.memberid)</span><span class="s0">;</span>
+        <span class="s1">name = (TextView) findViewById(R.id.name)</span><span class="s0">;</span>
+        <span class="s1">maintenance = (TextView) findViewById(R.id.maintenance)</span><span class="s0">;</span>
+        <span class="s1">miscellaneous = (TextView) findViewById(R.id.miscellaneous)</span><span class="s0">;</span>
+        <span class="s1">status = (TextView) findViewById(R.id.status)</span><span class="s0">;</span>
+        <span class="s1">maintenancep = (TextView) findViewById(R.id.maintenancep)</span><span class="s0">;</span>
+        <span class="s1">linear10 = (LinearLayout) findViewById(R.id.linear10)</span><span class="s0">;</span>
+        <span class="s1">linear1 = (LinearLayout) findViewById(R.id.linear1)</span><span class="s0">;</span>
+        <span class="s1">miscellaneousp = (TextView) findViewById(R.id.miscellaneousp)</span><span class="s0">;</span>
+        <span class="s1">edittext1 = (EditText) findViewById(R.id.edittext1)</span><span class="s0">;</span>
+        <span class="s1">save = (Button) findViewById(R.id.save)</span><span class="s0">;</span>
+        <span class="s1">payment = (Button) findViewById(R.id.payment)</span><span class="s0">;</span>
+        <span class="s1">back = (Button) findViewById(R.id.back)</span><span class="s0">;</span>
+        <span class="s1">imageview1 = findViewById(R.id.imageview1)</span><span class="s0">;</span>
+        <span class="s1">file = getSharedPreferences(</span><span class="s2">&quot;file&quot;</span><span class="s0">, </span><span class="s1">Activity.MODE_PRIVATE)</span><span class="s0">;</span>
+
+        <span class="s1">save.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View _view) {</span>
+                <span class="s1">linear10.setBackgroundColor(getResources().getColor(R.color.white))</span><span class="s0">;</span>
+                <span class="s0">try</span><span class="s1">{</span>
+                    <span class="s1">android.graphics.pdf.PdfDocument document = </span><span class="s0">new </span><span class="s1">android.graphics.pdf.PdfDocument()</span><span class="s0">;</span>
+                    <span class="s1">android.graphics.pdf.PdfDocument.PageInfo pageInfo = </span><span class="s0">new </span><span class="s1">android.graphics.pdf.PdfDocument.PageInfo.Builder(linear10.getWidth()</span><span class="s0">, </span><span class="s1">linear10.getHeight()</span><span class="s0">, </span><span class="s3">1</span><span class="s1">).create()</span><span class="s0">;</span>
+                    <span class="s1">android.graphics.pdf.PdfDocument.Page page = document.startPage(pageInfo)</span><span class="s0">;</span>
+                    <span class="s1">Canvas canvas = page.getCanvas()</span><span class="s0">; </span><span class="s1">Paint paint = </span><span class="s0">new </span><span class="s1">Paint()</span><span class="s0">;</span>
+                    <span class="s1">canvas.drawPaint(paint)</span><span class="s0">; </span><span class="s1">linear1.draw(canvas)</span><span class="s0">; </span><span class="s1">document.finishPage(page)</span><span class="s0">;</span>
+                    <span class="s1">string = FileUtil.getExternalStorageDir().concat(</span><span class="s2">&quot;/&quot;</span><span class="s1">).concat(edittext1.getText().toString().trim().concat(</span><span class="s2">&quot;.pdf&quot;</span><span class="s1">))</span><span class="s0">;</span>
+                    <span class="s1">FileUtil.writeFile(string</span><span class="s0">, </span><span class="s2">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">java.io.File myFile = </span><span class="s0">new </span><span class="s1">java.io.File(string)</span><span class="s0">;</span>
+                    <span class="s1">java.io.FileOutputStream fOut = </span><span class="s0">new </span><span class="s1">java.io.FileOutputStream(myFile)</span><span class="s0">;</span>
+                    <span class="s1">java.io.OutputStreamWriter myOutWriter = </span><span class="s0">new </span><span class="s1">java.io.OutputStreamWriter(fOut)</span><span class="s0">;</span>
+                    <span class="s1">document.writeTo(fOut)</span><span class="s0">; </span><span class="s1">document.close()</span><span class="s0">; </span><span class="s1">myOutWriter.close()</span><span class="s0">;</span>
+                    <span class="s1">fOut.close()</span><span class="s0">;</span>
+                    <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s1">edittext1.getText().toString()+</span><span class="s2">&quot;.pdf File Saved&quot;</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.SUCCESS)</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception e) {</span>
+                    <span class="s1">TastyToast.makeText(getApplicationContext()</span><span class="s0">, </span><span class="s1">e.getMessage()</span><span class="s0">, </span><span class="s1">TastyToast.LENGTH_LONG</span><span class="s0">, </span><span class="s1">TastyToast.ERROR)</span><span class="s0">;</span>
+                <span class="s1">}</span>
+                <span class="s1">linear10.setBackgroundColor(getResources().getColor(R.color.transparent))</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">payment.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View _view) {</span>
+                <span class="s1">intent.setClass(getApplicationContext()</span><span class="s0">, </span><span class="s1">PaymentActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">startActivity(intent)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">back.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View _view) {</span>
+                <span class="s1">finish()</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+
+        <span class="s1">_Currdata_child_listener = </span><span class="s0">new </span><span class="s1">ChildEventListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildAdded(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+                <span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt; _ind = </span><span class="s0">new </span><span class="s1">GenericTypeIndicator&lt;HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt;&gt;() {}</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">String _childKey = _param1.getKey()</span><span class="s0">;</span>
+                <span class="s0">final </span><span class="s1">HashMap&lt;String</span><span class="s0">, </span><span class="s1">Object&gt; _childValue = _param1.getValue(_ind)</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(_childValue.get(</span><span class="s2">&quot;emailid&quot;</span><span class="s1">).toString().equals(file.getString(</span><span class="s2">&quot;emailid&quot;</span><span class="s0">, </span><span class="s2">&quot;&quot;</span><span class="s1">))) {</span>
+                    <span class="s1">memberid.setText(_childValue.get(</span><span class="s2">&quot;memberid&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                    <span class="s1">name.setText(_childValue.get(</span><span class="s2">&quot;name&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                    <span class="s1">maintenance.setText(_childValue.get(</span><span class="s2">&quot;maintenance&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                    <span class="s1">miscellaneous.setText(_childValue.get(</span><span class="s2">&quot;miscellaneous&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                    <span class="s1">status.setText(_childValue.get(</span><span class="s2">&quot;status&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                    <span class="s1">maintenancep.setText(_childValue.get(</span><span class="s2">&quot;maintenancep&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                    <span class="s1">miscellaneousp.setText(_childValue.get(</span><span class="s2">&quot;miscellaneousp&quot;</span><span class="s1">).toString())</span><span class="s0">;</span>
+                    <span class="s1">edittext1.setText(_childValue.get(</span><span class="s2">&quot;memberid&quot;</span><span class="s1">).toString().trim().concat(_childValue.get(</span><span class="s2">&quot;name&quot;</span><span class="s1">).toString().trim()))</span><span class="s0">;</span>
+                    <span class="s0">if</span><span class="s1">(_childValue.get(</span><span class="s2">&quot;memberid&quot;</span><span class="s1">).toString().equals(</span><span class="s2">&quot;&quot;</span><span class="s1">))</span>
+                    <span class="s1">{</span>
+                        <span class="s1">imageview1.setBackgroundResource(R.drawable.default_profile)</span><span class="s0">;</span>
+                    <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+                        <span class="s1">Glide.with(getApplicationContext()).load(Uri.parse(_childValue.get(</span><span class="s2">&quot;profileurl&quot;</span><span class="s1">).toString())).into(imageview1)</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+                <span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildChanged(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildMoved(DataSnapshot _param1</span><span class="s0">, </span><span class="s1">String _param2) {</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onChildRemoved(DataSnapshot _param1) {</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onCancelled(DatabaseError _param1) {</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">;</span>
+        <span class="s1">Currdata.addChildEventListener(_Currdata_child_listener)</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onRequestPermissionsResult(</span><span class="s0">int </span><span class="s1">requestCode</span><span class="s0">, </span><span class="s1">String[] permissions</span><span class="s0">, int</span><span class="s1">[] grantResults) {</span>
+        <span class="s0">super</span><span class="s1">.onRequestPermissionsResult(requestCode</span><span class="s0">, </span><span class="s1">permissions</span><span class="s0">, </span><span class="s1">grantResults)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(requestCode == </span><span class="s3">1000</span><span class="s1">) {</span>
+            <span class="s1">initializeLogic()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+
+<span class="s1">}</span></pre>
+</body>
+</html>
